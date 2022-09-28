@@ -1,56 +1,64 @@
-\documentclass{article}
-
-\usepackage{tabularx}
-\usepackage{booktabs}
-
-\title{Problem Statement and Goals\\\progname}
-
-\author{\authname}
-
-\date{}
-
-\input{../Comments}
-\input{../Common}
+\documentclass[12pt,a4]{report}
+\title{Capstone Project: Problem Statement \& Goals}
+\author{Nashit Mohammad - mohamn31\\Eric Nguyen - nguyee13\\Samuel De Haan - dehaas1\\Eamon Earl - earle2\\Mustafa Choueib - choueibm}
+\date{September 24th 2022 (R.0)}
 
 \begin{document}
-
 \maketitle
+\newpage
 
-\begin{table}[hp]
-\caption{Revision History} \label{TblRevisionHistory}
-\begin{tabularx}{\textwidth}{llX}
-\toprule
-\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
-\midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
-\bottomrule
-\end{tabularx}
-\end{table}
+\section*{Introduction}
+The construction industry is not only essential for the ever-growing infrastructure of our society but also a key factor used to determine the success in communities. With the Greater-Toronto-Area being one of the top increasing communities in regards to construction from across the globe, it is salient to ensure any buildings whether residential, commercial or industrial are built with the highest of standard, highlight the importance of safety, and promote on-going innovation.
 
-\section{Problem Statement}
+Engineers are tasked with design in construction to exceed requirements without hindering safety. Safety is a topic that is never missed within the industry and is continuously being highlighted amongst designs; especially as Engineers are reminded of their moral obligations to society by their awarded rings upon graduation. 
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.}
-\wss{You can change the section headings, as long as you include the required information.}
+As a current process, the construction industry places sensors within concrete spaces to continuously test and/or monitor the integrity of buildings during as well as after construction. Ultimately however, these sensors run out of battery and are required to be re-charged. The industry still faces challenges when attempting to charge these sensors with the method of remote charging as the current products that satisfy remote charging abilities are yet to be optimized. 
 
-\subsection{Problem}
+There are a significant number of buildings being built in the Greater-Toronto-Area, which is emphasized considering that 70\% of cranes within Canada are in just the GTA alone. To place innovation in the sub-field of safety within the industry, it is indeed a requirement to modernize the ability of producing efficient remote charging systems and to have the design process optimized to provide the most effective results. 
 
-\subsection{Inputs and Outputs}
+\section*{Problem Statement}
+In the current construction industry, many means of safety testing are implemented. A current procedure taking place is the process of inserting sensors into and/or around concrete infrastructure to test as well as monitor the integrity of buildings. A challenge faced by the industry however is that these sensors are typically placed in hard-to-reach locations or are completely inaccessible in a reasonable manner. As such, many sensors run out of battery and are required to be charged through the means of remote charging; similar to charging phones by placing on top of charging devices (rather than plugging these devices together), electro-magnetic waves are sent out to charge these devices. 
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+The current industry has some products available for these remote charging devices but due to the novelty of these products, there is a significant room for improvement with these devices. When determining the “best solution” for certain applications, many inputs need to be considered such as antenna/phase array layouts, antenna lengths, system enclosure types to reduce destructive interference and/or increase constructive interference, frequencies, antenna types and many more. All these inputs are taken into consideration in order to obtain the best value for the gain which maximizes the amount of waves sent to a certain receiver while simultaneously minimizes the energy created to do so. 
 
-\subsection{Stakeholders}
+In order to calculate these “best systems”, a series of lengthy numerical calculations need to take place which is computerized and calculated through an elongated series matrix calculations. This process however is expensive as a computing cost, requires man-power to run simulations and takes extended periods of time to complete.  
 
-\subsection{Environment}
+This problem is important as there is a significant room for optimization when designing as well as producing these systems. By solving these issues, it can reduce the design process to allow faster designs at a more efficient manner as well as ensure optimal systems are being implemented in the high-demanding sub industry of safety when regarding construction. 
 
-\wss{Hardware and software}
+A key stakeholders for this project is Mobilite-Power, a start-up revolved around creating these remote charging devices systems using phase/antenna arrays. Other stakeholders include Engineering Consultant Groups (to implement these safety needs at the design stages of construction), General Contractors and Building Maintenance Teams. 
 
-\section{Goals}
+\section*{Goals}
+\subsection*{Machine Learning Optimization Study}
+A software is created through the means of a machine learning algorithm that is able to successfully display the required inputs in order to produce desired outputs. This goal is binary in essence to ensure successful compilation without error. This will be key to stakeholders as a limited amount of machine learning algorithms exist to construct the designs of these systems. 
 
-\section{Stretch Goals}
+\subsection*{Data Collection}
+To compile a sufficient solution, a collection of data is required to feed the machine learning algorithm. It is intended that the software is fed at minimum 3 different antenna types (most used antennas for this application) which vary in values (such as layout, amount, lengths, etc.) that are confined within reasonable parameters (i.e. values that would not hinder the system such as placing a value that would ultimately make the production of a system ineffective cost-wise). The more data the system has, the higher chances the system can output the most optimized solution.
+
+\subsection*{Robustness in Software}
+To ensure that the software is reliable, it is a goal to create the software such that it is robust. This is intended to be measured by sufficient testing systems similar that are used throughout software-testing procedures. This is dire to ensure the satisfaction of stakeholders and/or users. 
+
+\subsection*{Software Time in Completion}
+An intended goal for this machine learning software is for the software to display the desired outputs (I.e. the required inputs for production) in a timely manner. In order for it to be effective, the software simply needs to be faster than the average time taken to numerically calculate the best solutions from simulations. 
+
+\subsection*{Prototype is Resilient to External Environment Conditions}
+The prototype of the remote charging device must be resistant and still functional despite external environment conditions. It must be able to withstand typical weather conditions, humidity, rain and wind that is seen within the GTA. 
+
+\subsection*{Ease of Use}
+The software must be easy to use for users. This will be measured through the means of surveys taken by users describing their experience when using the software.
+
+\section*{Stretch Goals}
+\subsection*{Data Encryption}
+When exporting the results of the software, it is ideal for the data to be encrypted so users are protected when producing design results. This is a binary goal in nature.
+
+\subsection*{Data "Smoothing"}
+Data smoothing is referred to the process using old data as well as “future” data in order to predict designs for the past as well as the future. This allows for the system to be fed data that are confined within a set of reasonable parameters but be able to produce results outside of the set parameters if that result is deemed more effective by the software.
+
+\subsection*{Improve Simulation \& Process}
+Much of the issue with attempting to obtain the most optimized solutions for certain applications is that the simulation process of obtaining data is quite costly regarding computing as well as times a long time to successfully complete. Ideally, this can be improved by enhancing the performance of the simulation itself through potential means of multi-threading and concurrency support for simulation servers. This will allow multiple simulations to occur on multiple devices simultaneously. 
+
+\section*{Conclusion}
+In conclusion, there is a significant margin for improvement in the ability of creating optimal solutions for remote charging devices. This will aid stakeholders as they will be able to create more effective solutions that adhere to costs, energy consumption, design time, etc. The goals listed will aid the project in completion while satisfying user requirements.
+
+
 
 \end{document}
