@@ -56,6 +56,8 @@
     \hline
     All & October 5, 2022 & Rev 0 & Created first draft of document\\
     \hline
+    Mustafa & November 9, 2022 & Rev 1 & Added new functional and non-functional requirements\\
+    \hline
     \end{tabular}
 \end{table}
 \end{center}
@@ -462,7 +464,13 @@ As many constraints require feasible prototypes, the requirements are subject to
 \subsubsection{Software System Functional Requirements}
 \textbf{SR1.} ML Model must optimize inputs faster than the existing process.\\
 \textbf{SR2.} ML Model must be able to develop "new" simulations based on previous optimal models.\\
-\textbf{SR3.} ML Model must be able to encrypt optimized data before exporting.
+\textbf{SR3.} ML Model must be able to encrypt optimized data before exporting.\\
+\color{red}
+\textbf{SR4.} The software system must determine and output the optimized and correct solution.\\
+\textbf{SR5.} ML Model must be able to process incoming simulation data from multiple source devices.\\
+\textbf{SR6.} ML Model must be able to interpret data exported directly from Matlab simulations.
+
+\color{black}
 
 \subsubsection{Hardware System Functional Requirements}
 \textbf{HR1.} The system must be able to wirelessly charge device through a reasonable amount of material in between.\\
@@ -473,6 +481,16 @@ As many constraints require feasible prototypes, the requirements are subject to
 \subsubsection{Appearance Requirements}
 \textbf{APR1.} The system will consist of a simple user interface.
 
+\subsubsection{Access Requirements}
+\color{red}
+\textbf{ACR1.} Authorized users will have access to the system.
+\color{black}
+
+\subsubsection{Integrity Requirements}
+\color{red}
+\textbf{IR1.} The system must be able to store its current state locally in the event of a failure.\\
+\textbf{IR2.} The individual components of the physical system must be inspected and tested.
+\color{black}
 \subsubsection{Style Requirements}
 N/A
 \subsubsection{Usability and Humanity Requirements}
