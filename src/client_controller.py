@@ -11,7 +11,7 @@ if not(client.authSucess):
 
 def user_input():
     while True:
-        val = input("Input your desired data for the optimization problem.")
+        val = input("Input your desired data for the optimization problem: ")
         ##add input validation - need a lot here its a user so
         if(val):
             q.add(val)

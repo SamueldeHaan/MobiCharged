@@ -1,6 +1,5 @@
 import socket
 import threading
-# import tqdm
 
 soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -66,8 +65,8 @@ def receive_thread(c_socket):
             #Make sure received data is not null or empty
             if received_data:
                 print(f"Received message: {received_data}")
-                sendDataClient = ("Did it work").encode()
-                c_socket.send(sendDataClient)
+                # sendDataClient = ("Did it work").encode() THIS IS WHERE WE WILL SEND DATA TO THE MYSQL DBs
+                # c_socket.send(sendDataClient)
                 #broadcast(received_data)
             else:
                 print(f"Client disconnected: {c_socket}")

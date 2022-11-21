@@ -13,7 +13,7 @@ def add(val):
         s.append(val)
         n += 1
     ##else condition?
-    print('Val: ', val)
+    print('Added to queue: ', val)
     sem.release()
 
 def remove():
@@ -23,5 +23,6 @@ def remove():
     if(n > 0):
         n -= 1
         out =  s.pop()
+        print('Removed from queue: ', out)
     sem.release()
     return out

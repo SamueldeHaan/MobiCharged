@@ -45,13 +45,14 @@ def data_sending():
         input = q.remove()
         if not(input):
             time.sleep(5) ##this can be avoided with signals in the future
-            print('no input')
+            print('No inputs to work on!')
             continue
         
         y = eng.sample_simulation1(input, nargout=1) #output - hardcoded right now 
-        print(y)
+        print('Optimal output:', y)
         if y:
             soc.send(str(y).encode())
+        input = None
 
     ##need to quit eng upon connection cancellation / program termination
     eng.quit()
@@ -61,5 +62,5 @@ def data_receiving():
         data_received = soc.recv(1024).decode()
         if data_received:
             q.add(data_received)
-            print(data_received)
+            print("Received data: ", data_received)
         time.sleep(10)
