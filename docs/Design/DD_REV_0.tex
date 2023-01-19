@@ -1,0 +1,356 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\graphicspath{{./images/}}
+\usepackage{array}
+\graphicspath{ {figures/} }
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+\begin{document}
+
+\title{
+    MobiCharged\\Design Document 
+    \includegraphics[width=9cm]{images/mobicharged.png} 
+}
+\author{Team Super Charged (No.33)
+		\\ Nashit Mohammad - mohamn31
+		\\ Eric Nguyen - nguyee13
+		\\ Samuel De Haan - dehaas1
+		\\ Eamon Earl - earle2
+		\\ Mustafa Choueib - choueibm
+}
+    
+
+\date{January 18th, 2023}
+
+
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\vspace{20pt}
+\begin{center}
+\begin{table}[H]
+\caption{\bf Revision History}
+    \begin{tabular}{p{2cm}p{3cm}p{2cm}p{6cm}}
+    \hline
+    \bf Author & \bf Date & \bf Version & \bf Description\\
+    \hline
+    All & January, 2023 & Rev 0 & Created first draft of document\\
+    \hline
+    \end{tabular}
+\end{table}
+\end{center}
+
+\newpage
+
+\pagenumbering{arabic}
+
+\section{System Overview}
+
+\subsection{Naming Conventions and Terminology}
+
+\begin{table}[htp]
+\caption{\bf Naming Conventions and Terminology}
+\begin{tabular}{ |p{6cm}|p{8cm}|  } 
+ \hline
+\bf Word/Acronym & \bf Definition/Context\\
+ \hline
+ Functional Requirement & Requirements that describe what the product is supposed to do\\
+ \hline
+Non-functional Requirement & Requirements that describe qualities that product will have\\
+ \hline
+General Contractor & Third party companies that acquire services by Mobilite-Power\\
+ \hline
+Data Smoothing & The process of using old data as well as "future" data in order to predict designs\\
+ \hline
+ML & "Machine Learning" algorithm\\
+\hline
+AC & Ancticipated Change\\
+\hline 
+R & Requirement\\
+\hline 
+UC & Unlikely Change\\
+\hline 
+A & Assumption\\
+\hline 
+DS & Download Speed\\
+\hline
+US & Upload Speed\\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Relevant Facts and Assumptions}
+\begin{itemize}
+    \item There is an assumption that the developers will eventually have access to enough processing power to conduct large quantities of simulations.
+
+\end{itemize}
+
+\subsection{Introduction}
+
+Engineers are tasked with design in construction to exceed requirements without hindering safety. Safety is a topic that is never missed within the industry and is continuously being highlighted amongst designs; especially as Engineers are reminded of their moral obligations to society by their awarded rings upon graduation. 
+\par
+As a current process, the construction industry places sensors within concrete spaces to continuously test and/or monitor the integrity of buildings during as well as after construction. Ultimately however, these sensors run out of battery and are required to be re-charged.
+\par
+The industry still faces challenges when attempting to charge these sensors with the method of remote charging as the current products that satisfy remote charging abilities are yet to be optimized. There are a significant number of buildings being built in the GreaterToronto-Area, which is emphasized considering that 70\% of cranes within Canada are in just the GTA alone. To place innovation in the sub-field of safety within the industry, it is indeed a requirement to modernize the ability of producing efficient remote charging systems and to have the design process optimized to provide the most effective results.
+\par
+The system-solution for this will be the development of MobiCharged. 
+
+
+\subsection{Purpose}
+
+\subsubsection{System Purpose}
+The purpose of the development of MobiCharged is to assist stakeholders in the infrastructure development industry revolving around design and construction which include but are not limited to; consultant engineers, contractors and building owners. 
+\par
+The software will aid remote charging designers by optimizing their design through the method of machine learning, which will substantially reduce their time \& efforts designing as it will remove the process of costly simulations. 
+\par
+The hardware will serve as a prototype and be used for demonstration purposes for the aid in display as well as understanding of limitations for the software. 
+
+\subsubsection{Document Purpose}
+The purpose of this document is to elucidate the decomposition of the system (both the software portion as well as the hardware) into its components and provide a modular understanding for each component in the system. This document will serve as a guide for the execution of production intended to be completed in the upcoming weeks.
+
+
+\section{Scope}
+\subsection{System Summary}
+The environments in which these physical systems operate are typically from roof-tops and/or high-altitude locations with spacial capabilities to place arrays of these systems. These systems react to user inputted (remotely) data such as the location of the device required to be charged, so that it may orient itself in a manner optimal for that application. 
+\par
+The purpose of the software system, MobiCharge, is a machine learning algorithm that will be used by Mobilite-Power, engineering consultant groups, general contractors and building maintenance teams to optimize the design process required to effectively and efficiently produce the most viable remote charging system. In doing so, this will negate the current process of manually conducting simulations (that requires lengthy computerized numerical calculations), ultimately minimizing cost, manual labor, and the time necessary to produce the required results. This system will provide users with the optimal configuration of a remote charging device based on the desired output, encrypt data protecting users when producing design results and use data smoothing to ensure the accuracy of the system in a time efficient manner.
+\par
+The hardware system is to root our algorithms optimization in the real world environment. The production of a physical model will assist in the determination of the absolute boundaries that can be fed into the machine learning algorithm. Variable parameter ranges will be able to be derived from the physical model to determine the magnitude to which the boundaries can be pushed within the simulation. The physical system provides a secondary purpose in the form of data collection and verification. In order to increase the breadth of data that we can feed into the algorithm, we must determine the degree of computational error within the simulation results. A physical model will aid in determining this range and lead to further optimization through the machine learning algorithm.
+
+\subsection{Assumptions}
+\textbf{A1:} Developers will have access to enough processing power to conduct large quantities of simulations
+\par
+\textbf{A2:} User does not intentionally attempt to enter inputs incorrectly, as well as provide positive feedback to the system when it is not correct
+\par
+\textbf{A3:} Users have access to wifi with sufficient speeds, averaging 15 Mbps DS \& 10 Mbps US
+\par
+\textbf{A4:} Users execute the software with Windows 10 OS (or higher) as instructed
+\par 
+\textbf{A5:} The average developer has background knowledge in electromagnetic theory
+\par 
+\textbf{A6:} The app will be used by the above-average tech savvy individual due to the niche in industry
+\par
+\textbf{A7:} Hardware will have sufficient power sources (specific current values are to be determined)
+\par
+\textbf{A8:} Weather conditions for the hardware are not extreme, i.e. not operating in storm conditions or temperatures below -35C or above 35C
+\par
+\textbf{A9:} Hardware is not used near other equipment which can create wave interferences 
+\par 
+\textbf{A10:} Hardware is to not be operated near magnetic materials
+\par
+\textbf{A11:} Users can be individually identifiable through email addresses and/or usernames (to be determined)
+
+\section{Project Overview}
+\subsection{Normal Operation}
+This application is to be used by Mobilite-Power to reduce overhead costs associated with developing remote charging devices. The company will be able to use this system on their computers with ease.By using this system, Mobilite-Power will be able to minimize the cost, time, and labor required to determine the optimal configuration necessary for remote charging devices. This will make their operations more efficient.
+\subsection{Behaviour Overview}
+This system will continuously learn and develop without an operator. However, the ultimate output of the system will be event based, thus, requiring the user to initiate operations. The user will be required to provide the necessary input, in which the machine learning algorithm will return the optimal configuration for a remote charging device, encrypt the provided output, and store the optimal data into a database for data smoothing. When the system is not in use, it will be running simulations automatically to continuously refine its ability to produce accurate optimal results.
+\subsection{Undesired Event Handling}
+Undesired event handling is critical to ensuring that, even in unintended circumstances, the system can safely revert to a desired state. Thus, the system should ensure that in the event of an error or fault, it has a failsafe state to transition to. This fail-safe state will ensure that there are no corruptions in data, the system itself, or extensive damages caused. 
+
+\section{System Contexts}
+
+\subsection{Preliminary System Contexts}
+The system will interact with pre-existing matlab simulation programs, purely at the simulations’ start and end points, where the program will pull data from completed simulations and push parameters to run new ones. In the early stages of the product life cycle, it will mainly be pulling the completed simulation data, and feeding it into the deep learning algorithm in order to train it and give it some experience with optimal solutions. This will require integration with large databases in order to record this data. 
+\par
+Once the core program / deep learning algorithm has been trained to some satisfying degree, the context will expand to include the second half of the cyclical integration with the pre-existing simulation software; it will now take charge of running new simulations that push the boundaries of its current knowledge base. This is in order to take full advantage of free processing power, such that the simulations are always being run, and the deep learner is constantly being trained. This may require interfacing with an additional software module in order to schedule data coming in to be processed, and outward data to be procured.
+\par 
+Later in the life cycle of the program, we will be either integrating with Mobilite’s current remote desktop server (used to run the simulations remotely), or develop our own, and the specifics of this contextual decision will depend on the availability of their server at this time. The goal would be to integrate our program with the server such that our deep learner would be able to access the data from any simulation run, and not just those on the local devices of our teams, which also implies that we plan on having these simulations able to be run on multiple different devices at the same time, eventually adding further scheduling and concurrency constraints to our learner-server pair. 
+\par
+Evidently, our context shifts and expands multiple times throughout the development lifecycle, as we wish to integrate with and expand upon pre existing software in multiple areas of the design. The following context diagrams give an idea of this development, with each diagram associated, in order, with the above paragraphs. The components will be briefly described alongside each diagram for clarity.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{images/context0.png}
+    \caption[Prelim System Contexts 1]{First stage of preliminary system context.}
+    \label{fig:figure1}
+\end{figure}
+
+The external entity, the Super Charged team; the team of developers for the system, will begin to train the MobiCharged software system using pre existing simulation data. The simulations that are optimized by the system will then be stored into a large database for further use by the system. As shown by figure 1. \par
+\newpage
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{images/context1.png}
+    \caption[Prelim System Contexts 2]{Second stage of the preliminary system context.}
+    \label{fig:figure2}
+\end{figure}
+As shown in figure 2, the external entity, the Super Charged team, will then integrate the optimization algorithm with pre-existing simulation software. This will allow the system to conduct simulations automatically, furthering the knowledge base of the system
+\newpage
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{images/context2.png}
+    \caption[Prelim System Contexts 3]{Final stage of the preliminary system context.}
+    \label{fig:figure3}
+\end{figure}
+The last stage of the preliminary system context is as shown in figure 3. The external entities are the Super Charged team, as well as the MobilitePower company. Mobilite-Power is the external entity which oversees the data acquired from the simulations and provides clients with the necessary configurations for the remote charging devices. Mobilite-Power will provide access to remote desktop servers, which the Super Charged team will integrate into the system, allowing for more simulations to be accessed by the system. This will further train the system, increasing the accuracy of the optimizations produced by the system.
+
+\newpage
+\subsection{Server Integrated System Context}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{images/server_system.png}
+    \caption[Server-Int System Contexts 1]{System context integrated with servers.}
+    \label{fig:figure4}
+\end{figure}
+
+The divide between personal devices and the server will likely be structured as shown above, where the deep learner exists as a part of a central server, and the core computations of the simulations can be done on local machines. This allows the server to remain relatively low fidelity for the time being, where its core computations are the algorithms of the deep learner itself. The data processor and transmitters will handle concurrency and syncing with local devices. This obviously requires cooperation and coordination of these local devices, and this may not be ideal for commercial use. The goal is to prioritize data throughput in the development stage, leaving the simulations relatively untouched and implementing enough modularity such that the server can be formalized and protected with more elegance down the line, and integrated with higher-fidelity computing devices.
+
+\subsection{Deployed System Context}
+Once the system has been sufficiently trained and developed, it will be deployed for commercial use. However, the software system will continuously be trained and the throughput will continue to be refined. In a commercial setting, the system will interact with Mobilite-Power, who will feed the desired output to the system, and the system will produce the optimal configuration for a remote charging device. This data will be exported to the Mobilite-Power production team once the system has encrypted the data. The system will also be able to decrypt the data following the export and retrain the system with the optimized results. Lastly, the optimized data will be stored in a database to repeatedly enhance the accuracy of the system.
+\newpage
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{images/context3.png}
+    \caption[Deployed System Contexts 1]{Stage of the deployed system context.}
+    \label{fig:figure5}
+\end{figure}
+As shown in figure 5, the external entities acting on the system are the Mobilite-Power group responsible for determining the optimal configuration for the remote charging device, and the Mobilite-Power production team responsible for building the remote charging device. The Mobilite-Power entity will access the system and provide the desired output of the remote charging device. The system will then produce the optimal configuration and provide that configuration to the production team in an encrypted manner. 
+
+\subsection{Hardware System Context}
+The hardware system will be used by the MobiCharged team to validate parameters and be displayed for demonstration purposes. Due to limitations revolving around cost \& time constraints, the MobiCharged team proceeded with designing a system that simulates a remote charging device using an array of transducers connected to the system to levitate particles which will simulate remote charging devices, i.e. sending electromagnetic waves to the receiving ends of sensors. 
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=7cm]{images/HardwareContext.png}
+  \caption[Hardware Context]{Hardware System Context}
+  \label{fig:figure6}
+\end{figure}
+
+As shown in Figure 6, the user can interact with the hardware interface to input data (such as desired location). The interface then sends those data points to the data calculations module in which the outputs (such as wavelength and phase) are calculated and then sent to the transducer array. Each transducer within the array will receive individual data such that the whole array can send constructive interfered waves to localized points. The particles will levitate due to the waves and can also move to other localized areas if intended to do so by the user. 
+
+\subsection{Hardware System Parts}
+
+Table 1 below lists the parts required to create the simulation for the physical remote charging devices. 
+
+\begin{table}[H]
+  \caption{\bf Parts List for Physical Remote Charging Simulation Device}
+  \begin{tabular}{ |p{4cm}|p{3cm}|p{7cm}|} 
+   \hline
+  \bf Part & \bf Quantity\\
+   \hline
+   PCB: 183x169mm 2 layers & 1\\
+   \hline
+   MSO-P1040H07T Ultrasonic Emitter (Transducers) & 256\\
+   \hline 
+   CoreEP4CE6 FPGA & 1\\
+   \hline 
+   Drivers MIC4127 SOIC8 & 128\\
+   \hline 
+   shift-registers 74hc595 SOIC16 & 32\\
+   \hline 
+   0.1uf capacitors 50v 0805 & 160\\
+   \hline 
+   Arduino Nano or an USB-to-UART adaptor & 1\\
+   \hline 
+   DC barrel connector & 1\\
+   \hline 
+   Header Connectors for the FPGA (2x22) (2.54 pitch) & 1\\
+   \hline 
+   Side connectors either pin or headers (2x4 and 2x2) (2.54 pitch) & 1\\
+
+  \end{tabular}
+  \end{table}
+
+\section{System Boundary}
+\subsection{Preliminary Set of Monitored \& Controlled Variables}
+The following is a list of all monitored and controlled variables.
+\begin{table}[htp]
+\caption{\bf Monitored \& Controlled Variables}
+    \begin{tabular}{|p{4cm}|p{3cm}|p{7cm}|}
+         \hline
+         \bf Name & \bf Type & \bf Physical Interpretation\\
+         \hline
+         Charging Device's Range & Monitored & Maximum reach of for device charging.\\
+         \hline
+         Device's Lower Allowed Charge & Monitored & Minimum level of charge allowed in device before charging is required.\\
+         \hline
+         Device's Upper Desired Charge & Monitored & Level of charge desired in drive to be charged.\\
+         \hline
+         Wireless Charging Control & Controlled & \\
+         \hline
+         Displayed Device Charge & Controlled & \\
+         \hline
+         Current Supply & Controlled & Value of current supplied to charging device.\\
+         \hline
+         Charging Device Frequency & Controlled & Frequency used by charging device.\\
+         \hline
+         Phase Shift & Controlled & Phase shift used by charging device.\\
+         \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Environment Variables}
+\begin{table}[H]
+\caption{\bf Environment Variables}
+\begin{tabular}{ |p{4cm}|p{3cm}|p{7cm}|} 
+ \hline
+\bf Name & \bf Type & \bf Physical Interpretation\\
+ \hline
+ Position of Device to be Charged & Environmental & Relative distance from device to be charged to charging device.\\
+ \hline
+ Density of Medium & Environmental & Density of medium which charging device must charge through.\\
+\hline
+\end{tabular}
+\end{table}
+ 
+\section{Anticipated and Unlikely Changes}
+
+\section{Module Hierarchy}
+
+\section{Connection between Requirements and Design}
+
+\section{Module Decomposition}
+
+\section{Traceablility Matrix}
+
+\section{Use Hierarchy between Modules}
+
+\section*{References}
+We will be referring to documentations provided by Mobilite-Power, however, as of now there are no references to mention.
+
+\bibliographystyle{plainnat}
+
+\bibliography{SRS}
+
+\newpage
+
+\newpage{}
+\section*{Appendix --- Reflection}
+In order for this project to be successful, there are a plethora of skills required to be obtained. 
+\par
+One major skill required is the ability to enhance the expertise as well as the familiarity with simulation software such as Matlab. As Mechatronics \& Software students, the fundamentals are present to use Matlab for mathematical related programming (particularly in cases where linear algebra is necessary) but not much experience is present for the case of simulations aside from those specific to certain previous history in physics labs. This will allow the project to be excelled when collecting data to be fed into the machine learning algorithm. One approach to build this skill is to watch / go through online tutorials (particularly from Youtube) where they go over certain practices when performing simulations through Matlab. Another approach to this will be merely practicing the Matlab tools \& features such that familiarity is built with the simulation portions of Matlab. Members of the team will particularly choose the approach of following tutorial videos online as this can be quite helpful as well as done at any time due to its convenience. This will be completed by Eamon. 
+\par
+Another major skill which will determine the success of this project is the ability to create / program a machine-learning and/or artificial intelligence labeled software. This skill will be pertained to specific individuals in the group but a general understanding of this is required amongst the whole team for the continuous success of the project. One approach to this will be reviewing algorithm research papers online that provide ideas in succeeding in this project. Another method is to reach out to supervisors and industry members when discussing the process of building this as well as request for tips on obtaining the skills. This skill will be one of the most difficult to obtain due to the novelty nature of it in the perspective of the current team. The approach selected to build this skill is by reviewing research papers online as this will include a vast amount of information as well as be convenient; whereas the approach depends on external factors. This will be concluded by Eric.
+\par
+In addition, the skill of programming standards as well as practices will be a skill necessary to be obtained, particularly to the Mechatronics members as they are not as familiar with the tools \& practices as the Software members. This skill will be approached by discussions during meetings as well as reaching out to other team members (particularly in software) in order to request for their inputs as well as revisions when programming standards are applicable. Another method to build this skill is to review the team’s selected programming standard and use handbooks online that pertain to it as a guide when programming - as practice is built using it, the skill will be developed. The approach selected to build this skill is to reach out to other members with experience in this. This is selected as it is narrowed down particularly to the project as well as builds team communication such that the team is aware of the status of the project. This skill will pertain to Nashit. 
+\par
+A dire skill that is important for this project is the ability to effectively communicate to other members. This is necessary as when dealing with complex situations and a project such as this, it is impossible for a single individual to succeed given the current constraints. The only option is to work effectively as a team. With all the different components of this project as well as the integration to occur in the future, it is important that the project is communicated in each step. One approach to create this skill is to simply discuss with other members how they would like to do this best as well as asking the right questions. Moreover, it would be effective to be influenced by other practices that can be found online in regards to other successful projects. One key advantage to this team is the industry outreach supervisor; this skill can be developed by discussing this matter with them. This knowledge building will be assigned to Mustafa. The selected choice will be to discuss with other members how they would like to do this best as well as asking the correct questions as well as seeking feedback from team members. 
+\par
+Finally, another skill required to be obtained is the ability to create the prototype which will fall under embedded systems / hardware programming as well as the electrical abilities for assembly. This is a relatively new skill for all members but will be required to be obtained by certain individuals in the team. This will allow for the prototype to be built effectively as well as performing as per standards. An approach for developing this skill is to watch tutorials online and follow simple projects in which the skills are developed. Another approach is to reach out to colleagues with more expertise in this matter and apply those tips to develop our own personal skills. This knowledge will be acquired by Sam. The selected approach will be to watch tutorials online and follow other projects as this will be convenient as well as allows the ability to follow step-by-step procedures.
+
+\end{document}
+
