@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  20 JAN 2023 08:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  20 JAN 2023 10:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -551,666 +551,666 @@ Overfull \hbox (45.93854pt too wide) in paragraph at lines 310--319
 <images/Figure8.png, id=289, 358.33875pt x 227.34938pt>
 File: images/Figure8.png Graphic file (type png)
 <use images/Figure8.png>
-Package pdftex.def Info: images/Figure8.png  used on input line 357.
+Package pdftex.def Info: images/Figure8.png  used on input line 356.
 (pdftex.def)             Requested size: 199.16928pt x 126.36424pt.
- [15]
-<images/Figure9.png, id=294, 365.365pt x 209.78375pt>
+<images/Figure9.png, id=290, 365.365pt x 209.78375pt>
 File: images/Figure9.png Graphic file (type png)
 <use images/Figure9.png>
-Package pdftex.def Info: images/Figure9.png  used on input line 369.
+Package pdftex.def Info: images/Figure9.png  used on input line 368.
 (pdftex.def)             Requested size: 199.16928pt x 114.35707pt.
+ [15]
 <images/Figure10.png, id=295, 386.44376pt x 149.55875pt>
 File: images/Figure10.png Graphic file (type png)
 <use images/Figure10.png>
-Package pdftex.def Info: images/Figure10.png  used on input line 378.
+Package pdftex.def Info: images/Figure10.png  used on input line 377.
 (pdftex.def)             Requested size: 199.16928pt x 77.0818pt.
  [16 </Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure8.png> </Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure9.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 392--393
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
 []|\OT1/cmr/bx/n/12 Estimated
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--394
+Underfull \hbox (badness 10000) in paragraph at lines 393--393
 []|\OT1/cmr/m/n/12 Initializer
  []
 
 
-Underfull \hbox (badness 3884) in paragraph at lines 394--394
+Underfull \hbox (badness 3884) in paragraph at lines 393--393
 []|\OT1/cmr/m/n/12 Initializes main
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--394
+Underfull \hbox (badness 10000) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 loop, and
  []
 
 
-Underfull \hbox (badness 1917) in paragraph at lines 394--394
+Underfull \hbox (badness 1917) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 cates space for
  []
 
 
-Underfull \hbox (badness 1661) in paragraph at lines 394--394
+Underfull \hbox (badness 1661) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 la-tion com-piles.
  []
 
 
-Underfull \hbox (badness 2088) in paragraph at lines 394--394
+Underfull \hbox (badness 2088) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 mem-ory can-not
  []
 
 
-Underfull \hbox (badness 5189) in paragraph at lines 394--394
+Underfull \hbox (badness 5189) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 MAT-LAB does
  []
 
 
-Underfull \hbox (badness 1205) in paragraph at lines 394--394
+Underfull \hbox (badness 1205) in paragraph at lines 393--393
 []|\OT1/cmr/m/n/12 The num-ber of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--394
+Underfull \hbox (badness 10000) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 in-puts/outputs
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--394
+Underfull \hbox (badness 10000) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 that will de-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--394
+Underfull \hbox (badness 10000) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 ter-mine how
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--394
+Underfull \hbox (badness 10000) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 al-lo-cated, and
  []
 
 
-Underfull \hbox (badness 1776) in paragraph at lines 394--394
+Underfull \hbox (badness 1776) in paragraph at lines 393--393
 \OT1/cmr/m/n/12 the er-rors that
  []
 
 
-Underfull \hbox (badness 2547) in paragraph at lines 394--395
+Underfull \hbox (badness 2547) in paragraph at lines 393--394
 \OT1/cmr/m/n/12 the most part.
  []
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 394--395
+Underfull \hbox (badness 2591) in paragraph at lines 393--394
 \OT1/cmr/m/n/12 It may re-quire
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--395
+Underfull \hbox (badness 10000) in paragraph at lines 393--394
 \OT1/cmr/m/n/12 im-ple-ment-ing
  []
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 394--395
+Underfull \hbox (badness 2591) in paragraph at lines 393--394
 \OT1/cmr/m/n/12 with the other
  []
 
 
-Overfull \hbox (0.86473pt too wide) in paragraph at lines 396--396
+Overfull \hbox (0.86473pt too wide) in paragraph at lines 395--395
 []|\OT1/cmr/m/n/12 Controller/
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--396
+Underfull \hbox (badness 10000) in paragraph at lines 395--395
 \OT1/cmr/m/n/12 Server
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--396
+Underfull \hbox (badness 10000) in paragraph at lines 395--395
 []|\OT1/cmr/m/n/12 Handles com-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--396
+Underfull \hbox (badness 10000) in paragraph at lines 395--395
 \OT1/cmr/m/n/12 mu-ni-ca-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--396
+Underfull \hbox (badness 10000) in paragraph at lines 395--395
 \OT1/cmr/m/n/12 be-tween the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--396
+Underfull \hbox (badness 10000) in paragraph at lines 395--395
 \OT1/cmr/m/n/12 \Server" and
  []
 
 
-Underfull \hbox (badness 3250) in paragraph at lines 396--396
+Underfull \hbox (badness 3250) in paragraph at lines 395--395
 \OT1/cmr/m/n/12 aries to Client
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--396
+Underfull \hbox (badness 10000) in paragraph at lines 395--395
 \OT1/cmr/m/n/12 mod-ule and
  []
 
 
-Underfull \hbox (badness 2401) in paragraph at lines 396--396
+Underfull \hbox (badness 2401) in paragraph at lines 395--395
 \OT1/cmr/m/n/12 re-turns op-ti-mal
  []
 
 
-Underfull \hbox (badness 6658) in paragraph at lines 396--396
+Underfull \hbox (badness 6658) in paragraph at lines 395--395
 []|\OT1/cmr/m/n/12 The sim-u-la-tion
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 396--396
+Underfull \hbox (badness 5105) in paragraph at lines 395--395
 \OT1/cmr/m/n/12 client and the
  []
 
 
-Underfull \hbox (badness 2547) in paragraph at lines 396--397
+Underfull \hbox (badness 2547) in paragraph at lines 395--396
 \OT1/cmr/m/n/12 the most part.
  []
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 396--397
+Underfull \hbox (badness 2591) in paragraph at lines 395--396
 \OT1/cmr/m/n/12 It may re-quire
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--397
+Underfull \hbox (badness 10000) in paragraph at lines 395--396
 \OT1/cmr/m/n/12 im-ple-ment-ing
  []
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 396--397
+Underfull \hbox (badness 2591) in paragraph at lines 395--396
 \OT1/cmr/m/n/12 with the other
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 []|\OT1/cmr/m/n/12 Client
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 []|\OT1/cmr/m/n/12 Client mod-ule
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 \OT1/cmr/m/n/12 re-ceives in-puts
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 \OT1/cmr/m/n/12 and passes
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 \OT1/cmr/m/n/12 through MAT-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 \OT1/cmr/m/n/12 and re-turns
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 []|\OT1/cmr/m/n/12 The MAT-LAB
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 \OT1/cmr/m/n/12 sim-u-la-tion for-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
+Underfull \hbox (badness 10000) in paragraph at lines 397--397
 \OT1/cmr/m/n/12 in-puts and
  []
 
 
-Underfull \hbox (badness 2547) in paragraph at lines 398--399
+Underfull \hbox (badness 2547) in paragraph at lines 397--398
 \OT1/cmr/m/n/12 the most part.
  []
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 398--399
+Underfull \hbox (badness 2591) in paragraph at lines 397--398
 \OT1/cmr/m/n/12 It may re-quire
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--399
+Underfull \hbox (badness 10000) in paragraph at lines 397--398
 \OT1/cmr/m/n/12 im-ple-ment-ing
  []
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 398--399
+Underfull \hbox (badness 2591) in paragraph at lines 397--398
 \OT1/cmr/m/n/12 with the other
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 []|\OT1/cmr/m/n/12 Machine
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 Learner
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 Black-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 board
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 In-di-rec-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 []|\OT1/cmr/m/n/12 Reads batches
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 of data from
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 cer-tain data
  []
 
 
-Underfull \hbox (badness 2753) in paragraph at lines 400--400
+Underfull \hbox (badness 2753) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 thresh-olds have
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 been reached,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 this mod-ule
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 passes batched
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 model train-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 ing streams.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 Dur-ing down-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 times where
  []
 
 
-Underfull \hbox (badness 3568) in paragraph at lines 400--400
+Underfull \hbox (badness 3568) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 the amount of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 new data is
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 re-ceived, this
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 val-i-da-tion test
  []
 
 
-Underfull \hbox (badness 1152) in paragraph at lines 400--400
+Underfull \hbox (badness 1152) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 suites to mon-i-
  []
 
 
-Underfull \hbox (badness 2293) in paragraph at lines 400--400
+Underfull \hbox (badness 2293) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 tor progress of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 user re-quests
  []
 
 
-Underfull \hbox (badness 7012) in paragraph at lines 400--400
+Underfull \hbox (badness 7012) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 for in-put into
  []
 
 
-Underfull \hbox (badness 1418) in paragraph at lines 400--400
+Underfull \hbox (badness 1418) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 pre-dic-tive mod-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 will ul-ti-mately
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 fil-ter out the
  []
 
 
-Underfull \hbox (badness 3568) in paragraph at lines 400--400
+Underfull \hbox (badness 3568) in paragraph at lines 399--399
 []|\OT1/cmr/m/n/12 The data that
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 is read from
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 Database Ac-
  []
 
 
-Underfull \hbox (badness 1742) in paragraph at lines 400--400
+Underfull \hbox (badness 1742) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 cess Mod-ule 1,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--399
 \OT1/cmr/m/n/12 re-quests, and
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 400--401
+Underfull \hbox (badness 1097) in paragraph at lines 399--400
 []|\OT1/cmr/m/n/12 Feb-March. A
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 400--401
+Underfull \hbox (badness 2012) in paragraph at lines 399--400
 \OT1/cmr/m/n/12 sim-u-la-tion data
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--402
+Underfull \hbox (badness 10000) in paragraph at lines 401--401
 []|\OT1/cmr/m/n/12 Database
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--402
+Underfull \hbox (badness 10000) in paragraph at lines 401--401
 \OT1/cmr/m/n/12 Ac-cess
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--402
+Underfull \hbox (badness 10000) in paragraph at lines 401--401
 \OT1/cmr/m/n/12 cor-re-spond-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--402
+Underfull \hbox (badness 10000) in paragraph at lines 401--401
 \OT1/cmr/m/n/12 op-ti-mal out-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--402
+Underfull \hbox (badness 10000) in paragraph at lines 401--401
 \OT1/cmr/m/n/12 ba-sic read-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--402
+Underfull \hbox (badness 10000) in paragraph at lines 401--401
 \OT1/cmr/m/n/12 and writ-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--402
+Underfull \hbox (badness 10000) in paragraph at lines 401--401
 \OT1/cmr/m/n/12 con-cur-rency
  []
 
 
-Underfull \hbox (badness 6658) in paragraph at lines 402--402
+Underfull \hbox (badness 6658) in paragraph at lines 401--401
 []|\OT1/cmr/m/n/12 The sim-u-la-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--403
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
 \OT1/cmr/m/n/12 for the most
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--403
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
 \OT1/cmr/m/n/12 the for-mat-ting
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--403
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
 \OT1/cmr/m/n/12 may re-quire
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--403
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
 \OT1/cmr/m/n/12 edit-ing when
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 402--403
+Underfull \hbox (badness 2012) in paragraph at lines 401--402
 \OT1/cmr/m/n/12 sim-u-la-tion data
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 []|\OT1/cmr/m/n/12 Database
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 Ac-cess
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 []|\OT1/cmr/m/n/12 Stores the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 gen-er-ated hy-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 per-pa-ram-e-ters
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 404--404
+Underfull \hbox (badness 5105) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 of each model
  []
 
 
-Underfull \hbox (badness 7814) in paragraph at lines 404--404
+Underfull \hbox (badness 7814) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 stream in the
  []
 
 
-Underfull \hbox (badness 8170) in paragraph at lines 404--404
+Underfull \hbox (badness 8170) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 Black-board In-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 []|\OT1/cmr/m/n/12 The hy-per-pa-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 ram-e-ters and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 model per-for-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 403--403
 \OT1/cmr/m/n/12 mances stored
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 404--405
+Underfull \hbox (badness 1097) in paragraph at lines 403--404
 []|\OT1/cmr/m/n/12 Feb-March. A
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 404--405
+Underfull \hbox (badness 2012) in paragraph at lines 403--404
 \OT1/cmr/m/n/12 sim-u-la-tion data
  []
 
 
-Underfull \hbox (badness 2418) in paragraph at lines 406--406
+Underfull \hbox (badness 2418) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 face Mod-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--406
+Underfull \hbox (badness 10000) in paragraph at lines 405--405
 []|\OT1/cmr/m/n/12 Controls the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--406
+Underfull \hbox (badness 10000) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 com-mu-ni-ca-tion
  []
 
 
-Underfull \hbox (badness 1303) in paragraph at lines 406--406
+Underfull \hbox (badness 1303) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 dic-tion re-quests
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--406
+Underfull \hbox (badness 10000) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 to the Ma-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--406
+Underfull \hbox (badness 10000) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 chine Learner
  []
 
 
-Underfull \hbox (badness 8170) in paragraph at lines 406--406
+Underfull \hbox (badness 8170) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 Black-board In-
  []
 
 
-Underfull \hbox (badness 1275) in paragraph at lines 406--406
+Underfull \hbox (badness 1275) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 di-rec-tion Layer.
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 406--406
+Underfull \hbox (badness 1005) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 It also dis-plays
  []
 
 
-Underfull \hbox (badness 1484) in paragraph at lines 406--406
+Underfull \hbox (badness 1484) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 the model per-
  []
 
 
-Underfull \hbox (badness 3333) in paragraph at lines 406--406
+Underfull \hbox (badness 3333) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 for-mances af-ter
  []
 
 
-Underfull \hbox (badness 7685) in paragraph at lines 406--406
+Underfull \hbox (badness 7685) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 each val-i-da-tion
  []
 
 
-Underfull \hbox (badness 4967) in paragraph at lines 406--406
+Underfull \hbox (badness 4967) in paragraph at lines 405--405
 []|\OT1/cmr/m/n/12 The re-sults of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--406
+Underfull \hbox (badness 10000) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 the val-i-da-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--406
+Underfull \hbox (badness 10000) in paragraph at lines 405--405
 \OT1/cmr/m/n/12 tests on the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--407
+Underfull \hbox (badness 10000) in paragraph at lines 405--406
 []|\OT1/cmr/m/n/12 Feb-March.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--407
+Underfull \hbox (badness 10000) in paragraph at lines 405--406
 \OT1/cmr/m/n/12 This mod-ule
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--407
+Underfull \hbox (badness 10000) in paragraph at lines 405--406
 \OT1/cmr/m/n/12 chine Learner
  []
 
 
-Underfull \hbox (badness 8170) in paragraph at lines 406--407
+Underfull \hbox (badness 8170) in paragraph at lines 405--406
 \OT1/cmr/m/n/12 Black-board In-
  []
 
 
-Underfull \hbox (badness 6412) in paragraph at lines 406--407
+Underfull \hbox (badness 6412) in paragraph at lines 405--406
 \OT1/cmr/m/n/12 di-rec-tion Layer
  []
 
 [17 </Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure10.png>] [18] [19]
 No file DD_REV_0.bbl.
 [20] [21] [22]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 444.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 445.
  [23]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 444.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 445.
  (/Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/DD_REV_0.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 444.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 444.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 445.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 445.
 Package rerunfilecheck Info: File `DD_REV_0.out' has not changed.
-(rerunfilecheck)             Checksum: 4FB1068E0BEDD220903E7FE9BE9B8B60;2145.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 444.
+(rerunfilecheck)             Checksum: 437538EA838A1F5B29A26F349C6733B0;2145.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 445.
  ) 
 Here is how much of TeX's memory you used:
  8974 strings out of 480608
@@ -1221,7 +1221,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  36i,11n,46p,1295b,806s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/DD_REV_0.pdf (26 pages, 336909 bytes).
+Output written on /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/DD_REV_0.pdf (26 pages, 336863 bytes).
 PDF statistics:
  376 PDF objects out of 1000 (max. 8388607)
  320 compressed objects within 4 object streams

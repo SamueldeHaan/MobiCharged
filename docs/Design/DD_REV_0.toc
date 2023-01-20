@@ -21,12 +21,12 @@
 \contentsline {section}{\numberline {5}System Boundary}{13}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Preliminary Set of Monitored \& Controlled Variables}{13}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Environment Variables}{14}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Anticipated and Unlikely Changes}{14}{section.6}%
-\contentsline {section}{\numberline {7}Module Hierarchy}{14}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Software System Module Hierarchy}{14}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Modules}{15}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Hardware MOdule Hierarchy}{15}{subsection.7.3}%
-\contentsline {section}{\numberline {8}Module Decomposition}{17}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Software Module Decomposition}{17}{subsection.8.1}%
-\contentsline {section}{\numberline {9}Traceablility Matrix}{21}{section.9}%
+\contentsline {section}{\numberline {6}Module Hierarchy}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Software System Module Hierarchy}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Modules}{15}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Hardware MOdule Hierarchy}{15}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Module Decomposition}{17}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Software Module Decomposition}{17}{subsection.7.1}%
+\contentsline {section}{\numberline {8}Traceablility Matrix}{21}{section.8}%
+\contentsline {section}{\numberline {9}Anticipated and Unlikely Changes}{21}{section.9}%
 \contentsline {section}{\numberline {10}Use Hierarchy between Modules}{21}{section.10}%
