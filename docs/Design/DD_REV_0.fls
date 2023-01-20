@@ -101,6 +101,8 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/translator/translator.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/translator/translator.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/textcomp.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/textcomp.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tools/longtable.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tools/longtable.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/natbib/natbib.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/natbib/natbib.sty
 INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/DD_REV_0.aux
@@ -199,6 +201,15 @@ INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/contex
 INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/HardwareContext.png
 INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/HardwareContext.png
 INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/HardwareContext.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure8.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure8.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure8.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure9.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure9.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure9.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure10.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure10.png
+INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/images/Figure10.png
 INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/DD_REV_0.aux
 INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/DD_REV_0.out
 INPUT /Users/samueldehaan/Desktop/CAPSTONE/MobiCharged/docs/Design/DD_REV_0.out

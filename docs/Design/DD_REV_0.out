@@ -23,7 +23,10 @@
 \BOOKMARK [2][-]{subsection.5.2}{Environment Variables}{section.5}% 23
 \BOOKMARK [1][-]{section.6}{Anticipated and Unlikely Changes}{}% 24
 \BOOKMARK [1][-]{section.7}{Module Hierarchy}{}% 25
-\BOOKMARK [1][-]{section.8}{Connection between Requirements and Design}{}% 26
-\BOOKMARK [1][-]{section.9}{Module Decomposition}{}% 27
-\BOOKMARK [1][-]{section.10}{Traceablility Matrix}{}% 28
-\BOOKMARK [1][-]{section.11}{Use Hierarchy between Modules}{}% 29
+\BOOKMARK [2][-]{subsection.7.1}{Software System Module Hierarchy}{section.7}% 26
+\BOOKMARK [2][-]{subsection.7.2}{Modules}{section.7}% 27
+\BOOKMARK [2][-]{subsection.7.3}{Hardware MOdule Hierarchy}{section.7}% 28
+\BOOKMARK [1][-]{section.8}{Module Decomposition}{}% 29
+\BOOKMARK [2][-]{subsection.8.1}{Software Module Decomposition}{section.8}% 30
+\BOOKMARK [1][-]{section.9}{Traceablility Matrix}{}% 31
+\BOOKMARK [1][-]{section.10}{Use Hierarchy between Modules}{}% 32

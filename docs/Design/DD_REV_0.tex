@@ -11,6 +11,7 @@
 \usepackage{gensymb}
 \usepackage{siunitx}
 \usepackage{textcomp}
+\usepackage{longtable}
 \graphicspath{{./images/}}
 \usepackage{array}
 \graphicspath{ {figures/} }
@@ -320,10 +321,92 @@ The following is a list of all monitored and controlled variables.
 \section{Anticipated and Unlikely Changes}
 
 \section{Module Hierarchy}
+\subsection{Software System Module Hierarchy}
+For the machine learning algorithm to be effective, it is efficient for it to be modularized. Below is a list and diagram of the software system module hierarchy, where further information upon these modules are outlined in the Module Decomposition section.
 
-\section{Connection between Requirements and Design}
+\subsection{Modules}
+\begin{itemize}
+  \item Input Module
+  \item Initializer Module
+  \item Machine Learner Blackboard Indirection Layer
+  \item Database Access Module 1
+  \item Database Access Module 2
+  \item User Interface Module
+  \item Controller / Server Module
+  \item “Client” Module
+\end{itemize}
 
+\subsection{Hardware MOdule Hierarchy}
+Although the physical simulation component of this project is not connected to the software portion directly, the hardware system can still be modularized to exhibit the workings of the system.
+\par 
+Below is a high-level module hierarchy of the hardware system where further information on each module will be described in the Module Decomposition section.Please note that the “modules” here can be more thought of to be component sections.
+\par
+
+\begin{itemize}
+  \item PCB Board Module (includes MOSFET drivers, shift registers,  capacitors \& transducers i.e. electrosonic emitters)
+  \item FPGA Module
+  \item Power Supply Module (includes connectors \& ports)
+  \item FPGA Programmer \& Arduino Module
+\end{itemize}
+
+For further illustrations of the components of the hardware system, below are diagrams depicting the connection between components.
+\par 
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=7cm]{images/Figure8.png}
+  \caption[PCB and Power]{PCB Board Component with FPGA \& Power Requirements}
+  \label{fig:figure8}
+\end{figure}
+
+As shown in figure 8 above, the FPGA will be soldered onto the primary FPGA board for further ability of programming. The board will require a 5V power supply and a 9V power supply (note that the connector port is rated for 18V but 9V will be sufficient). 
+\par 
+Next we will connect the Arduino to the primary board as shown in figure 9 below.
+\par
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=7cm]{images/Figure9.png}
+  \caption[Arduino Connectrion]{Arduino component connection to the PCB Board }
+  \label{fig:figure9}
+\end{figure}
+
+In order to create a 3D levitation device for the purpose of simulating remote charging devices, a secondary board will be necessary. Figure 10 below shows the connections required.
+\par 
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=7cm]{images/Figure10.png}
+  \caption[Hardware Complete]{Complete 3D Levitation System}
+  \label{fig:figure10}
+\end{figure}
+
+Note that for the whole system, the primary board \& secondary board will be on top of each other where the ultrasonic emitters (transducers) will be facing each other. There will be a sufficient gap in between the boards such that particles can be placed in between for levitation to occur and for it to be visible by the naked eye.
+\par
+Furthermore, the Arduino will be connected to the FPGA programmer component. In this case, it will be a PC running a Quartus software along with a script to operate the ultrasonic emitters.
+\par
 \section{Module Decomposition}
+\subsection{Software Module Decomposition}
+\begin{longtable}{|p{2cm}|p{3cm}|p{3cm}|p{3cm}}
+  \caption{\bf Software Modules}\\
+    \hline
+    \bf Module & \bf Service & \bf Secret & \bf Estimated Completion\\
+    \hline
+    Initializer Module & Initializes main loop, and databases.  Allocates space for data processing, verifies that the MATLAB simulation compiles. Bounces errors if memory cannot be allocated or if MATLAB does not compile.  & The number of inputs/outputs that will determine how much memory is allocated, and the errors that can be returned. & End of January 2023. This module is finished for the most part. It may require slight edits when implementing with the other modules.\\
+    \hline 
+    Controller/ Server Module & Handles communication between the “Server” and “Client”. Passes inputs based on provided boundaries to Client module and returns optimal outputs. & The simulation inputs passed to client and the optimal outputs received by the client. & End of January 2023. This module is finished for the most part. It may require slight edits when implementing with the other modules.\\
+    \hline 
+    Client Module & Client module receives inputs and passes through MATLAB simulation and returns optimal outputs. & The MATLAB simulation format, simulation inputs and outputs. & End of January 2023. This module is finished for the most part. It may require slight edits when implementing with the other modules.\\
+    \hline 
+    Machine Learner Blackboard Indirection Layer & Reads batches of data from Database Access Module 1. Once certain data thresholds have been reached, this module passes batched data to specific model training streams. During downtimes where the amount of new data is received, this module will run validation test suites to monitor progress of models. Allows user requests for input into predictive models. This module will ultimately filter out the best performing models. & The data that is read from Database Access Module 1, format of validation tests, user requests, and trained models. & Feb-March. A large amount of simulation data still needs to be produced in order to train and test models.\\
+    \hline 
+    Database Access Module 1 & Stores the generated inputs and corresponding optimal output. Establishes basic reading and writing concurrency control. & The simulation inputs and optimal outputs that are stored in this database. & End of January 2023. This module is completed for the most part. However, the formatting of the database may require editing when simulation data is produced.\\
+    \hline 
+    Database Access Module 2 & Stores the generated hyperparameters and performance of each model stream in the Machine Learner Blackboard Indirection Layer. & The hyperparameters and model performances stored in this database. & Feb-March. A large amount of simulation data still needs to be produced in order to train and test models.\\
+    \hline 
+    User Interface Module & Controls the communication of the user prediction requests to the Machine Learner Blackboard Indirection Layer. It also displays the model performances after each validation test trial. & The results of the validation tests on the models, and the user requests. & Feb-March. This module requires the Machine Learner Blackboard Indirection Layer to be completed first. \\
+    \hline 
+\end{longtable}
+  
 
 \section{Traceablility Matrix}
 
@@ -340,17 +423,23 @@ We will be referring to documentations provided by Mobilite-Power, however, as o
 
 \newpage{}
 \section*{Appendix --- Reflection}
-In order for this project to be successful, there are a plethora of skills required to be obtained. 
-\par
-One major skill required is the ability to enhance the expertise as well as the familiarity with simulation software such as Matlab. As Mechatronics \& Software students, the fundamentals are present to use Matlab for mathematical related programming (particularly in cases where linear algebra is necessary) but not much experience is present for the case of simulations aside from those specific to certain previous history in physics labs. This will allow the project to be excelled when collecting data to be fed into the machine learning algorithm. One approach to build this skill is to watch / go through online tutorials (particularly from Youtube) where they go over certain practices when performing simulations through Matlab. Another approach to this will be merely practicing the Matlab tools \& features such that familiarity is built with the simulation portions of Matlab. Members of the team will particularly choose the approach of following tutorial videos online as this can be quite helpful as well as done at any time due to its convenience. This will be completed by Eamon. 
-\par
-Another major skill which will determine the success of this project is the ability to create / program a machine-learning and/or artificial intelligence labeled software. This skill will be pertained to specific individuals in the group but a general understanding of this is required amongst the whole team for the continuous success of the project. One approach to this will be reviewing algorithm research papers online that provide ideas in succeeding in this project. Another method is to reach out to supervisors and industry members when discussing the process of building this as well as request for tips on obtaining the skills. This skill will be one of the most difficult to obtain due to the novelty nature of it in the perspective of the current team. The approach selected to build this skill is by reviewing research papers online as this will include a vast amount of information as well as be convenient; whereas the approach depends on external factors. This will be concluded by Eric.
-\par
-In addition, the skill of programming standards as well as practices will be a skill necessary to be obtained, particularly to the Mechatronics members as they are not as familiar with the tools \& practices as the Software members. This skill will be approached by discussions during meetings as well as reaching out to other team members (particularly in software) in order to request for their inputs as well as revisions when programming standards are applicable. Another method to build this skill is to review the team’s selected programming standard and use handbooks online that pertain to it as a guide when programming - as practice is built using it, the skill will be developed. The approach selected to build this skill is to reach out to other members with experience in this. This is selected as it is narrowed down particularly to the project as well as builds team communication such that the team is aware of the status of the project. This skill will pertain to Nashit. 
-\par
-A dire skill that is important for this project is the ability to effectively communicate to other members. This is necessary as when dealing with complex situations and a project such as this, it is impossible for a single individual to succeed given the current constraints. The only option is to work effectively as a team. With all the different components of this project as well as the integration to occur in the future, it is important that the project is communicated in each step. One approach to create this skill is to simply discuss with other members how they would like to do this best as well as asking the right questions. Moreover, it would be effective to be influenced by other practices that can be found online in regards to other successful projects. One key advantage to this team is the industry outreach supervisor; this skill can be developed by discussing this matter with them. This knowledge building will be assigned to Mustafa. The selected choice will be to discuss with other members how they would like to do this best as well as asking the correct questions as well as seeking feedback from team members. 
-\par
-Finally, another skill required to be obtained is the ability to create the prototype which will fall under embedded systems / hardware programming as well as the electrical abilities for assembly. This is a relatively new skill for all members but will be required to be obtained by certain individuals in the team. This will allow for the prototype to be built effectively as well as performing as per standards. An approach for developing this skill is to watch tutorials online and follow simple projects in which the skills are developed. Another approach is to reach out to colleagues with more expertise in this matter and apply those tips to develop our own personal skills. This knowledge will be acquired by Sam. The selected approach will be to watch tutorials online and follow other projects as this will be convenient as well as allows the ability to follow step-by-step procedures.
+
+The information in this section will be used to evaluate the team members on the graduate attribute of Problem Analysis and Design. Please answer the following questions: 
+\par 
+\begin{enumerate}
+  \item What are the limitations of your solution? Put another way, given unlimited resources, what could you do to make the project better? (LO ProbSolutions) 
+  \item Give a brief overview of other design solutions you considered. What are the benefits and tradeoffs of those other designs compared with the chosen design? From all the potential options, why did you select documented design? (LO Explores)
+\end{enumerate}
+
+\begin{enumerate}  
+  \item The limitations of our solution is primarily cost \& time. \par The problem of making the process of obtaining data values for the purpose of creating remote charging devices specific to certain applications easier is proposed to be solved through the methods of machine learning algorithms. That is, the process would become significantly easier if a machine learning algorithm could output the data values necessary at a much faster speed (and subsequently lower computational costs) without the use of simulations. \par The proposed solution has limitations in verifications. Through the original method of using simulations, the consequence is that it is extremely timely to output. However, the benefit of it is exhibited with verification of values. Through the machine learning algorithms, although the speed of the values being outputted increases significantly, the idea of verification becomes lost; particularly in the case where the algorithm goes past the limits of inputs provided. \par Given unlimited resources, the solution could become better if more time was present such that modules were created that verify the values and provide higher certainty in the values outputted. 
+  Moreover, more servers would be purchased so that it may feed the machine learning algorithm without the use of users inputting data manually (referring to the client modules). \par 
+  In regards to the hardware system, the proposed solution would become better with appropriate equipment to create a real prototype as opposed to a simulative one. The prototype would be better for display as well as feeding limits to the software by purchasing equipment such as antenna arrays, phase arrays, electromagnetic wave resistant encapsulations, etc. Moreover, with unlimited resources, the hardware system would be given an embedded system such that it may direct “charging” signals remotely to desired devices.
+  \item An alternative solution for the design of this project was manually obtaining values based on certain inputs (and subsequently certain applications) over a wide range such that we may feed it into the machine learning algorithm. Although the benefit of this method is that the values are verified, it was better thought of to use a single server or two in order to run these simulations continuously in the backend automatically. This way, it is more efficient obtaining the values in the long term. In addition, this would be more effective for our client Mobilite Power as they can use the architecture of our software system and feed their large data set into it. This way, the machine learning algorithm will output more accurate results over a wider range of data. \par 
+  Regarding the hardware system, an alternative solution was to create a small charging device using a pre-purchased antenna array. This would be done without the phase arrays but be implemented with a larger structure around the system to solve our stretch goals (which include being resistant to weather conditions). The benefit in this is that we can display different antenna array shapes \& sizing while illustrating the change in results; which we predicted to be power distributed as well as accuracy of electromagnetic waves sent. The problem with this solution is the limitation of resources. The group proceeded with creating a simulation of a remote charging device using a phased array system with the fear that the original solution mentioned would not be completed in a timely manner due to the expertise required. The original solution would dive into the area of PHD level projects and would be a risk in completion.   
+
+\end{enumerate}
+
 
 \end{document}
 
