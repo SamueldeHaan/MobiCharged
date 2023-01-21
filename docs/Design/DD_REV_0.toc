@@ -24,9 +24,10 @@
 \contentsline {section}{\numberline {6}Module Hierarchy}{14}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Software System Module Hierarchy}{14}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Modules}{15}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Hardware MOdule Hierarchy}{15}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.3}Hardware Module Hierarchy}{15}{subsection.6.3}%
 \contentsline {section}{\numberline {7}Module Decomposition}{17}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Software Module Decomposition}{17}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Hardware System Module / Component Timelines}{21}{subsection.7.2}%
 \contentsline {section}{\numberline {8}Traceablility Matrix}{21}{section.8}%
-\contentsline {section}{\numberline {9}Anticipated and Unlikely Changes}{21}{section.9}%
-\contentsline {section}{\numberline {10}Use Hierarchy between Modules}{21}{section.10}%
+\contentsline {section}{\numberline {9}Anticipated and Unlikely Changes}{22}{section.9}%
+\contentsline {section}{\numberline {10}Use Hierarchy between Modules}{24}{section.10}%

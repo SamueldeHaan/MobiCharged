@@ -24,9 +24,10 @@
 \BOOKMARK [1][-]{section.6}{Module Hierarchy}{}% 24
 \BOOKMARK [2][-]{subsection.6.1}{Software System Module Hierarchy}{section.6}% 25
 \BOOKMARK [2][-]{subsection.6.2}{Modules}{section.6}% 26
-\BOOKMARK [2][-]{subsection.6.3}{Hardware MOdule Hierarchy}{section.6}% 27
+\BOOKMARK [2][-]{subsection.6.3}{Hardware Module Hierarchy}{section.6}% 27
 \BOOKMARK [1][-]{section.7}{Module Decomposition}{}% 28
 \BOOKMARK [2][-]{subsection.7.1}{Software Module Decomposition}{section.7}% 29
-\BOOKMARK [1][-]{section.8}{Traceablility Matrix}{}% 30
-\BOOKMARK [1][-]{section.9}{Anticipated and Unlikely Changes}{}% 31
-\BOOKMARK [1][-]{section.10}{Use Hierarchy between Modules}{}% 32
+\BOOKMARK [2][-]{subsection.7.2}{Hardware System Module / Component Timelines}{section.7}% 30
+\BOOKMARK [1][-]{section.8}{Traceablility Matrix}{}% 31
+\BOOKMARK [1][-]{section.9}{Anticipated and Unlikely Changes}{}% 32
+\BOOKMARK [1][-]{section.10}{Use Hierarchy between Modules}{}% 33

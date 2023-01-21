@@ -99,6 +99,8 @@ DS & Download Speed\\
 \hline
 US & Upload Speed\\
 \hline
+I/O & Input/Output\\
+\hline
 \end{tabular}
 \end{table}
 
@@ -122,6 +124,7 @@ The system-solution for this will be the development of MobiCharged.
 \subsection{Purpose}
 
 \subsubsection{System Purpose}
+\par
 The purpose of the development of MobiCharged is to assist stakeholders in the infrastructure development industry revolving around design and construction which include but are not limited to; consultant engineers, contractors and building owners. 
 \par
 The software will aid remote charging designers by optimizing their design through the method of machine learning, which will substantially reduce their time \& efforts designing as it will remove the process of costly simulations. 
@@ -134,6 +137,7 @@ The purpose of this document is to elucidate the decomposition of the system (bo
 
 \section{Scope}
 \subsection{System Summary}
+\par
 The environments in which these physical systems operate are typically from roof-tops and/or high-altitude locations with spacial capabilities to place arrays of these systems. These systems react to user inputted (remotely) data such as the location of the device required to be charged, so that it may orient itself in a manner optimal for that application. 
 \par
 The purpose of the software system, MobiCharge, is a machine learning algorithm that will be used by Mobilite-Power, engineering consultant groups, general contractors and building maintenance teams to optimize the design process required to effectively and efficiently produce the most viable remote charging system. In doing so, this will negate the current process of manually conducting simulations (that requires lengthy computerized numerical calculations), ultimately minimizing cost, manual labor, and the time necessary to produce the required results. This system will provide users with the optimal configuration of a remote charging device based on the desired output, encrypt data protecting users when producing design results and use data smoothing to ensure the accuracy of the system in a time efficient manner.
@@ -141,6 +145,7 @@ The purpose of the software system, MobiCharge, is a machine learning algorithm 
 The hardware system is to root our algorithms optimization in the real world environment. The production of a physical model will assist in the determination of the absolute boundaries that can be fed into the machine learning algorithm. Variable parameter ranges will be able to be derived from the physical model to determine the magnitude to which the boundaries can be pushed within the simulation. The physical system provides a secondary purpose in the form of data collection and verification. In order to increase the breadth of data that we can feed into the algorithm, we must determine the degree of computational error within the simulation results. A physical model will aid in determining this range and lead to further optimization through the machine learning algorithm.
 
 \subsection{Assumptions}
+\par 
 \textbf{A1:} Developers will have access to enough processing power to conduct large quantities of simulations
 \par
 \textbf{A2:} User does not intentionally attempt to enter inputs incorrectly, as well as provide positive feedback to the system when it is not correct
@@ -165,6 +170,7 @@ The hardware system is to root our algorithms optimization in the real world env
 
 \section{Project Overview}
 \subsection{Normal Operation}
+
 This application is to be used by Mobilite-Power to reduce overhead costs associated with developing remote charging devices. The company will be able to use this system on their computers with ease.By using this system, Mobilite-Power will be able to minimize the cost, time, and labor required to determine the optimal configuration necessary for remote charging devices. This will make their operations more efficient.
 \subsection{Behaviour Overview}
 This system will continuously learn and develop without an operator. However, the ultimate output of the system will be event based, thus, requiring the user to initiate operations. The user will be required to provide the necessary input, in which the machine learning algorithm will return the optimal configuration for a remote charging device, encrypt the provided output, and store the optimal data into a database for data smoothing. When the system is not in use, it will be running simulations automatically to continuously refine its ability to produce accurate optimal results.
@@ -174,6 +180,7 @@ Undesired event handling is critical to ensuring that, even in unintended circum
 \section{System Contexts}
 
 \subsection{Preliminary System Contexts}
+\par
 The system will interact with pre-existing matlab simulation programs, purely at the simulations’ start and end points, where the program will pull data from completed simulations and push parameters to run new ones. In the early stages of the product life cycle, it will mainly be pulling the completed simulation data, and feeding it into the deep learning algorithm in order to train it and give it some experience with optimal solutions. This will require integration with large databases in order to record this data. 
 \par
 Once the core program / deep learning algorithm has been trained to some satisfying degree, the context will expand to include the second half of the cyclical integration with the pre-existing simulation software; it will now take charge of running new simulations that push the boundaries of its current knowledge base. This is in order to take full advantage of free processing power, such that the simulations are always being run, and the deep learner is constantly being trained. This may require interfacing with an additional software module in order to schedule data coming in to be processed, and outward data to be procured.
@@ -335,7 +342,14 @@ For the machine learning algorithm to be effective, it is efficient for it to be
   \item “Client” Module
 \end{itemize}
 
-\subsection{Hardware MOdule Hierarchy}
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=7cm]{images/Figure7.png}
+  \caption[Software Architecture Modules]{Software Architecture Modularized }
+  \label{fig:figure7}
+\end{figure}
+
+\subsection{Hardware Module Hierarchy}
 Although the physical simulation component of this project is not connected to the software portion directly, the hardware system can still be modularized to exhibit the workings of the system.
 \par 
 Below is a high-level module hierarchy of the hardware system where further information on each module will be described in the Module Decomposition section.Please note that the “modules” here can be more thought of to be component sections.
@@ -375,7 +389,7 @@ In order to create a 3D levitation device for the purpose of simulating remote c
 \begin{figure}[htp]
   \centering
   \includegraphics[width=7cm]{images/Figure10.png}
-  \caption[Hardware Complete]{Complete 3D Levitation System}
+  \caption[Hardware Complete System]{Complete 3D Levitation System}
   \label{fig:figure10}
 \end{figure}
 
@@ -405,20 +419,96 @@ Furthermore, the Arduino will be connected to the FPGA programmer component. In 
     User Interface Module & Controls the communication of the user prediction requests to the Machine Learner Blackboard Indirection Layer. It also displays the model performances after each validation test trial. & The results of the validation tests on the models, and the user requests. & Feb-March. This module requires the Machine Learner Blackboard Indirection Layer to be completed first. \\
     \hline 
 \end{longtable}
-  
+\subsection{Hardware System Module / Component Timelines}
+The following table will outline the dates of completion for the hardware modules.
+\begin{table}[htp]
+  \caption{\bf Hardware System Timeline}
+      \begin{tabular}{|p{4cm}|p{4cm}|}
+           \hline
+           \bf Module & \bf Estimated Completion\\
+           \hline
+           PCB Board Module & Jan 28th, 2023\\
+           \hline
+           FPGA Module & Programming Completed by Feb 3rd, 2023\\
+           \hline 
+           Power Supply Module & IJan 20th, 2023\\
+           \hline 
+           FPGA Programmer \& Arduino Module & Jan 28th, 2023\\
+           \hline 
+      \end{tabular}
+  \end{table}
 
 \section{Traceablility Matrix}
+The following is the traceablility matrix for the software system.
+\begin{longtable}{|p{4cm}|p{4cm}|}
+  \caption{\bf Traceablility Matrix}\\
+           \hline
+           \bf Module & \bf Requirements\\
+           \hline
+           Initializer Module & ACR1\\
+           \hline
+           Machine Learner Blackboard Indirection Layer & SR1, SR2, SR3, SR5, SR6, PAR1, RAR1\\
+           \hline 
+           Database Access Module 1 & IR1, RAR1, RFTR1, PRV1\\
+           \hline 
+           Database Access Module 2 & IR1, RAR1, RFTR1, PRV1\\
+           \hline 
+           Controller/Server Module & SR5\\
+           \hline 
+           Client Module & SR4, ACR1, IR1, ADAR1\\
+           \hline 
+           User Interface Module & APR1, ACR1, EUR1, EUR2, LR1, SLR1, RAR1, ADAR1\\
+           \hline 
+  \end{longtable}
 
 \section{Anticipated and Unlikely Changes}
 
+\begin{longtable}{|p{4cm}|p{4cm}|}
+  \caption{\bf Anticipated Changes}\\
+           \hline
+           \bf Module & \bf Anticipated Changes\\
+           \hline
+           Initializer Module & The number of inputs/outputs and their bounds will change once the MATLAB simulation format is finalized.\\
+           \hline
+           Machine Learner Blackboard Indirection Layer & The range of model architectures will change as we gain insight on what types of models perform the best with the simulation data. The batch size of the data being read and the data thresholds will also change.\\
+           \hline 
+           Database Access Module 1 & The formatting of this database will change if the MATLAB simulation format changes. For example, the simulation may be changed to add or remove features in the data.\\
+           \hline 
+           Database Access Module 2 & The formatting of this database may change as new model architectures are tested.\\
+           \hline 
+           Controller/Server Module & The formatting of the inputs and outputs sent and received from the client will change depending on the MATLAB simulation file.\\
+           \hline 
+           Client Module & The formatting of the inputs and outputs sent and received from the client will change depending on the MATLAB simulation file.\\
+           \hline 
+  \end{longtable}
+
+\begin{longtable}{|p{4cm}|p{4cm}|}
+  \caption{\bf Unlikely Changes}\\
+           \hline
+           \bf Module & \bf Unlikely Changes\\
+           \hline
+           Initializer Module & Handling memory storage and error calls as this is necessary and currently most efficient to be instilled within this module\\
+           \hline
+           Machine Learner Blackboard Indirection Layer & During downtimes where the amount of new data is received, this module will run validation test suites to monitor progress of models. This is unlikely to change in order to maximize efficiency as well as accuracy of results.\\
+           \hline 
+  \end{longtable}
+
 \section{Use Hierarchy between Modules}
+The figure below displays the use cases between the modules (eg: Optimal I/O module depends on the Initializer module to work).
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=7cm]{images/Figure7.png}
+  \caption[Uses Hierarchy]{Uses Hierarchy for Software System}
+  \label{fig:figure11}
+\end{figure}
+
 
 \section*{References}
-We will be referring to documentations provided by Mobilite-Power, however, as of now there are no references to mention.
+SRS, \url{https://github.com/SamueldeHaan/MobiCharged/blob/main/docs/SRS/SRS.pdf}
 
 \bibliographystyle{plainnat}
 
-\bibliography{SRS}
+\bibliography{Design Document}
 
 \newpage
 
