@@ -9,7 +9,7 @@ device_IP = socket.gethostbyname(device_Name)
 authSucess = False
 
 soc = socket.socket()
-server_ADD = "192.168.0.15"
+server_ADD = "192.168.0.27"
 server_PORT = 5001
 
 try:
@@ -48,7 +48,7 @@ def data_sending():
             print('No inputs to work on!')
             continue
         
-        y = eng.sample_simulation1(input, nargout=1) #output - hardcoded right now 
+        y = eng.sample_simulation1(int(input), nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
         if y:
             soc.send(str(y).encode())

@@ -3,7 +3,7 @@ import threading
 
 soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server_ADD = "192.168.0.15"
+server_ADD = "192.168.0.27"
 server_PORT = 5001
 
 connected_clients = []
