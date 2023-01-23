@@ -1,0 +1,59 @@
+\contentsline {section}{\numberline {1}System Overview}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Naming Conventions and Terminology}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Relevant Facts and Assumptions}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Introduction}{1}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}The Stakeholders}{2}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}The Client}{2}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Other Stakeholders}{3}{subsubsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.5}Mandated Constraints}{3}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}Budget Constraints}{3}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}Schedule Constraints}{3}{subsubsection.1.5.2}%
+\contentsline {section}{\numberline {2}Synopsis}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Software System}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Hardware System}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Project Overview}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Normal Operation}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Behaviour Overview}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Undesired Event Handling}{4}{subsection.3.3}%
+\contentsline {section}{\numberline {4}System Contexts}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Preliminary System Contexts}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Server Integrated System Context}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Deployed System Context}{10}{subsection.4.3}%
+\contentsline {section}{\numberline {5}System Goals}{11}{section.5}%
+\contentsline {section}{\numberline {6}System Boundary}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Preliminary Set of Monitored \& Controlled Variables}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Environment Variables}{14}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Operational Concepts}{14}{section.7}%
+\contentsline {section}{\numberline {8}Environmental Assumptions}{15}{section.8}%
+\contentsline {section}{\numberline {9}Functional Architecture}{17}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Functional Requirements}{18}{subsection.9.1}%
+\contentsline {subsubsection}{\numberline {9.1.1}Software System Functional Requirements}{18}{subsubsection.9.1.1}%
+\contentsline {subsubsection}{\numberline {9.1.2}Hardware System Functional Requirements}{18}{subsubsection.9.1.2}%
+\contentsline {subsection}{\numberline {9.2}Non-functional Requirements}{18}{subsection.9.2}%
+\contentsline {subsubsection}{\numberline {9.2.1}Look and Feel Requirements}{18}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}Appearance Requirements}{18}{subsubsection.9.2.2}%
+\contentsline {subsubsection}{\numberline {9.2.3}Style Requirements}{18}{subsubsection.9.2.3}%
+\contentsline {subsubsection}{\numberline {9.2.4}Usability and Humanity Requirements}{18}{subsubsection.9.2.4}%
+\contentsline {subsubsection}{\numberline {9.2.5}Ease of use Requirements}{18}{subsubsection.9.2.5}%
+\contentsline {subsubsection}{\numberline {9.2.6}Learning Requirements}{18}{subsubsection.9.2.6}%
+\contentsline {subsubsection}{\numberline {9.2.7}Understandability and Politeness Requirements}{19}{subsubsection.9.2.7}%
+\contentsline {subsubsection}{\numberline {9.2.8}Performance Requirements}{19}{subsubsection.9.2.8}%
+\contentsline {subsubsection}{\numberline {9.2.9}Speed and Latency Requirements}{19}{subsubsection.9.2.9}%
+\contentsline {subsubsection}{\numberline {9.2.10}Safety Critical Requirements}{19}{subsubsection.9.2.10}%
+\contentsline {subsubsection}{\numberline {9.2.11}Precision of Accuracy Requirements}{19}{subsubsection.9.2.11}%
+\contentsline {subsubsection}{\numberline {9.2.12}Reliability and Availability Requirements}{19}{subsubsection.9.2.12}%
+\contentsline {subsubsection}{\numberline {9.2.13}Robustness of Fault Tolerance Requirements}{19}{subsubsection.9.2.13}%
+\contentsline {subsubsection}{\numberline {9.2.14}Capacity Requirements}{19}{subsubsection.9.2.14}%
+\contentsline {subsubsection}{\numberline {9.2.15}Operational and Environmental Requirements}{19}{subsubsection.9.2.15}%
+\contentsline {subsubsection}{\numberline {9.2.16}Physical Environment}{19}{subsubsection.9.2.16}%
+\contentsline {subsubsection}{\numberline {9.2.17}Release Requirements}{20}{subsubsection.9.2.17}%
+\contentsline {subsubsection}{\numberline {9.2.18}Maintainability and Support Requirements}{20}{subsubsection.9.2.18}%
+\contentsline {subsubsection}{\numberline {9.2.19}Maintenance Requirements}{20}{subsubsection.9.2.19}%
+\contentsline {subsubsection}{\numberline {9.2.20}Adaptability Requirements}{20}{subsubsection.9.2.20}%
+\contentsline {subsubsection}{\numberline {9.2.21}Security Requirements}{20}{subsubsection.9.2.21}%
+\contentsline {subsubsection}{\numberline {9.2.22}Access Requirements}{20}{subsubsection.9.2.22}%
+\contentsline {subsubsection}{\numberline {9.2.23}Privacy Requirements}{20}{subsubsection.9.2.23}%
+\contentsline {subsubsection}{\numberline {9.2.24}Legal Requirements}{20}{subsubsection.9.2.24}%
+\contentsline {subsubsection}{\numberline {9.2.25}Health and Safety Requirements}{20}{subsubsection.9.2.25}%
+\contentsline {section}{\numberline {10}System Modes}{20}{section.10}%
+\contentsline {section}{\numberline {11}Plan}{21}{section.11}%
