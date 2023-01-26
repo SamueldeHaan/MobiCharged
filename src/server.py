@@ -1,9 +1,10 @@
 import socket
 import threading
-
+import random
 soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server_ADD = "192.168.0.27"
+#server_ADD = "192.168.0.16"
+server_ADD = "0.0.0.0"
 server_PORT = 5001
 
 connected_clients = []
@@ -32,12 +33,12 @@ def Client_Connections():
         if authSuccess:
             print(f"[+] {c_add} Authorized Successfully")
             connected_clients.append(c_socket)
-            client_data_receiver_thread(c_socket)
+            client_data_receiver_thread(c_socket, c_add)
             print("Currently Connected Clients: ")
             print(connected_clients)
 
 
-
+#This function ensures authorized access
 def authorizationAccess(client_socket, c_add):
     authSuccess = False
     client_socket.send(authorizationMessage)
@@ -54,26 +55,38 @@ def authorizationAccess(client_socket, c_add):
         return authSuccess
 
 
-def client_data_receiver_thread(c_socket):
-    c_thread = threading.Thread(target=receive_thread, args=(c_socket,))
+def client_data_receiver_thread(c_socket, c_add):
+    c_thread = threading.Thread(target=receive_thread, args=((c_socket, c_add),))
     c_thread.start()
 
 def receive_thread(c_socket):
+    #c_socket is a tuple containing socket object in position 0, and the address in position 1
     while True:
         try:
-            received_data = c_socket.recv(1024).decode()
+            received_data = c_socket[0].recv(1024).decode()
             #Make sure received data is not null or empty
             if received_data:
-                print(f"Received message: {received_data}")
+
+                print(f"Received Optimized Simulation from {c_socket[1]}: {received_data}")
+                #Temporarily writing to text file (this is where data will be pushed to database)
+                file = open("C:\\Users\\Sal\\Desktop\\4G06 Offline\\database.txt", 'a')
+                file.write(received_data + "\n")
+                file.close()
+                #Generating new inputs
+                newResponse = newInput(received_data)
+                newEncodedResponse = newResponse.encode()
+                print(f"Sending Random Input To {c_socket[1]}: " + newResponse)
+                c_socket[0].send(newEncodedResponse)
+                
                 # sendDataClient = ("Did it work").encode() THIS IS WHERE WE WILL SEND DATA TO THE MYSQL DBs
                 # c_socket.send(sendDataClient)
                 #broadcast(received_data)
             else:
-                print(f"Client disconnected: {c_socket}")
+                print(f"Client disconnected: {c_socket[1]}")
                 return
         except:
-            connected_clients.remove(c_socket)
-            print(f"Client Disconnected: {c_socket}")
+            connected_clients.remove(c_socket[0])
+            print(f"Client Disconnected: {c_socket[1]}")
             print("Currently Connected Clients: ")
             print(connected_clients)
             return
@@ -87,5 +100,12 @@ def broadcast(message):
             connected_clients.remove(c_socket)
             print(f"Removed Client From Connected Clients: {c_socket}")
 
+def newInput(originalInput):
+    #Creating new input to keep simulation autonomous after being initialized
+    intData = float(originalInput)
+    intData += random.randint(0,9)
+    intData = int(intData)
+    newInput = str(intData)
+    return newInput
 
 Client_Connections()

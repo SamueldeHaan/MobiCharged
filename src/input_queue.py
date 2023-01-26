@@ -26,3 +26,11 @@ def remove():
         print('Removed from queue: ', out)
     sem.release()
     return out
+
+    
+
+def isEmpty():
+    if len(s) == 0:
+        return True
+    else:
+        return False

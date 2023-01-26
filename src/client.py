@@ -9,13 +9,13 @@ device_IP = socket.gethostbyname(device_Name)
 authSucess = False
 
 soc = socket.socket()
-server_ADD = "192.168.0.27"
+server_ADD = "192.168.0.16"
 server_PORT = 5001
 
 try:
     eng = matlab.engine.start_matlab()
 
-    path = eng.genpath('src')
+    path = eng.genpath('matlab')
     eng.addpath(path, nargout=0)
 
 except Exception as e:
@@ -42,16 +42,26 @@ def client_init():
 
 def data_sending():
     while True:
+        #Testing to see if system is idle for 10 minutes, then providing a notice
+        t0 = time.time()
+        while(q.isEmpty()):
+            t1 = time.time()
+            if((t1-t0) >= 600):
+                t0 = time.time()
+                print("\nQueue is currently empty, please provide optimization inputs: ")
+            pass
         input = q.remove()
-        if not(input):
-            time.sleep(5) ##this can be avoided with signals in the future
-            print('No inputs to work on!')
-            continue
+        
         
         y = eng.sample_simulation1(int(input), nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
         if y:
             soc.send(str(y).encode())
+
+        #if q.isEmpty():
+         #   time.sleep(5) ##this can be avoided with signals in the future
+            #print('\nNo inputs to work on!')
+          #  continue
         input = None
 
     ##need to quit eng upon connection cancellation / program termination
@@ -62,5 +72,5 @@ def data_receiving():
         data_received = soc.recv(1024).decode()
         if data_received:
             q.add(data_received)
-            print("Received data: ", data_received)
+            print("Received New Input: ", data_received)
         time.sleep(10)
