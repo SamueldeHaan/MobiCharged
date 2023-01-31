@@ -3,13 +3,14 @@ import threading
 import input_queue as q
 import time
 import matlab.engine
+import json
 
 device_Name = socket.gethostname()
 device_IP = socket.gethostbyname(device_Name)
 authSucess = False
 
 soc = socket.socket()
-server_ADD = "192.168.0.16"
+server_ADD = "172.105.14.186"
 server_PORT = 5001
 
 try:
@@ -50,19 +51,20 @@ def data_sending():
                 t0 = time.time()
                 print("\nQueue is currently empty, please provide optimization inputs: ")
             pass
-        input = q.remove()
+        inputParams = q.remove()
         
         
-        y = eng.sample_simulation1(int(input), nargout=1) #output - hardcoded right now 
+        y = eng.sample_simulation1(int(inputParams), nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
+        outputInputPair = inputParams + "/" + str(y)
         if y:
-            soc.send(str(y).encode())
+            soc.send(outputInputPair.encode())
 
         #if q.isEmpty():
          #   time.sleep(5) ##this can be avoided with signals in the future
             #print('\nNo inputs to work on!')
           #  continue
-        input = None
+        inputParams = None
 
     ##need to quit eng upon connection cancellation / program termination
     eng.quit()
@@ -71,6 +73,7 @@ def data_receiving():
     while True:
         data_received = soc.recv(1024).decode()
         if data_received:
-            q.add(data_received)
             print("Received New Input: ", data_received)
+            newInputReceived = json.loads(data_received)
+            q.add(newInputReceived)
         time.sleep(10)

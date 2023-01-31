@@ -27,10 +27,27 @@ def remove():
     sem.release()
     return out
 
-    
+def qSize():
+    global s
+    return len(s) 
 
 def isEmpty():
+    global s
     if len(s) == 0:
         return True
     else:
         return False
+
+
+def isFull():
+    global s, MAX_SIZE
+    if len(s) >= MAX_SIZE:
+        return True
+    else:
+        return False
+
+def qClear():
+    global s
+    sem.acquire()
+    s.clear()
+    sem.release()

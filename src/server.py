@@ -1,27 +1,47 @@
 import socket
 import threading
+import input_queue as output_q
 import random
-soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+import json
 
-#server_ADD = "192.168.0.16"
-server_ADD = "0.0.0.0"
-server_PORT = 5001
+global inputSize
+global outputSize
+global inputList
+global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMessage, acceptMessage, sem
 
-connected_clients = []
+def Server_init():
+    global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMesasged, acceptMessage, sem
+    soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-soc.bind((server_ADD, server_PORT))
+    server_ADD = ""
+    server_PORT = 5001
 
-#Authorization Key
-authorizationKey = "mobicharged"
+    connected_clients = []
 
-#Message sent by server for authorization key
-authorizationMessage = ("Please send in the verification key: ").encode()
-#Message sent if refused connection
-refusedMessage = ("Incorrect authorization key, refusing connection").encode()
-#Message sent if accepted connection
-acceptMessage = ("Correct authorization key, accepting connection").encode()
+    soc.bind((server_ADD, server_PORT))
 
-print("LAN Server is now running....")
+    sem = threading.Semaphore()
+
+    #Authorization Key
+    authorizationKey = "mobicharged"
+
+    #Message sent by server for authorization key
+    authorizationMessage = ("Please send in the verification key: ").encode()
+    #Message sent if refused connection
+    refusedMessage = ("Incorrect authorization key, refusing connection").encode()
+    #Message sent if accepted connection
+    acceptMessage = ("Correct authorization key, accepting connection").encode()
+
+    print("LAN Server is now running....")
+    Client_Connections()
+
+def Server_Configuration(inputSizelo, outputSizelo, inputRangeList):
+    global inputSize, outputSize, inputList
+    inputSize = int(inputSizelo)
+    outputSize = int(outputSizelo)
+    inputList = inputRangeList
+    Server_init()
+
 
 def Client_Connections():
     while True:
@@ -65,25 +85,40 @@ def receive_thread(c_socket):
         try:
             received_data = c_socket[0].recv(1024).decode()
             #Make sure received data is not null or empty
+            sem.acquire()
             if received_data:
-
                 print(f"Received Optimized Simulation from {c_socket[1]}: {received_data}")
-                #Temporarily writing to text file (this is where data will be pushed to database)
-                file = open("C:\\Users\\Sal\\Desktop\\4G06 Offline\\database.txt", 'a')
-                file.write(received_data + "\n")
-                file.close()
-                #Generating new inputs
-                newResponse = newInput(received_data)
-                newEncodedResponse = newResponse.encode()
-                print(f"Sending Random Input To {c_socket[1]}: " + newResponse)
-                c_socket[0].send(newEncodedResponse)
-                
+                splitList = received_data.split("/")
+                if not(output_q.isFull()):
+                    #At some point, have current queue locally backed up for sake of preservation
+                    #Add each individual input/output pair to local database, once full transfer data and clear local database.
+
+                    #Adding new input/output pair to queue
+                    output_q.add((splitList[0], splitList[1]))
+                    #print(output_q.qSize())
+                    print("Current Queue Size: " + str(output_q.qSize()))
+                    #Generating new inputs
+                    newResponse = newInput()
+                    newEncodedResponse = newResponse.encode()
+                    print(f"Sending Random Input To {c_socket[1]}: " + newResponse)
+                    c_socket[0].send(newEncodedResponse)
+                else:
+                    DataTransfer(output_q)
+                    output_q.add((splitList[0], splitList[1]))
+                    print("Current Queue Size: " + str(output_q.qSize()))
+                    #Generating new inputs
+                    newResponse = newInput()
+                    newEncodedResponse = newResponse.encode()
+                    print(f"Sending Random Input To {c_socket[1]}: " + newResponse)
+                    c_socket[0].send(newEncodedResponse)
                 # sendDataClient = ("Did it work").encode() THIS IS WHERE WE WILL SEND DATA TO THE MYSQL DBs
                 # c_socket.send(sendDataClient)
                 #broadcast(received_data)
             else:
                 print(f"Client disconnected: {c_socket[1]}")
                 return
+            sem.release()
+
         except:
             connected_clients.remove(c_socket[0])
             print(f"Client Disconnected: {c_socket[1]}")
@@ -100,12 +135,29 @@ def broadcast(message):
             connected_clients.remove(c_socket)
             print(f"Removed Client From Connected Clients: {c_socket}")
 
-def newInput(originalInput):
+def newInput():
     #Creating new input to keep simulation autonomous after being initialized
-    intData = float(originalInput)
-    intData += random.randint(0,9)
-    intData = int(intData)
-    newInput = str(intData)
-    return newInput
+    tempList = []
+    for inputVal in inputList:
+        intData = random.uniform(float(inputVal[0]), float(inputVal[1]))
+        tempList.append(intData)
+        
+    #intData = int(intData)
+    #newInput = str(intData)
+    newInputParam = json.dumps(tempList)
+    print(newInputParam)
+    return newInputParam
 
-Client_Connections()
+def DataTransfer(output_queue):
+    #Temporarily writing to text file (this is where data will be pushed to database)
+    file = open("\\root\\Mobicharged-Server\\database.txt", 'a')
+    for dataT in output_q:
+        print("Transfering: " + dataT)
+        file.write(dataT + "\n")
+    file.close()
+    output_q.qClear()
+    print("Data Transfer Complete, current queue: " + output_q)
+    
+
+#Client_Connections()
+#Server_Configuration()
