@@ -1,34 +1,57 @@
 import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
 
-# Create dataset
-x_data = [[1], [2], [3], [4], [5]]
-y_data = [[2], [4], [6], [8], [10]]
 
-# Create variables for polynomial regression
-W = tf.Variable(tf.random.normal(shape=[3, 1]))
+# Define the input and output matrices
+X = np.random.rand(100, 3)
 
-# Create placeholders for input
-x = tf.placeholder(dtype=tf.float32, shape=[None, 1])
-y = tf.placeholder(dtype=tf.float32, shape=[None, 1])
+Y = 3 * X[:,0] ** 2 + 2 * X[:,1] + 1 + np.random.normal(0, 0.1, 100)
 
-# Create polynomial model
-x_matrix = tf.concat([tf.pow(x, i) for i in range(3)], axis=1)
-y_pred = tf.matmul(x_matrix, W)
+#############Might wanna put all this in a separate higher level file
+# Define the model
+model = tf.keras.Sequential()
+model.add(tf.keras.layers.Dense(1, input_shape=(3,), kernel_regularizer=tf.keras.regularizers.l2(0.01)))
 
-# Create custom loss function
-loss = tf.reduce_mean(tf.square(y - y_pred))
+# Compile the model with a custom loss function
+def custom_loss(y_true, y_pred):
+    return tf.reduce_mean(tf.square(y_true - y_pred))
 
-# Create optimizer
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(loss)
+optimizer = tf.keras.optimizers.SGD(learning_rate=0.1)
+model.compile(optimizer=optimizer, loss=custom_loss)
 
-# Initialize variables
-init = tf.global_variables_initializer()
+class LossHistory(tf.keras.callbacks.Callback):
+    def on_train_begin(self, logs={}):
+        self.losses = []
 
-# Create session and run
-with tf.Session() as sess:
-    sess.run(init)
-    for i in range(1000):
-        _, curr_loss, curr_W = sess.run([optimizer, loss, W], feed_dict={x: x_data, y: y_data})
-        if i % 100 == 0:
-            print(f'Step {i}, Loss: {curr_loss}, W: {curr_W}')
-    print(f'Final W: {curr_W}')
+    def on_epoch_end(self, epoch, logs={}):
+        self.losses.append(logs.get('loss'))
+
+
+history = LossHistory()
+early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
+
+model.fit(X, Y, epochs=100, validation_split=0.2, callbacks=[history, early_stopping])
+
+plt.plot(range(1,101), history.losses)
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.show()
+#------------------------------------
+
+
+# Fit the model to the data
+model.fit(X, Y, epochs=100)
+
+def pred():
+    # Make predictions with the trained model
+    new_X = np.random.rand(10, 3)
+    predictions = model.predict(new_X)
+    return predictions 
+
+##will be added later - will test on both normalized and non-normalized and compare
+##def normalize():
+##    return
+
+def old_params(): ##for retraining?
+    return
