@@ -4,12 +4,12 @@ sem = threading.Semaphore()
 
 s = []
 n = 0
-MAX_SIZE = 10
+MAX_SIZE = 3
 
 def add(val):
     global n, s, MAX_SIZE
     sem.acquire()
-    if(n + 1 < MAX_SIZE):
+    if(n + 1 <= MAX_SIZE):
         s.append(val)
         n += 1
     ##else condition?
@@ -46,8 +46,5 @@ def isFull():
     else:
         return False
 
-def qClear():
-    global s
-    sem.acquire()
-    s.clear()
-    sem.release()
+
+    

@@ -15,8 +15,12 @@ server_PORT = 5001
 
 try:
     eng = matlab.engine.start_matlab()
-
+    #Add check to make sure path works
     path = eng.genpath('matlab')
+    if path == "":
+        newPath = input("Please Enter the Full Path of the Matlab Simulation File: ")
+        newPath.replace("\\", "\\\\")
+        path = eng.genpath(newPath)
     eng.addpath(path, nargout=0)
 
 except Exception as e:
@@ -53,10 +57,10 @@ def data_sending():
             pass
         inputParams = q.remove()
         
-        
-        y = eng.sample_simulation1(int(inputParams), nargout=1) #output - hardcoded right now 
+        #Temporarily set to inputParams[0]
+        y = eng.sample_simulation1(int(inputParams[0]), nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
-        outputInputPair = inputParams + "/" + str(y)
+        outputInputPair = str(inputParams[0]) + "/" + str(y)
         if y:
             soc.send(outputInputPair.encode())
 

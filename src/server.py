@@ -10,7 +10,7 @@ global inputList
 global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMessage, acceptMessage, sem
 
 def Server_init():
-    global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMesasged, acceptMessage, sem
+    global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMessage, acceptMessage, sem
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     server_ADD = ""
@@ -32,7 +32,7 @@ def Server_init():
     #Message sent if accepted connection
     acceptMessage = ("Correct authorization key, accepting connection").encode()
 
-    print("LAN Server is now running....")
+    print("MobiCharged Server is now running....")
     Client_Connections()
 
 def Server_Configuration(inputSizelo, outputSizelo, inputRangeList):
@@ -62,18 +62,25 @@ def Client_Connections():
 def authorizationAccess(client_socket, c_add):
     authSuccess = False
     client_socket.send(authorizationMessage)
-    keyData = client_socket.recv(1024)
+    try:
+        keyData = client_socket.recv(1024)
+    except:
+        keyData = ""
+        keyData = keyData.encode()
+        print("No Response Received From Client, Disconnected!")
 
-    if(keyData.decode() != authorizationKey):
-        client_socket.send(refusedMessage)
-        client_socket.close()
-        s = socket.socket()
-        print(f"[-] {c_add} is disconnected. (Authorization Failed)")
-    else:
-        client_socket.send(acceptMessage)
-        authSuccess = True
-        return authSuccess
-
+    try:
+        if(keyData.decode() != authorizationKey):
+            client_socket.send(refusedMessage)
+            client_socket.close()
+            s = socket.socket()
+            print(f"[-] {c_add} is disconnected. (Authorization Failed)")
+        else:
+            client_socket.send(acceptMessage)
+            authSuccess = True
+            return authSuccess
+    except:
+        print("Client Disconnected")
 
 def client_data_receiver_thread(c_socket, c_add):
     c_thread = threading.Thread(target=receive_thread, args=((c_socket, c_add),))
@@ -95,15 +102,15 @@ def receive_thread(c_socket):
 
                     #Adding new input/output pair to queue
                     output_q.add((splitList[0], splitList[1]))
-                    #print(output_q.qSize())
                     print("Current Queue Size: " + str(output_q.qSize()))
                     #Generating new inputs
                     newResponse = newInput()
                     newEncodedResponse = newResponse.encode()
                     print(f"Sending Random Input To {c_socket[1]}: " + newResponse)
                     c_socket[0].send(newEncodedResponse)
+                    print("\n")
                 else:
-                    DataTransfer(output_q)
+                    DataTransfer()
                     output_q.add((splitList[0], splitList[1]))
                     print("Current Queue Size: " + str(output_q.qSize()))
                     #Generating new inputs
@@ -111,6 +118,7 @@ def receive_thread(c_socket):
                     newEncodedResponse = newResponse.encode()
                     print(f"Sending Random Input To {c_socket[1]}: " + newResponse)
                     c_socket[0].send(newEncodedResponse)
+                    print("\n")
                 # sendDataClient = ("Did it work").encode() THIS IS WHERE WE WILL SEND DATA TO THE MYSQL DBs
                 # c_socket.send(sendDataClient)
                 #broadcast(received_data)
@@ -148,15 +156,17 @@ def newInput():
     print(newInputParam)
     return newInputParam
 
-def DataTransfer(output_queue):
+def DataTransfer():
     #Temporarily writing to text file (this is where data will be pushed to database)
-    file = open("\\root\\Mobicharged-Server\\database.txt", 'a')
-    for dataT in output_q:
-        print("Transfering: " + dataT)
-        file.write(dataT + "\n")
+    file = open("database.txt", 'a')
+    for dataT in range(output_q.qSize()):
+        #Add confirmation that data was transfered successfully.
+        currentVal = output_q.remove()
+        print("Transfering: " + str(currentVal))
+        file.write(str(currentVal) + "\n")
+        
     file.close()
-    output_q.qClear()
-    print("Data Transfer Complete, current queue: " + output_q)
+    print("Data Transfer Complete, current queue: " + str(output_q.s))
     
 
 #Client_Connections()
