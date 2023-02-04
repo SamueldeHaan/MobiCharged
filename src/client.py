@@ -4,12 +4,18 @@ import input_queue as q
 import time
 import matlab.engine
 
+import pickle
+
+
 device_Name = socket.gethostname()
 device_IP = socket.gethostbyname(device_Name)
 authSucess = False
 
 soc = socket.socket()
-server_ADD = "192.168.0.27"
+
+server_ADD ="192.168.1.109"
+#server_ADD = socket.gethostbyname(socket.gethostname())
+print(server_ADD)
 server_PORT = 5001
 
 try:
@@ -21,6 +27,7 @@ try:
 except Exception as e:
     print(e)
     quit()
+
 
 def client_init():
     global authSucess
@@ -41,17 +48,33 @@ def client_init():
         thread_receiving.start()
 
 def data_sending():
+    count = 0 
     while True:
         input = q.remove()
         if not(input):
             time.sleep(5) ##this can be avoided with signals in the future
             print('No inputs to work on!')
             continue
-        
-        y = eng.sample_simulation1(int(input), nargout=1) #output - hardcoded right now 
+        y = eng.sample_simulation2(int(input), nargout=1) #output - hardcoded right now 
+        #y = eng.sample_simulation1(int(input), nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
+        count+=1
         if y:
-            soc.send(str(y).encode())
+            data = {
+                'Simulation' : 'Sim_'+str(count), #DOCUMENT WILL ONYL WRITE IF THIS IS A STRING
+                'Input' : input, 
+                'Output' : y,
+            }
+            Obj1 = {
+                'Model': '1',
+                'Input' : [5,11],
+                'Output' : [1,2,3]
+            }   
+            
+            #data = [count,input,y]
+            data_string = pickle.dumps(data) #i used pickle to send an array
+            soc.send(data_string)
+            #soc.send(str(y).encode())
         input = None
 
     ##need to quit eng upon connection cancellation / program termination
@@ -64,3 +87,4 @@ def data_receiving():
             q.add(data_received)
             print("Received data: ", data_received)
         time.sleep(10)
+#client_init()

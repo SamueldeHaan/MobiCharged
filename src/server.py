@@ -1,14 +1,20 @@
 import socket
 import threading
+import firestore
+import pickle
 
 soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server_ADD = "192.168.0.27"
+
+server_ADD ="192.168.1.109"
+#server_ADD = socket.gethostbyname(socket.gethostname())
+print(server_ADD)
 server_PORT = 5001
 
 connected_clients = []
 
 soc.bind((server_ADD, server_PORT))
+
 
 #Authorization Key
 authorizationKey = "mobicharged"
@@ -21,6 +27,10 @@ refusedMessage = ("Incorrect authorization key, refusing connection").encode()
 acceptMessage = ("Correct authorization key, accepting connection").encode()
 
 print("LAN Server is now running....")
+
+firestore.initalize_firestore()
+
+
 
 def Client_Connections():
     while True:
@@ -58,16 +68,43 @@ def client_data_receiver_thread(c_socket):
     c_thread = threading.Thread(target=receive_thread, args=(c_socket,))
     c_thread.start()
 
+##testing
+Obj1 = {
+    'Model': '1',
+    'Input' : [5,11],
+    'Output' : [1,2,3]
+}
+Obj2 = {
+    'Model': '2',                                                                                                   
+    'Input' : [1,13],
+    'Output' : [1,5,2]
+}
+data = Obj1
+
+
+
 def receive_thread(c_socket):
     while True:
         try:
-            received_data = c_socket.recv(1024).decode()
+            #received_data = c_socket.recv(1024).decode()
+            received_data_pickle = c_socket.recv(1024)
+            received_data = pickle.loads(received_data_pickle)
+
             #Make sure received data is not null or empty
             if received_data:
                 print(f"Received message: {received_data}")
+                print("RECEIVED")
                 # sendDataClient = ("Did it work").encode() THIS IS WHERE WE WILL SEND DATA TO THE MYSQL DBs
                 # c_socket.send(sendDataClient)
                 #broadcast(received_data)
+
+                #Send received data to firestore
+                #firestore.write_data(data)
+                firestore.write_data(received_data)
+                #firestore.write_data_test(received_data)
+                #firestore.write_data_test(received_data)
+
+
             else:
                 print(f"Client disconnected: {c_socket}")
                 return
