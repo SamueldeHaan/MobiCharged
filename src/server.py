@@ -68,21 +68,6 @@ def client_data_receiver_thread(c_socket):
     c_thread = threading.Thread(target=receive_thread, args=(c_socket,))
     c_thread.start()
 
-##testing
-Obj1 = {
-    'Model': '1',
-    'Input' : [5,11],
-    'Output' : [1,2,3]
-}
-Obj2 = {
-    'Model': '2',                                                                                                   
-    'Input' : [1,13],
-    'Output' : [1,5,2]
-}
-data = Obj1
-
-
-
 def receive_thread(c_socket):
     while True:
         try:
@@ -99,11 +84,18 @@ def receive_thread(c_socket):
                 #broadcast(received_data)
 
                 #Send received data to firestore
-                #firestore.write_data(data)
                 firestore.write_data(received_data)
-                #firestore.write_data_test(received_data)
-                #firestore.write_data_test(received_data)
 
+                #part 2 check count
+                count = firestore.check_count()
+                print("current count = ",count)
+                #if count >= 100: #if the data threshold is met: call training function for ML blackboard
+                    #start_train()
+                #if count > 5:
+                ML_input, ML_output = firestore.batched_read()
+                print("TESTING BATCHED_READ()")
+                print(ML_input)
+                print(ML_output)
 
             else:
                 print(f"Client disconnected: {c_socket}")
@@ -124,5 +116,11 @@ def broadcast(message):
             connected_clients.remove(c_socket)
             print(f"Removed Client From Connected Clients: {c_socket}")
 
+def start_train():
+    #Read all documents from a specific collection
+    db = firestore.client()
+    docs = db.collection(u'MATLAB_Simulations').stream()
+    for doc in docs: #isntead of printing, ML blackboard will store this
+        print(f'{doc.id} => {doc.to_dict()}')
 
 Client_Connections()

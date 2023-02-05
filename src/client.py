@@ -49,20 +49,34 @@ def client_init():
         thread_receiving.start()
 
 def data_sending():
-    count = firestore.check_count() #take the current number of simulations in the db.
+
     while True:
         input = q.remove()
         if not(input):
             time.sleep(5) ##this can be avoided with signals in the future
             print('No inputs to work on!')
             continue
-        y = eng.sample_simulation2(int(input), nargout=1) #output - hardcoded right now 
+
+        #this is hard-coded like crazy, need to fix dynamic inputs
+
+        temp_input = str(input) #'1,2,3,4'
+        a = input.split(',') #['1','2','3','4']
+        b = list(map(int,a)) # [1,2,3,4]
+        A= b[0]
+        B= b[1]
+        C= b[2]
+        D= b[3]
+
+        y = eng.unknown_poly_type(A,B,C,D,nargout = 1)
+
+
+        #y = eng.sample_simulation2(int(input), nargout=1) #output - hardcoded right now 
         #y = eng.sample_simulation1(int(input), nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
-        count+=1
+        count = firestore.check_count() + 1 #take the current number of simulations in the db.
         if y:
             data = {
-                'Simulation' : 'Sim_'+str(count), #DOCUMENT WILL ONYL WRITE IF THIS IS A STRING
+                'ID' : str(count), #DOCUMENT WILL ONYL WRITE IF THIS IS A STRING
                 'Input' : input, 
                 'Output' : y,
             }
@@ -71,7 +85,7 @@ def data_sending():
             soc.send(data_string)
             #soc.send(str(y).encode())
         input = None
-
+        
     ##need to quit eng upon connection cancellation / program termination
     eng.quit()
 
