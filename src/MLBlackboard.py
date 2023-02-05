@@ -3,60 +3,100 @@ import threading as th
 import importlib
 import matplotlib.pyplot as plt
 from PIL import Image
-import sys
 import re
+import time
 
 #In the future, the true MLBlackboard will be primarily a scheduler and task manager
 
 ##THIS WILL BE A CLASS IN THE FUTURE
 stack_pointer = 0
-input_size = 4
+input_size = 3
 init = False
 module = 'polyfit'
 # model = None
 img = None
 ##needs editing to accept only 4
-pattern = "/^(?:\d+(?:\.\d*)?|\.\d+)(?:,(?:\d+(?:\.\d*)?|\.\d+))*$/"
+pattern = "^(?:\d+(?:\.\d*)?|\.\d+)(?:,(?:\d+(?:\.\d*)?|\.\d+))*$"
 update_predictive_model = th.Event()
 
 # validation_data = 10 ##points to the data saved for validation (about 1/5th of how much we keep for training)
 
 p = importlib.import_module(module)
 
-##THIS WILL BE BLACKBOARD BEHAVIOUR
-def prediction_thread(event, module):
+##THIS WILL BE BLACKBOARD BEHAVIOUR - INPUT HANDLING NEEDS WORK
+def prediction_thread(module):
+    # global update_predictive_model
+    print("Wait a couple of seconds for the process to get ready.")
+    def input_thread(result, lock):
+        # print("made it to input")
+        result.append(input())
+        lock.release()
+        # print("lock released")
+
+    def get_input_with_timeout(timeout):
+        lock = th.Lock()
+        # print("here?")
+        lock.acquire()
+        # print("Lock acquired")
+        result = []
+        t = th.Thread(target=input_thread, args=[result, lock])
+        t.daemon = True
+        t.start()
+        t.join(timeout)
+        if lock.locked():
+            return None
+        else:
+            return result[0]
+
     def validate_input(input):
         match = re.fullmatch(pattern, input)
         return match is not None
 
-    while event.is_set:
+    while True:
         print("The current accuracy of the " + module + " model can be seen in " + module + ".png !")
-        print("Please provide the input you wish to predict in the following format: input1, input2, input3, input4 - where each input is required and must be a real number.")
-        input = sys.stdin.readline().strip
-        if validate_input(input):
+        print("Please provide the input you wish to predict in the following format: input1,input2,input3 (no spaces) - where each input is required and must be a real number.")
+        # NEED TO FIGURE OUT WHY SELECT DOESN'T WORK AND WHAT ALTERNATIVES THERE ARE
+        
+        while True:
+            if(update_predictive_model.is_set()):
+                break
+            x = get_input_with_timeout(10)
+            # print("what about here?")
+            if x:
+                # print("value provided")
+                break
+
+        if(update_predictive_model.is_set()):
+            break
+        # print("input:" + x)
+        if validate_input(x):
             ##implement semaphore for shared access between MLBlackboard and UI prediction, both use the same model
-            input = input.split(',')
-            input = [float(i) for i in input]
-            print(input)
-            if len(input) == input_size: 
+            x = x.split(',')
+            x = [float(i) for i in x]
+            if len(x) == input_size: 
                 ##ensures model isn't being tested - waits if it is
-                predictions = p.pred(input)
-                print("Prediction(s): " + predictions)
+                ##right now only accepting one prediction at a time
+                predictions = p.pred(x)
+                print("Prediction(s): " + str(predictions))
                 continue
         print("Invalid input!")
 
-thread = th.Thread(target=prediction_thread, args=[update_predictive_model, module]) #thread used for showing 
+thread = th.Thread(target=prediction_thread, args=[module]) #thread used for showing 
 
 #control the main loop
 def run(epochs):
+    global thread
     if not(init):
         return ##might need better messaging than this
-    if thread.is_alive():
-        update_predictive_model.clear()
-        print("thread cancelled!!!!!")
+    not_first_run = thread.is_alive()
+    if not_first_run:
+        update_predictive_model.set()
+        print("Halting process - new model to be trained.")
         thread.join()
     save_and_show_run_graph(p.run(epochs), epochs)
-    update_predictive_model.set()
+    update_predictive_model.clear()
+
+    thread = th.Thread(target=prediction_thread, args=[module])
     thread.start()
     
 
@@ -93,7 +133,11 @@ def save_and_show_run_graph(history, epoch_num):
     plt.savefig( module + '.png')
     img = Image.open(module + '.png')
     img.show()
+    plt.clf()
 
-init_module()
-run(10)
+# init_module()
+# run(10)
+# time.sleep(5)
+# run(100)
+
 ##########Tables hold their associated model

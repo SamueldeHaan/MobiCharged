@@ -47,28 +47,19 @@ def run(epoch_num):
     s.release()
     return history
 
-##this might have to be moved to the blackboard?
-
-# setup()
-# show(run(100), 100)
-# print('setting up')
-# setup()
-# print('setup succesful: running')
-# run(100)
-# print("DO WE PAUSE?")
-
-#------------------------------------
-
-
-# Fit the model to the data
-
 def pred(new_X):
-    # Make predictions with the trained model
+    # Make predictions with the trained model - currently only one at a time
     s.acquire()
-    new_X = np.array(new_X)
+    new_X = np.array([new_X])
     predictions = model.predict(new_X)
     s.release()
     return predictions 
+
+# setup()
+# run(100)
+# print("PREDICTION:" + str(pred([1,2,3])))
+
+##-----------------------------
 
 ##will be added later - will test on both normalized and non-normalized and compare
 ##def normalize():
