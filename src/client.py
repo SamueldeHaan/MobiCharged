@@ -57,10 +57,11 @@ def data_sending():
             pass
         inputParams = q.remove()
         
-        #Temporarily set to inputParams[0]
+        #Temporarily set to inputParams[0] as the actual simulation file is not available yet
+        #Setting inputParams[0] is only passing 1 of the input values in the list. 
         y = eng.sample_simulation1(int(inputParams[0]), nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
-        outputInputPair = str(inputParams[0]) + "/" + str(y)
+        outputInputPair = str(inputParams) + "/" + str(y)
         if y:
             soc.send(outputInputPair.encode())
 

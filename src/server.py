@@ -3,20 +3,22 @@ import threading
 import input_queue as output_q
 import random
 import json
+import os
 
 global inputSize
 global outputSize
 global inputList
-global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMessage, acceptMessage, sem
+global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMessage, acceptMessage, sem, displayConnectedClients
 
 def Server_init():
-    global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMessage, acceptMessage, sem
+    global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMessage, acceptMessage, sem, displayConnectedClients
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     server_ADD = ""
     server_PORT = 5001
 
     connected_clients = []
+    displayConnectedClients = []
 
     soc.bind((server_ADD, server_PORT))
 
@@ -32,8 +34,38 @@ def Server_init():
     #Message sent if accepted connection
     acceptMessage = ("Correct authorization key, accepting connection").encode()
 
+    print("Checking Local Data Repository")
+    RestoreCheck()
+
     print("MobiCharged Server is now running....")
     Client_Connections()
+
+def RestoreCheck():
+    #This function will ensure that the server is starting from the last point in which is ended. 
+    #If the server unexpectedly closed while there was local data that has not been transfered to main database, it will load that data to the current queue automatically
+    file_name = "database.txt"
+    if not os.path.exists(file_name):
+        file = open('database.txt', 'w+')
+        file.close()
+        print("Local Data Repository not found, creating new one!")
+
+    if os.path.getsize(file_name) == 0:
+        print("Clean Local Database, Current Queue is empty!")
+    else:    
+        with open('database.txt', 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                line = line.replace("(", "")
+                line = line.replace(")", "")
+                line = line.replace(",", "")
+                line = line.replace("'", "")
+                localList = line.split()
+                newTup = tuple(localList)
+                output_q.add(newTup)
+        print("Local Queue Restored, Current Queue Size: " + str(output_q.qSize()))
+
+
+
 
 def Server_Configuration(inputSizelo, outputSizelo, inputRangeList):
     global inputSize, outputSize, inputList
@@ -53,9 +85,10 @@ def Client_Connections():
         if authSuccess:
             print(f"[+] {c_add} Authorized Successfully")
             connected_clients.append(c_socket)
+            displayConnectedClients.append(c_add)
             client_data_receiver_thread(c_socket, c_add)
             print("Currently Connected Clients: ")
-            print(connected_clients)
+            print(displayConnectedClients)
 
 
 #This function ensures authorized access
@@ -102,6 +135,9 @@ def receive_thread(c_socket):
 
                     #Adding new input/output pair to queue
                     output_q.add((splitList[0], splitList[1]))
+                    file = open('database.txt', 'a')
+                    file.write(str((splitList[0], splitList[1])) + "\n")
+                    file.close()
                     print("Current Queue Size: " + str(output_q.qSize()))
                     #Generating new inputs
                     newResponse = newInput()
@@ -144,7 +180,7 @@ def broadcast(message):
             print(f"Removed Client From Connected Clients: {c_socket}")
 
 def newInput():
-    #Creating new input to keep simulation autonomous after being initialized
+    #Creating new input to keep simulation autonomous after being initialized using the ranges provided by the original server configuration
     tempList = []
     for inputVal in inputList:
         intData = random.uniform(float(inputVal[0]), float(inputVal[1]))
@@ -158,7 +194,7 @@ def newInput():
 
 def DataTransfer():
     #Temporarily writing to text file (this is where data will be pushed to database)
-    file = open("database.txt", 'a')
+    file = open('Tdatabase.txt', 'a')
     for dataT in range(output_q.qSize()):
         #Add confirmation that data was transfered successfully.
         currentVal = output_q.remove()
@@ -167,6 +203,11 @@ def DataTransfer():
         
     file.close()
     print("Data Transfer Complete, current queue: " + str(output_q.s))
+    print("Clearing Local Data Storage")
+    with open('database.txt', 'r+') as file:
+        file.truncate(0)
+    file.close()
+
     
 
 #Client_Connections()
