@@ -4,6 +4,7 @@ import input_queue as q
 import time
 import matlab.engine
 
+import firestore
 import pickle
 
 
@@ -48,7 +49,7 @@ def client_init():
         thread_receiving.start()
 
 def data_sending():
-    count = 0 
+    count = firestore.check_count() #take the current number of simulations in the db.
     while True:
         input = q.remove()
         if not(input):
@@ -65,13 +66,7 @@ def data_sending():
                 'Input' : input, 
                 'Output' : y,
             }
-            Obj1 = {
-                'Model': '1',
-                'Input' : [5,11],
-                'Output' : [1,2,3]
-            }   
-            
-            #data = [count,input,y]
+
             data_string = pickle.dumps(data) #i used pickle to send an array
             soc.send(data_string)
             #soc.send(str(y).encode())
