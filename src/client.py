@@ -5,6 +5,10 @@ import time
 import matlab.engine
 import json
 
+import firestore
+import pickle
+import uuid 
+
 device_Name = socket.gethostname()
 device_IP = socket.gethostbyname(device_Name)
 authSucess = False
@@ -59,11 +63,28 @@ def data_sending():
         
         #Temporarily set to inputParams[0] as the actual simulation file is not available yet
         #Setting inputParams[0] is only passing 1 of the input values in the list. 
-        y = eng.sample_simulation1(int(inputParams[0]), nargout=1) #output - hardcoded right now 
+        b = list(map(int,inputParams))
+        A= b[0]
+        B= b[1]
+        C= b[2]
+        D= b[3]
+        y = eng.unknown_poly_type(A,B,C,D, nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
-        outputInputPair = str(inputParams) + "/" + str(y)
+        
+        #outputInputPair = str(inputParams) + "/" + str(y)
+
+        #count = firestore.check_count() + 1 #take the current number of simulations in the db.
+        UID = uuid.uuid4()
         if y:
-            soc.send(outputInputPair.encode())
+            data = {
+                "ID" : str(UID), #DOCUMENT WILL ONYL WRITE IF THIS IS A STRING
+                "Input" : inputParams, 
+                "Output" : y,
+            }
+
+            data_string = pickle.dumps(data) #i used pickle to send an array
+            soc.send(data_string)
+            #soc.send(outputInputPair.encode())
 
         #if q.isEmpty():
          #   time.sleep(5) ##this can be avoided with signals in the future

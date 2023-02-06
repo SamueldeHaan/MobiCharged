@@ -45,6 +45,3 @@ def isFull():
         return True
     else:
         return False
-
-
-    

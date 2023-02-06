@@ -5,7 +5,13 @@ import random
 import json
 import os
 
-global inputSize
+import pickle
+import firestore
+
+import ast
+
+
+global inputSize 
 global outputSize
 global inputList
 global soc, server_ADD, server_PORT, connected_clients, authorizationKey, authorizationMessage, refusedMessage, acceptMessage, sem, displayConnectedClients
@@ -55,13 +61,8 @@ def RestoreCheck():
         with open('database.txt', 'r') as file:
             lines = file.readlines()
             for line in lines:
-                line = line.replace("(", "")
-                line = line.replace(")", "")
-                line = line.replace(",", "")
-                line = line.replace("'", "")
-                localList = line.split()
-                newTup = tuple(localList)
-                output_q.add(newTup)
+                line_ast = ast.literal_eval(line)
+                output_q.add(line_ast)
         print("Local Queue Restored, Current Queue Size: " + str(output_q.qSize()))
 
 
@@ -123,20 +124,23 @@ def receive_thread(c_socket):
     #c_socket is a tuple containing socket object in position 0, and the address in position 1
     while True:
         try:
-            received_data = c_socket[0].recv(1024).decode()
+            received_data = c_socket[0].recv(1024)#.decode()
+            received_data = pickle.loads(received_data)
+
             #Make sure received data is not null or empty
             sem.acquire()
             if received_data:
                 print(f"Received Optimized Simulation from {c_socket[1]}: {received_data}")
-                splitList = received_data.split("/")
+                
                 if not(output_q.isFull()):
                     #At some point, have current queue locally backed up for sake of preservation
                     #Add each individual input/output pair to local database, once full transfer data and clear local database.
-
                     #Adding new input/output pair to queue
-                    output_q.add((splitList[0], splitList[1]))
+
+                    output_q.add(received_data)
                     file = open('database.txt', 'a')
-                    file.write(str((splitList[0], splitList[1])) + "\n")
+                    file.write(str(received_data) + "\n")
+                    
                     file.close()
                     print("Current Queue Size: " + str(output_q.qSize()))
                     #Generating new inputs
@@ -147,7 +151,11 @@ def receive_thread(c_socket):
                     print("\n")
                 else:
                     DataTransfer()
-                    output_q.add((splitList[0], splitList[1]))
+                    output_q.add(received_data)
+                    file = open('database.txt', 'a')
+                    file.write(str(received_data) + "\n")
+                    file.close()
+
                     print("Current Queue Size: " + str(output_q.qSize()))
                     #Generating new inputs
                     newResponse = newInput()
@@ -194,14 +202,17 @@ def newInput():
 
 def DataTransfer():
     #Temporarily writing to text file (this is where data will be pushed to database)
-    file = open('Tdatabase.txt', 'a')
+    #file = open('Tdatabase.txt', 'a')
+    print("Data Transfer beginning.")
     for dataT in range(output_q.qSize()):
         #Add confirmation that data was transfered successfully.
+
         currentVal = output_q.remove()
+        firestore.write_data(currentVal) #FIX OBJECT TYPE
         print("Transfering: " + str(currentVal))
-        file.write(str(currentVal) + "\n")
+        #file.write(str(currentVal) + "\n")
         
-    file.close()
+    #file.close()
     print("Data Transfer Complete, current queue: " + str(output_q.s))
     print("Clearing Local Data Storage")
     with open('database.txt', 'r+') as file:
