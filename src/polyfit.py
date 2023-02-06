@@ -4,10 +4,10 @@ import threading as th
 
 # In the future, this file and other files like it will implement a standard Model Interface
 # Define the input and output matrices
-X = np.random.rand(100, 3)
+# X = np.random.rand(100, 3)
 s = th.Semaphore(1)
-
-Y = 3 * X[:,0] ** 2 + 2 * X[:,1] + 5*X[:,2] +  1 + np.random.normal(0, 0.1, 100)
+input_size = 4
+# Y = 3 * X[:,0] ** 2 + 2 * X[:,1] + 5*X[:,2] +  1 + np.random.normal(0, 0.1, 100)
 
 #############Might wanna put all this in a separate higher level file
 # Define the model
@@ -25,7 +25,7 @@ def setup():
     try:
         global model 
         model = tf.keras.Sequential()
-        model.add(tf.keras.layers.Dense(1, input_shape=(3,), kernel_regularizer=tf.keras.regularizers.l2(0.01)))
+        model.add(tf.keras.layers.Dense(1, input_shape=(input_size,), kernel_regularizer=tf.keras.regularizers.l2(0.01)))
 
         # Compile the model with a custom loss function - Least squares
         def custom_loss(y_true, y_pred):
@@ -39,11 +39,11 @@ def setup():
         print("Error:" + e)
         return False
 
-def run(epoch_num):
+def run(epoch_num, input_data, output_data):
     s.acquire()
     history = LossHistory()
     early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
-    model.fit(X, Y, epochs=epoch_num, validation_split=0.2, callbacks=[history, early_stopping])
+    model.fit(input_data, output_data, epochs=epoch_num, validation_split=0.2, callbacks=[history, early_stopping])
     s.release()
     return history
 
@@ -56,7 +56,7 @@ def pred(new_X):
     return predictions 
 
 # setup()
-# run(100)
+# run(100, np.array([ [10, 20, 11, 21], [1, 2, 3, 4], [5, 6, 7, 8] ]).astype(float, copy=False), np.array([27, 32, 45]).astype(float, copy=False))
 # print("PREDICTION:" + str(pred([1,2,3])))
 
 ##-----------------------------
