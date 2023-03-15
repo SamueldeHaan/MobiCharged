@@ -68,6 +68,8 @@
     \hline
     Mustafa Choueib & March 9th, 2023 & Rev 1 & Fixed formatting issues, revised tex document, and made grammatical corrections\\
     \hline
+    Mustafa Choueib & March 15th, 2023 & Rev 1 & Updated Non-Functional Requirements naming convention (as changed in SRS)\\
+    \hline
     \end{tabular}
 \end{table}
 \end{center}
@@ -141,20 +143,22 @@ In certain cases where the non-functional requirements pertains to a non-quantif
 
 \begin{center}
     \begin{itemize}
-        \item \textbf{APR1: The system will consist of a simple user interface}
-        \item \textbf{ACR1: Authorized users will have access to the system}
-        \item \textbf{IR1: The system must be able to store its current state locally in the event of a failure}
-        \item \textbf{IR2: The individual components of the physical system must be inspected and tested}
-        \item \textbf{EUR1: The system shall be easy to use}
-        \item \textbf{EUR2: The system shall be easy to install}
-        \item \textbf{LR1: The system shall be understandable within an hour of use}
-        \item \textbf{SLR1: The system must compute optimal configuration within 6 hours}
-        \item \textbf{PAR1: The system must have a relative accuracy of 5\% compared to current MATLAB simulation}
-        \item \textbf{RAR1: The system must be available at all times}
-        \item \textbf{RFTR1: The system must be able to discard any corrupted data without adding it to the database}
-        \item \textbf{PER1: The hardware system must be able to withstand harsh weather}
-        \item \textbf{ADAR1: The system must be functional on all operating systems}
-        \item \textbf{PVR1: The system must encrypt all exported data}
+        \item \textbf{NFR1: The hardware system will be packaged neatly such that all wiring is hidden and not exposed to others}
+        \item \textbf{NFR2: The software system will be produced with front end design colors such that strains to the eye are minimized}
+        \item \textbf{NFR3: The system will consist of a simple user interface by minimizing unnecessary and complex functionalities}
+        \item \textbf{NFR4: Authorized users will have access to the system while unauthorized users will not}
+        \item \textbf{NFR5: The system must be able to store its current state locally in the event of a failure}
+        \item \textbf{NFR6: The individual components of the physical system must be inspected and tested}
+        \item \textbf{NFR7: The system shall be simple to install within 10 steps and within one hour}
+        \item \textbf{NFR8: The system shall be understandable within an hour of use}
+        \item \textbf{NFR9: The system must compute optimal configuration within 6 hours}
+        \item \textbf{NFR10: The hardware system must have a fail safe option such that the system shuts off at the event of a failure to reduce potential harm}
+        \item \textbf{NFR11: The system must have a relative accuracy of 5\% compared to current MATLAB simulation}
+        \item \textbf{NFR12: The system must be available at all times}
+        \item \textbf{NFR13: The system must be able to discard any corrupted data without adding it to the database}
+        \item \textbf{NFR14: The hardware system must be able to withstand an input of an upper limit of 15 volts}
+        \item \textbf{NFR15: The system must be functional on Windows and macOS}
+        \item \textbf{NFR16: The system must encrypt all exported data}
     \end{itemize}
 \end{center}
 
@@ -242,9 +246,9 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         \bf Test Number & \bf Description & \bf Requirement Reference & \bf Inputs & \bf Expected Outputs & \bf Actual Outputs & \bf Results \\
         \hline
-        1. & Testing that the server checks local database and acknowledges it is empty & IR1 & Local database is empty & "Clean Local Database, Current Queue is empty!" prompt & "Clean Local database, Current Queue is empty!" prompt & Pass\\
+        1. & Testing that the server checks local database and acknowledges it is empty & NFR5 & Local database is empty & "Clean Local Database, Current Queue is empty!" prompt & "Clean Local database, Current Queue is empty!" prompt & Pass\\
         \hline
-        2. & Testing that the server retrieves the data inside the local database when it is not empty & IR1 & Local Database = \{\{'ID': '884a5913-47a1-4610-bda4-5db03aa8f425', 'Input': [1.69987008\newline94027414,3.6\newline88886129396\newline8028,1.09399\newline82029550088\newline,3.325165892\newline7677354],\newline'Output': 13\},\{'ID':'7c\newline f59c41-acb3-4e03-9ade-6f7235c7ca97\newline','Input':[1.47\newline963341984527\newline2,3.10597539\newline27838574,1.07\newline95084653703\newline89,3.4097349\newline62180615],\newline'Output':13\}\} & output\_q == [\{\{'ID': '884a5913-47a1-4610-bda4-5db03aa8f425', 'Input': [1.69987008\newline94027414,3.6\newline88886129396\newline8028,1.09399\newline82029550088\newline,3.325165892\newline7677354],\newline'Output': 13\},\{'ID':'7c\newline f59c41-acb3-4e03-9ade-6f7235c7ca97\newline','Input':[1.47\newline963341984527\newline2,3.10597539\newline27838574,1.07\newline95084653703\newline89,3.4097349\newline62180615],\newline'Output':13\}\}] & output\_q == [\{\{'ID': '884a5913-47a1-4610-bda4-5db03aa8f425', 'Input': [1.69987008\newline94027414,3.6\newline88886129396\newline8028,1.09399\newline82029550088\newline,3.325165892\newline7677354],\newline'Output': 13\},\{'ID':'7c\newline f59c41-acb3-4e03-9ade-6f7235c7ca97\newline','Input':[1.47\newline963341984527\newline2,3.10597539\newline27838574,1.07\newline95084653703\newline89,3.4097349\newline62180615],\newline'Output':13\}\}] & Pass\\
+        2. & Testing that the server retrieves the data inside the local database when it is not empty & NFR5 & Local Database = \{\{'ID': '884a5913-47a1-4610-bda4-5db03aa8f425', 'Input': [1.69987008\newline94027414,3.6\newline88886129396\newline8028,1.09399\newline82029550088\newline,3.325165892\newline7677354],\newline'Output': 13\},\{'ID':'7c\newline f59c41-acb3-4e03-9ade-6f7235c7ca97\newline','Input':[1.47\newline963341984527\newline2,3.10597539\newline27838574,1.07\newline95084653703\newline89,3.4097349\newline62180615],\newline'Output':13\}\} & output\_q == [\{\{'ID': '884a5913-47a1-4610-bda4-5db03aa8f425', 'Input': [1.69987008\newline94027414,3.6\newline88886129396\newline8028,1.09399\newline82029550088\newline,3.325165892\newline7677354],\newline'Output': 13\},\{'ID':'7c\newline f59c41-acb3-4e03-9ade-6f7235c7ca97\newline','Input':[1.47\newline963341984527\newline2,3.10597539\newline27838574,1.07\newline95084653703\newline89,3.4097349\newline62180615],\newline'Output':13\}\}] & output\_q == [\{\{'ID': '884a5913-47a1-4610-bda4-5db03aa8f425', 'Input': [1.69987008\newline94027414,3.6\newline88886129396\newline8028,1.09399\newline82029550088\newline,3.325165892\newline7677354],\newline'Output': 13\},\{'ID':'7c\newline f59c41-acb3-4e03-9ade-6f7235c7ca97\newline','Input':[1.47\newline963341984527\newline2,3.10597539\newline27838574,1.07\newline95084653703\newline89,3.4097349\newline62180615],\newline'Output':13\}\}] & Pass\\
         \hline
         \end{tabular}
         \caption{Server-Side Test Cases (1-2)}
@@ -265,11 +269,11 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         \bf Test Number & \bf Description & \bf Requirement Reference & \bf Inputs & \bf Expected Outputs & \bf Actual Outputs & \bf Results \\
         \hline
-        3. & Testing that the server is appending each new input/output pair to the local database & IR1 & pair =\{'ID':'7vq92b\newline61-bdc8-1y15-9jqh-4f4367b3ba97',\newline'Input':[1.46318\newline79642130127,3.5\newline67941357964125\newline4,1.5786135784\newline296312,3.96347\newline81254631236],\newline'Output': 10\} & Local Database = \{\{'ID':'7vq92b\newline61-bdc8-1y15-9jqh-4f4367b3ba97'\newline,'Input':[1.463\newline187964213012\newline7,3.567941357\newline9641254,1.578\newline613578429631\newline2,3.963478125\newline4631236],\newline'Output': 10\}\} & Local Database = \{\{'ID':'7vq92b\newline61-bdc8-1y15-9jqh-4f4367b3ba97'\newline,'Input':[1.463\newline187964213012\newline7,3.567941357\newline9641254,1.578\newline613578429631\newline2,3.963478125\newline4631236],\newline'Output': 10\}\} & Pass \\
+        3. & Testing that the server is appending each new input/output pair to the local database & NFR5 & pair =\{'ID':'7vq92b\newline61-bdc8-1y15-9jqh-4f4367b3ba97',\newline'Input':[1.46318\newline79642130127,3.5\newline67941357964125\newline4,1.5786135784\newline296312,3.96347\newline81254631236],\newline'Output': 10\} & Local Database = \{\{'ID':'7vq92b\newline61-bdc8-1y15-9jqh-4f4367b3ba97'\newline,'Input':[1.463\newline187964213012\newline7,3.567941357\newline9641254,1.578\newline613578429631\newline2,3.963478125\newline4631236],\newline'Output': 10\}\} & Local Database = \{\{'ID':'7vq92b\newline61-bdc8-1y15-9jqh-4f4367b3ba97'\newline,'Input':[1.463\newline187964213012\newline7,3.567941357\newline9641254,1.578\newline613578429631\newline2,3.963478125\newline4631236],\newline'Output': 10\}\} & Pass \\
         \hline
-        4. & Testing that the server can handle a client connection & ACR1 & Client requests connection & connected\_clie\newline nts[0][0] = ('99.235.234\newline.43') & connected\_clie\newline nts[0][0] = ('99.235.234\newline.43') & Pass\\
+        4. & Testing that the server can handle a client connection & NFR4 & Client requests connection & connected\_clie\newline nts[0][0] = ('99.235.234\newline.43') & connected\_clie\newline nts[0][0] = ('99.235.234\newline.43') & Pass\\
         \hline
-        5. & Testing that the server can handle multiple client connections & ACR1 & Multiple clients request connection & connected\_clie\newline nts[0][0] = [('99.235.234\newline.43'), ('99.235.234\newline.43')] & connected\_clie\newline nts[0][0] = [('99.235.234\newline.43'), ('99.235.234\newline.43')] & Pass\\
+        5. & Testing that the server can handle multiple client connections & NFR4 & Multiple clients request connection & connected\_clie\newline nts[0][0] = [('99.235.234\newline.43'), ('99.235.234\newline.43')] & connected\_clie\newline nts[0][0] = [('99.235.234\newline.43'), ('99.235.234\newline.43')] & Pass\\
         \hline
         \end{tabular}
         \caption{Server-Side Test Cases (3-5)}
@@ -289,11 +293,11 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         \bf Test Number & \bf Description & \bf Requirement Reference & \bf Inputs & \bf Expected Outputs & \bf Actual Outputs & \bf Results \\
         \hline
-        6. & Testing that the server can handle multiple client connections & ACR1 & 4  clients request connection & len(connected\newline\_clients) == 4 & len(connected\newline\_clients) == 4 & Pass\\
+        6. & Testing that the server can handle multiple client connections & NFR4 & 4  clients request connection & len(connected\newline\_clients) == 4 & len(connected\newline\_clients) == 4 & Pass\\
         \hline
-        7. & Testing that the server rejects incorrect authorization from the client & ACR1 & Client sends incorrect authorization message & authSucecss == False \&\& "Incorrect Authorization key, disconnecting!" prompt & authSucecss == False \&\& "Incorrect Authorization key, disconnecting!" & Pass\\
+        7. & Testing that the server rejects incorrect authorization from the client & NFR4 & Client sends incorrect authorization message & authSucecss == False \&\& "Incorrect Authorization key, disconnecting!" prompt & authSucecss == False \&\& "Incorrect Authorization key, disconnecting!" & Pass\\
         \hline
-        8. & Testing that the server accepts correct authorization from the client & ACR1 & Client sends correct authorization message & authSuccess == True \&\& connected\newline \_clients[0][0] == ('99.235.234.\newline43') \&\& "Correct Authorization key, Accepting Connection!" prompt & authSuccess == True \&\& connected\newline\_clients[0][0] == ('99.235.234.\newline43') \&\& "Correct Authorization key, Accepting Connection!" prompt & Pass\\
+        8. & Testing that the server accepts correct authorization from the client & NFR4 & Client sends correct authorization message & authSuccess == True \&\& connected\newline \_clients[0][0] == ('99.235.234.\newline43') \&\& "Correct Authorization key, Accepting Connection!" prompt & authSuccess == True \&\& connected\newline\_clients[0][0] == ('99.235.234.\newline43') \&\& "Correct Authorization key, Accepting Connection!" prompt & Pass\\
         \hline
         9. & Testing that the server can receive input from the client & N/A & Client sends optimal output to server == 10.0 & received\_data.\newline pickleloads(re\newline ceived\_data) == 10 & received\_data.\newline pickleloads(re\newline ceived\_data) == 10 & Pass\\
         \hline
@@ -319,7 +323,7 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         11. & Testing that the server calls for a data transfer once the output\_q is full & SR3 & output\_q.isFull() == True \&\& received\_data & Local Database.\newline isEmpty() == True & Local Database.\newline isEmpty() == True & Pass\\
         \hline
-        12. & Testing that the server does not lose data if interrupted during data transfer & RFTR1 & output\_q = \{1,2,3,4,5,6,7,\newline 8,9,10\} \&\& finished transferring \{1,2,3,4\} then interrupted during the 5th value & continue transfer from output\_q == \{5,6,7,8,9,10\} & continue transfer from output\_q == \{1,2,3,4,5,6,7,\newline8,9,10\} & Fail\\
+        12. & Testing that the server does not lose data if interrupted during data transfer & NFR13 & output\_q = \{1,2,3,4,5,6,7,\newline 8,9,10\} \&\& finished transferring \{1,2,3,4\} then interrupted during the 5th value & continue transfer from output\_q == \{5,6,7,8,9,10\} & continue transfer from output\_q == \{1,2,3,4,5,6,7,\newline8,9,10\} & Fail\\
         \hline
         \end{tabular}
         \caption{Server-Side Test Cases (10-12)}
@@ -339,7 +343,7 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         \bf Test Number & \bf Description & \bf Requirement Reference & \bf Inputs & \bf Expected Outputs & \bf Actual Outputs & \bf Results \\
         \hline
-        13. & Testing if the server is functional on all operating systems & ADAR1 & Running the server-side application on multiple operating systems & "Mobicharged is now running" prompt on all devices & "Mobicharged is now running" prompt on all devices & Pass\\
+        13. & Testing if the server is functional on all operating systems & NFR15 & Running the server-side application on multiple operating systems & "Mobicharged is now running" prompt on all devices & "Mobicharged is now running" prompt on all devices & Pass\\
         \hline
         \end{tabular}
         \caption{Server-Side Test Cases (13)}
@@ -358,9 +362,9 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         1. & Testing that the client-side application attempts to connect to the server & N/A & Python client\newline\_controller.py & "Please enter the authorization key: " prompt & "Please enter the authorization key: " prompt & Pass\\
         \hline
-        2. & Testing that the client-side application is refused connection if failed authorization & ACR1 & authorizationKey  = "incorrectpassword" & "Authorization Failed. Disconnecting." prompt & "Authorization Failed. Disconnecting" prompt & Pass\\
+        2. & Testing that the client-side application is refused connection if failed authorization & NFR4 & authorizationKey  = "incorrectpassword" & "Authorization Failed. Disconnecting." prompt & "Authorization Failed. Disconnecting" prompt & Pass\\
         \hline
-        3. & Testing that the client-side application is accepted connection on successful authorization & ACR1 & AuthorizationKey = "mobicharged" & "Authorization Successful, Connecting to server" prompt & "Authorization Successful, Connecting to server" prompt & Pass\\
+        3. & Testing that the client-side application is accepted connection on successful authorization & NFR4 & AuthorizationKey = "mobicharged" & "Authorization Successful, Connecting to server" prompt & "Authorization Successful, Connecting to server" prompt & Pass\\
         \hline
         \end{tabular}
         \caption{Client-Side Test Cases (1-3)}
@@ -419,7 +423,7 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         10. & Testing that the client-side application receives new input from the server & SR2 & soc.\newline send(data\_string) & data\_received != Null & data\_received != Null & Pass\\
         \hline
-        11. & Testing that the client-side application computes optimal configuration within 6 hours & SLR1 & y = eng.unknown\_\newline poly\_type\newline (inputParams, nargout = 1) \&\& start_stopwatch & (Elapsed\_time \leq 21600 \newline (seconds)) == True & (Elapsed\_time \leq 21600 \newline (seconds)) == True & Pass\\
+        11. & Testing that the client-side application computes optimal configuration within 6 hours & NFR9 & y = eng.unknown\_\newline poly\_type\newline (inputParams, nargout = 1) \&\& start_stopwatch & (Elapsed\_time \leq 21600 \newline (seconds)) == True & (Elapsed\_time \leq 21600 \newline (seconds)) == True & Pass\\
         \hline
         \end{tabular}
         \caption{Client-Side Test Cases (10-11)}
@@ -450,11 +454,11 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         \bf Test Number & \bf Description & \bf Requirement Reference & \bf Inputs & \bf Expected Outputs & \bf Actual Outputs & \bf Results \\
         \hline
-        1. & Test server connection. Determine if the server module is able to write to the database & RAR1 & [ID:”006dd8fc-44f3-4e9a-9b15-e12557df1a48”,\newline Input:{0:1,1:2,2:3,\newline3:4},\newline Output:1.21922\newline2] & A new document is added to the "MATLAB\_Simula\newline tions" collection & A new document is added to the "MATLAB\_Simula\newline tions" collection & Pass\\
+        1. & Test server connection. Determine if the server module is able to write to the database & NFR12 & [ID:”006dd8fc-44f3-4e9a-9b15-e12557df1a48”,\newline Input:{0:1,1:2,2:3,\newline3:4},\newline Output:1.21922\newline2] & A new document is added to the "MATLAB\_Simula\newline tions" collection & A new document is added to the "MATLAB\_Simula\newline tions" collection & Pass\\
         \hline
-        2. & Test client connection. Determine if the client module is able to read from the database & RAR1 & Call batched\_read() & Returns a dictionary containing all stored data in database & Returns a dictionary containing all stored data in database (tested with 1 entry and with 1000 entries) & Pass\\
+        2. & Test client connection. Determine if the client module is able to read from the database & NFR12 & Call batched\_read() & Returns a dictionary containing all stored data in database & Returns a dictionary containing all stored data in database (tested with 1 entry and with 1000 entries) & Pass\\
         \hline
-        3. & Test security protocol of Firestore. Ensure that non-authorized users are unable to read/write to database & ACR1 & Call batched\_read() without Firestore authentication & "Unauthorized request" prompt & "Unauthorized request" prompt & Pass\\
+        3. & Test security protocol of Firestore. Ensure that non-authorized users are unable to read/write to database & NFR4 & Call batched\_read() without Firestore authentication & "Unauthorized request" prompt & "Unauthorized request" prompt & Pass\\
         \hline
         \end{tabular}
         \caption{Database Test Cases (1-3)}
@@ -471,7 +475,7 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         4. & Test data structure consistency during read/write functions. Ensure that the data being written to the database has the same data structure as data being read & N/A & N/A & [ID:”006dd8fc-44f3-4e9a-9b15-e12557df1a48”, Input:{0:1,1:2,2:3\newline,3:4},\newline Output:1.219\newline222] is written and read & [ID:”006dd8fc-44f3-4e9a-9b15-e12557df1a48”, Input:{0:1,1:2,2:3\newline,3:4},\newline Output:1.219\newline222] is written and read & Pass\\
         \hline
-        5. & Test backup and recovery capabilities. In the case of a corrupted database, make sure that a local copy or previous version can be reestablished & RAR1 & Call recover\_last\_\newline db\_version() & Wipes corrupted dataset and re-writes most recently stored database & Wipes corrupted dataset and re-writes most recently stored database & Pass\\
+        5. & Test backup and recovery capabilities. In the case of a corrupted database, make sure that a local copy or previous version can be reestablished & NFR12 & Call recover\_last\_\newline db\_version() & Wipes corrupted dataset and re-writes most recently stored database & Wipes corrupted dataset and re-writes most recently stored database & Pass\\
         \hline
         \end{tabular}
         \caption{Database Test Cases (4-5)}
@@ -486,12 +490,12 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         \bf Test Number & \bf Description & \bf Requirement Reference & \bf Inputs & \bf Expected Outputs & \bf Actual Outputs & \bf Results \\
         \hline
-        6. & Test database size funtionality. Ensure that the database is still functioning after storing a large amount of data & RAR1 \newline PER1 & \begin{enumerate}
+        6. & Test database size funtionality. Ensure that the database is still functioning after storing a large amount of data & NFR12 & \begin{enumerate}
             \item Call write\_lar\newline ge\_\newline dataset()
             \item Call batched\_\newline read()
         \end{enumerate} & Even with 1000 entries, the database read and write functions should still work & Both read and write functionalities continue to work. Output is not written because it is too large & Pass\\
         \hline
-        7. & Test incorrect data structure handling. The database should reject incorrectly formatted data & RFTR1 & Call write\_data() with [ID:"12"] & "Incorrect data structure inputted. Server should input [ID:"", Input:{}, Output: \_\_]" & "Incorrect data structure inputted. Server should input [ID:"", Input:{}, Output: \_\_]" & Pass\\
+        7. & Test incorrect data structure handling. The database should reject incorrectly formatted data & NFR13 & Call write\_data() with [ID:"12"] & "Incorrect data structure inputted. Server should input [ID:"", Input:{}, Output: \_\_]" & "Incorrect data structure inputted. Server should input [ID:"", Input:{}, Output: \_\_]" & Pass\\
         \hline
         8. & Reading data from an empty database & N/A & Call batched\_read() & "Database is empty" prompt, and returns an empty dictionary & "Database is empty" prompt, and returns an empty dictionary & Pass\\
         \hline
@@ -582,7 +586,7 @@ Server Initializer Application & The main reason for testing the server initiali
         \hline
         9. & Test that input/output numbers and boundaries set by the user through the initializer module are properly set in the predictive stream & N/A & [list of boundaries for each input] & None & None & Fail - values currently hard coded in file\\
         \hline
-        10. & Testing that the currently sole model consistently produces accurate results that are correct within a 0.01 relative error rate & PAR1 & None & None & None & Pass\\
+        10. & Testing that the currently sole model consistently produces accurate results that are correct within a 0.01 relative error rate & NFR11 & None & None & None & Pass\\
         \hline
         \end{tabular}
         \caption{Machine Learning Blackboard Test Cases (9-10)}
