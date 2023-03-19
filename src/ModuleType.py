@@ -95,12 +95,23 @@ def run(epochs, input_data, output_data):
         print("Halting process - new model to be trained.")
         thread.join()
     ##THIS LINE NEEDS TO BE BROKEN UP - TOO MUCH HAPPENING IN ONE PLACE
-    save_and_show_run_graph(p.run(epochs, np.array(input_data).astype(float, copy=False), np.array(output_data).astype(float, copy=False)), epochs)
+    # save_and_show_run_graph(p.run(epochs, np.array(input_data).astype(float, copy=False, dtype=object), np.array(output_data).astype(float, copy=False)), epochs)
+   
+    try:
+        x = np.array(input_data).astype(np.float32, copy=False)
+        y = np.array(output_data).astype(np.float32, copy=False)
+
+    except Exception as e:
+        print("ERROR HERE: " + str(e)) 
+
+    save_and_show_run_graph(p.run(epochs, x, y), epochs)
     update_predictive_model.clear()
 
     thread = th.Thread(target=prediction_thread, args=[module])
     thread.start()
-    
+
+   
+        
 
 def init_module(): ##is there a way to confirm we have room for the data before we read it? maybe handled in param_read()
     ##this creates object with table name, the model filename, the quota number

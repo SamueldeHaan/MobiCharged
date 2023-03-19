@@ -4,10 +4,10 @@ import threading as th
 
 # In the future, this file and other files like it will implement a standard Model Interface
 # Define the input and output matrices
-# X = np.random.rand(100, 3)
+X = np.random.rand(100, 4)
 s = th.Semaphore(1)
 input_size = 4
-# Y = 3 * X[:,0] ** 2 + 2 * X[:,1] + 5*X[:,2] +  1 + np.random.normal(0, 0.1, 100)
+Y = 3 * X[:,0] ** 2 + 2 * X[:,1] + 5*X[:,2] + 6*X[:,3] +  1 + np.random.normal(0, 0.1, 100)
 
 #############Might wanna put all this in a separate higher level file
 # Define the model
@@ -36,7 +36,7 @@ def setup():
         model.compile(optimizer=optimizer, loss=custom_loss)
         return True
     except Exception as e:
-        print("Error:" + e)
+        print("Error:" + str(e))
         return False
 
 def run(epoch_num, input_data, output_data):
@@ -55,8 +55,16 @@ def pred(new_X):
     s.release()
     return predictions 
 
+
 # setup()
-# run(100, np.array([ [10, 20, 11, 21], [1, 2, 3, 4], [5, 6, 7, 8] ]).astype(float, copy=False), np.array([27, 32, 45]).astype(float, copy=False))
+# run(100, X, Y)
+# setup()
+# try:
+#     run(100, np.array([ [10.0123, 20.0, 11.055, 21.0], [1.0, 2.0, 3.044353453345, 4.0], [5.0, 6.02222222, 7.0, 8.0] ]).astype(float, copy=False), np.array([27.0, 32.0, 45.0]).astype(float, copy=False))
+# except Exception as e:
+#     print(e)
+
+
 # print("PREDICTION:" + str(pred([1,2,3])))
 
 ##-----------------------------
