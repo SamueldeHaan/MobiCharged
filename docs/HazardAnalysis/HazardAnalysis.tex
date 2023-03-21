@@ -38,7 +38,7 @@
 }
     
 
-\date{October 19th, 2022}
+\date{March 14, 2023, Rev. 1}
 
 
 \maketitle
@@ -65,6 +65,12 @@
     \hline
     All & October 19, 2022 & Rev 0 & Created first draft of document\\
     \hline
+    Nashit & March 18, 2023 & Rev 1 & Updated "Scope" to "Scope of Hazard Analysis"\\
+    \hline
+    Nashit & March 18, 2023 & Rev 1 & Updated "Definitions and Assumptions" to be Specific to the Hazard Analysis\\
+    \hline 
+    Nashit & March 18, 2023 & Rev 1 & Updated FMEA Table \& Functional Architecture\\
+    \hline 
     \end{tabular}
 \end{table}
 \end{center}
@@ -73,28 +79,25 @@
 \section{Introduction}
 
 \subsection{Purpose}
-The purpose of this Hazard Analysis document is to examine the MobiCharged Project in its stage of development to outline all potential hazards. These hazards include, but are not limited to safety risks, areas of failure and security issues. Along with the highlighted areas of potential hazards, solutions to remove these issues (or mitigate these issues at best) will be outlined.
+The purpose of this Hazard Analysis document is to examine the MobiCharged project in its stage of development to outline all potential hazards. These hazards include, but are not limited to safety risks, areas of failure and security issues. Along with the highlighted areas of potential hazards, solutions to remove these issues (or mitigate these issues at best) will be outlined.
 
 \subsection{Background}
 Engineers are tasked with design in construction to exceed requirements without hindering safety. Safety is a topic that is never missed within the industry and is continuously being highlighted amongst designs; especially as Engineers are reminded of their moral obligations to society by their awarded rings upon graduation. 
 \par
-As a current process, the construction industry places sensors within concrete spaces to continuously test and/or monitor the integrity of buildings during as well as after construction. Ultimately however, these sensors run out of battery and are required to be re-charged. 
-The industry still faces challenges when attempting to charge these sensors with the method of remote charging as the current products that satisfy remote charging abilities are yet to be optimized. There are a significant number of buildings being built in the GreaterToronto-Area, which is emphasized considering that 70\% of cranes within Canada are in just the GTA alone. To place innovation in the sub-field of safety within the industry, it is indeed a requirement to modernize the ability of producing efficient remote charging systems and to have the design process optimized to provide the most effective results.
+As a current process, the construction industry places sensors within concrete spaces to continuously test and/or monitor the integrity of buildings during as well as after construction. Ultimately however, these sensors run out of battery and are required to be re-charged.
+\par
+The industry still faces challenges when attempting to charge these sensors with the method of remote charging as the current products that satisfy remote charging abilities are yet to be optimized. There are a significant number of buildings being built in the Greater-Toronto-Area, which is emphasized considering that 70\% of cranes within Canada are in just the GTA alone. To place innovation in the sub-field of safety within the industry, it is indeed a requirement to modernize the ability of producing efficient remote charging systems by having the design process optimized to provide the most effective results.
 \par
 The system-solution for this will be the development of MobiCharged. This system is separated into two separate components - the software for users as well as the hardware / prototype. 
-The software component of MobiCharged is a machine-learned system that will react to the input of users (in which the input will be the desired outputs / application requirements for the remote charging device) and provide the necessary results (these variables depending on the user inputs can be antenna types, layouts, wavelengths, phases, etc.)  in order to satisfy the user’s inputs such that they may proceed with producing the devices in a way that it is optimized. This software can be operated in any environment the user chooses such that it can be used in any computing system with sufficient speed, memory & the required processors. 
 \par
-The hardware component of MobiCharged is a prototype to be developed for the purpose of demonstration as well as development for the software. This physical component will allow the system to be rooted to the core optimization problem in the real world, as it applies to real products. The physical system will allow placing absolute constraints and limitations into the software for optimal outputs in the software. In addition, this physical system can be implemented for an actual use-case in the field post-demonstrations. 
+The software component of MobiCharged is a machine-learned system that will react to the input of users (in which the input will be the desired outputs / application requirements for the remote charging device) and provide the necessary results (these variables depending on the user inputs can be antenna types, layouts, wavelengths, phases, etc.)  in order to satisfy the user’s inputs such that they may proceed with producing the devices in a way that it is optimized. This software can be operated in any environment the user chooses such that it can be used in any computing system with sufficient speed, memory \& the required processors. 
+\par
+The hardware component of MobiCharged is a prototype to be developed for the purpose of demonstration as well as development for the software. This physical component will allow the system to be rooted to the core optimization problem in the real world, as it applies to real products. The physical system will allow placing absolute constraints and limitations into the software for optimal outputs in the software. In addition, this physical system can be implemented for an actual use-case in the field for demonstrations. The environments in which these physical systems operate are typically from roof-tops and/or high-altitude locations with spacial capabilities to place arrays of these systems. These systems react to user inputted (remotely) data such as the location of the device required to be charged, so that it may orient itself in a manner optimal for that application. 
 
-\subsection{Scope}
-The environments in which these physical systems operate are typically from roof-tops and/or high-altitude locations with spacial capabilities to place arrays of these systems. These systems react to user inputted (remotely) data such as the location of the device required to be charged, so that it may orient itself in a manner optimal for that application. 
+\subsection{Scope of Hazard Analysis}
+The objective of this hazard analysis is to identify any and ideally all potential hazards/risks project MobiCharged may encounter. Moreover, the goal is to evaluate the likelihood and severity of these risks while generating solutions to remove and/or mitigate them.
 \par
-The purpose of the software system, MobiCharge, is a machine learning algorithm that will be used by Mobilite-Power, engineering consultant groups, general contractors and building maintenance teams to optimize the design process required to effectively and efficiently produce the most viable remote charging system. In doing so, this will negate the current process of manually conducting simulations (that requires lengthy computerized numerical calculations), ultimately minimizing cost, manual labor, and the time necessary to produce the required results. 
-\par
-This system will provide users with the optimal configuration of a remote charging device based on the desired output, encrypt data protecting users when producing design results and use data smoothing to ensure the accuracy of the system in a time efficient manner.
-\par
-The purpose of the hardware system is to root our algorithms optimization in the real world environment. The production of a physical model will assist in the determination of the absolute boundaries that can be fed into the machine learning algorithm. Variable parameter ranges will be able to be derived from the physical model to determine the magnitude to which the boundaries can be pushed within the simulation. 
-The physical system provides a secondary purpose in the form of data collection and verification. In order to increase the breadth of data that we can feed into the algorithm, we must determine the degree of computational error within the simulation results. A physical model will aid in determining this range and lead to further optimization through the machine learning algorithm. 
+The scope of the hazard analysis will be limited to the software system as well as the hardware system. The software system will be analyzed for anything that can create errors and/or issues for the users which include but are not limited to incorrect outputs, crashing of the software and security issues. The hardware system will be analyzed for anything that can bring harm to the user which includes voltage/current spikes, malfunction of hardware system and areas of physical danger. The project being analyzed will be analyzed for when it is in operation but also for the cases when it is not in operation. 
 
 \subsection{Definitions \& Assumptions}
 
@@ -119,9 +122,9 @@ The physical system provides a secondary purpose in the form of data collection 
  \hline
  Output Limitation Timers & A software algorithm module designed to measure the time it takes for a process to complete and cancel the process if the time elapsed exceeds a programmed amount.\\
  \hline
- Functional Requirement & Requirements that describe what the product is supposed to do\\
+ FR - Functional Requirement & Requirements that describe what the product is supposed to do\\
  \hline
-Non-functional Requirement & Requirements that describe qualities that product will have\\
+NFR - Non-functional Requirement & Requirements that describe qualities that product will have\\
  \hline
 General Contractor & Third party companies that acquire services by Mobilite-Power\\
   \hline
@@ -137,7 +140,9 @@ ML & "Machine Learning" algorithm.\\
 \subsubsection{Assumptions}
 \begin{itemize}
     \item There is an assumption that the developers will eventually have access to enough processing power to conduct large quantities of simulations.
-    \item A large underlying assumption regarding this system is that the user does not intentionally attempt to enter inputs incorrectly, as well as provide positive feedback to the system when it is not correct.
+    \item A large underlying assumption regarding the software system is that the user does not intentionally attempt to enter inputs incorrectly, as well as provide positive feedback to the system when it is not correct.
+    \item The user will be ages 14 and up for hardware system. Ages 16 and up for software system.
+    \item The user has a fundamental background in hardware operation safety.
 
 \end{itemize}
 
@@ -179,10 +184,10 @@ This component is present to enclose the system. Typically, the material of this
 \subsubsection{Hardware Display System}
 This component is for the user to understand when the device is operational, functional, etc. The current display system is under development, however, the use of LEDs will most likely be implemented. 
 
-\subsubsection{Circuits & Logic}
+\subsubsection{Circuits \& Logic}
 This will consist of any circuitry required for proper control and use of the overall system. 
 
-\section{Failure Modes & Effects Analysis Table}
+\section{Failure Modes \& Effects Analysis Table}
 Below is a failure modes and effects analysis (FMEA) for MobiCharged system.
 \newpage
 \fancyhf{}
@@ -195,9 +200,9 @@ Below is a failure modes and effects analysis (FMEA) for MobiCharged system.
 \hline
 Design Component & Ref.\# & Failure Modes & Causes of Failure & Effects of Failure & Detection & Controls & Recommended Action\\
 \hline
-Front End User Display & 4.1.1.0 \par(PAR1) & Incorrect Outputs & -Incorrect inputs from user \par -Incorrect input type \par -Unintended indexing in Database \par -Race Conditions & Users carry incorrect outputs that are later used to produce the remote charging devices. This results in a device produced that is not actually the one optimized for certain application & -Software can detect incorrect input types based on ASCII values \par -Other forms are not detectable & N/A & -Display confirmation screen containing inputs provided by the user \par -Display/Export the data of outputs along with the user's inputs at all times \par -Create an "Incorrect Input" pop-up display when the user enters an incorrect input type \par -Display examples of inputs for user \par -Display input limitations \par -Display a "Calculation Failed" screen if calculation fails (and have program execute fail-safe) \par -Ensure Race Conditions \& Indexing errors do not occur by correctly writing program to avoid it (i.e. using "sleep()") \par\\
+Front End User Display & 4.1.1.0 \par(NFR11) & Incorrect Outputs & -Incorrect inputs from user \par -Incorrect input type \par -Unintended indexing in Database \par -Race Conditions & Users carry incorrect outputs that are later used to produce the remote charging devices. This results in a device produced that is not actually the one optimized for certain application & -Software can detect incorrect input types based on ASCII values \par -Other forms are not detectable & N/A & -Display confirmation screen containing inputs provided by the user \par -Display/Export the data of outputs along with the user's inputs at all times \par -Create an "Incorrect Input" pop-up display when the user enters an incorrect input type \par -Display examples of inputs for user \par -Display input limitations \par -Display a "Calculation Failed" screen if calculation fails (and have program execute fail-safe) \par -Ensure Race Conditions \& concurrency errors do not occur by correctly writing program to avoid it (eg: using semaphores) \par\\
 
- & 4.1.1.1 \par(RFTR1) & Frozen Screen and/or Crash & -User inputs values exceeding calculation capabilities (eg;dividing by 0) \par -Removal of power to software system during process \par -Deadlock & -Reboot necessary \par -Loss of data & N/A & N/A & -Avoid incorrect programming that may cause deadlocks and ensure robustness in code \par -Encourage user to maintain power to system during operation \par -Limit users from inputting incorrect data \par -Provide users examples of data types and/or values that are acceptable\\
+ & 4.1.1.1 \par(NFR13) & Frozen Screen and/or Crash & -User inputs values exceeding calculation capabilities (eg;dividing by 0) \par -Removal of power to software system during process \par -Deadlock & -Reboot necessary \par -Loss of data & -Interrupted process by loss of data (only detected once in operation again) & N/A & -Avoid incorrect programming that may cause deadlocks and ensure robustness in code \par -Limit users from inputting incorrect data \par -Provide users examples of acceptable data types \par -Produce an emergency module that informs user of the loss of data after the crash, while advising them to report the issue to the manufacturer if repeated continuously\\
  \hline
 \end{tabular}
 \end{adjustwidth}
@@ -210,12 +215,12 @@ Front End User Display & 4.1.1.0 \par(PAR1) & Incorrect Outputs & -Incorrect inp
 \hline
 Design Component & Ref.\# & Failure Modes & Causes of Failure & Effects of Failure & Detection & Controls & Recommended Action\\
 \hline
-Front End User Display & 4.1.1.2 \par(ACR1)& Incorrect Login Information & User forgets password and/or username & Loss of previous data history for user & N/A & N/A & -Generate security questions during account creation, thus, if user forgets password they can reset it using security questions \par -Make software tied to online servers, allowing users to get a reset link their email address\\
+Front End User Display & 4.1.1.2 \par(NFR4)& Incorrect Login Information & User forgets password and/or username & Loss of previous data history for user & N/A & N/A & -Generate security questions during account creation, thus, if user forgets password they can reset it using security questions \par -Make software tied to online servers, allowing users to get a reset link their email address\\
  \hline
  Backend Calculations & 4.1.2.0 \par(SR4)& Failed Calculations (undefined answers) & -User enters values that lead to undefined answers \par -User enters incorrect data types \par -User enters extreme data values & -Crash of calculations and no outputs \par -Potentially outputting incorrect data without warning, which could then be used to produce remote charging devices & N/A & N/A & -Limit the data types users can input based on ASCII values \par -Ensure correct and sufficient testing is implemented during development\\
  \hline
- Machine Learning Algorithm & 4.1.3.0  \par (IR1)& Infinite loop & -Incorrect programming \par -Negligence of exiting loops & -Software crash \par -Computer crash \par -Reboot system \par -Loss of data & -Computer built-in exiting programs \par -Output limitation timers & N/A & -Ensure correct programming to avoid infinite loops \par -Enter states of polling to ensure processing does not exceed time limits \par -Create failure states within code\\
- & 4.1.3.1 \par(RFTR1) & Incorrect Data-Smoothing & -Ineffective algorithms implemented \par -Limit of data present & -Incorrect data output leading to non-optimized solutions and devices \par -Catastrophic errors may occur if positive feedback is provided to incorrect output & N/A & N/A & -Produce extensive research to implement the most effective data-smoothing algorithm \par -Increase data set overtime \\
+ Machine Learning Algorithm & 4.1.3.0  \par (NFR5)& Infinite loop & -Incorrect programming \par -Negligence of exiting loops & -Software crash \par -Computer crash \par -Reboot system \par -Loss of data & -Computer built-in exiting programs \par -Output limitation timers & N/A & -Ensure correct programming to avoid infinite loops \par -Enter states of polling to ensure processing does not exceed time limits \par -Create failure states within code\\
+ & 4.1.3.1 \par(NFR13) & Incorrect Data-Smoothing & -Ineffective algorithms implemented \par -Limit of data present & -Incorrect data output leading to non-optimized solutions and devices \par -Catastrophic errors may occur if positive feedback is provided to incorrect output & N/A & N/A & -Produce extensive research to implement the most effective data-smoothing algorithm \par -Increase data set overtime \\
  \hline
 \end{tabular}
 \end{adjustwidth}
@@ -233,7 +238,7 @@ Machine Learning Algorithm & 4.1.3.2 \par (SR2) & Positive feedback applied to i
 \hline
 Data-Exporting & 4.1.4.0 \par(SR3)& Unable to export & -Export file type not supported \par -Exporting process stopped due to higher priority preemption or power loss during process & -Exporting failed, data is not exported to user \par -Data is not saved & -Software check \par -Computer built in exit programs & N/A & -Provide user the requirements of installing the software to ensure the necessary support is present \par -Deny the installation of the software system if necessary support is not present \par -Create the programs modular and preemptable such that the process can continue after halt\\
 & 4.1.4.1 \par (SR4)& Incorrect data outputted & -Race conditions \par -Incorrect indexing through data &  Incorrect solution provided &Visual check between correct data displayed to user and exported data & N/A & -Thorough programming to avoid race conditions \par -Apply verifications to ensure indexing is correct\\
-&4.1.4.2 \par(SEC\par R1)& Vulnerable data & -Data leaks & Possibly critical client data available to malicious parties & Ethical hacking attempts to assess vulnerabilities & N/A & Encrypt outbound data on local machines before transmitting via the server (SR3)\\
+&4.1.4.2 \par(NFR17)& Vulnerable data & -Data leaks & Possibly critical client data available to malicious parties & Ethical hacking attempts to assess vulnerabilities & N/A & Encrypt outbound data on local machines before transmitting via the server (SR3)\\
 \hline 
 \end{tabular}
 \end{adjustwidth}
@@ -263,13 +268,13 @@ Simulation Integration Software & 4.1.6.0 \par (SR6)& Inaccurate results & -comp
 \hline
 Design Component & Ref.\# & Failure Modes & Causes of Failure & Effects of Failure & Detection & Controls & Recommended Action\\
 \hline
-Power Supply System & 4.2.1.0 (RAR1)& No power supplied to subsequent systems & -Fault in power supply \par -Fault in power supply cables to downstream systems & -System crash \par -Loss of data & Current measurements taken at antenna-array system & N/A & -Disconnect power supply system from remaining systems \par -Conduct testing of power supply components to determine mode of failure \par\\
+Power Supply System & 4.2.1.0 (NFR12)& No power supplied to subsequent systems & -Fault in power supply \par -Fault in power supply cables to downstream systems & -System crash \par -Loss of data & Current measurements taken at antenna-array system & N/A & -Disconnect power supply system from remaining systems \par -Conduct testing of power supply components to determine mode of failure \par\\
 
-& 4.2.1.1\par (RAR1) & Voltage swell & Large change in loads seen by power system & System short circuited & Voltage measurements taken at antenna-array system & Protection devices (fuses) downstream from power supply & Conduct testing of power supply components to determine mode of failure\\
+& 4.2.1.1\par (NFR12) & Voltage swell & Large change in loads seen by power system & System short circuited & Voltage measurements taken at antenna-array system & Protection devices (fuses) downstream from power supply & Conduct testing of power supply components to determine mode of failure\\
 \hline
-Phase-Shift System & 4.2.2.0 \par (IR2) & Phase shifter component failure & Component break down & - System failure \par - Incorrect phase applied to system and unintended waves will be created \par - Device intended to be charged may not be charged & Measurement of induced radio waves & N/A & Testing of units prior to assembly\\
+Phase-Shift System & 4.2.2.0 \par (NFR6) & Phase shifter component failure & Component break down & - System failure \par - Incorrect phase applied to system and unintended waves will be created \par - Device intended to be charged may not be charged & Measurement of induced radio waves & N/A & Testing of units prior to assembly\\
 \hline
-Antenna Array System & 4.2.3.0 \par (IR2) & Antenna Array Component failure & -Component break down \par -Over current supplied & - System Failure \par - Waves will not be distributed \par - Devices will not be charged & Measurement of induced radio waves & Protection devices (fuses) to limit current to antenna within operating range & -Testing of units prior to assembly \par -Monitor power supplied to units\\
+Antenna Array System & 4.2.3.0 \par (NFR6) & Antenna Array Component failure & -Component break down \par -Over current supplied & - System Failure \par - Waves will not be distributed \par - Devices will not be charged & Measurement of induced radio waves & Protection devices (fuses) to limit current to antenna within operating range & -Testing of units prior to assembly \par -Monitor power supplied to units\\
 \hline
 \end{tabular}
 \end{adjustwidth}
@@ -281,9 +286,9 @@ Antenna Array System & 4.2.3.0 \par (IR2) & Antenna Array Component failure & -C
 \hline
 Design Component & Ref.\# & Failure Modes & Causes of Failure & Effects of Failure & Detection & Controls & Recommended Action\\
 \hline
-System Enclosure & 4.2.4.0 \par (RAR1) & Enclosure "leak" & Gap in wave reflective enclosure system & - Waves will leak through the gap and constructive interference will occur in unintended directions \par - The intended directions for the waves to be distributed will be minimized; device may not be charged due to length of waves not sent  & -Measurement of induced radio waves \par -Visual inspection & N/A & -Inspection prior to use \par -Remove sensitive equipment from affected area\\
+System Enclosure & 4.2.4.0 \par (NFR12) & Enclosure "leak" & Gap in wave reflective enclosure system & - Waves will leak through the gap and constructive interference will occur in unintended directions \par - The intended directions for the waves to be distributed will be minimized; device may not be charged due to length of waves not sent  & -Measurement of induced radio waves \par -Visual inspection & N/A & -Inspection prior to use \par -Remove sensitive equipment from affected area\\
 \hline
-Hardware Display System & 4.2.5.0 \par (RAR1) & False indication & Display stuck in "on" or "off" state & - Confusion amongst user \par - Incorrect usage may occur by user & Verification downstream to determine state of device & Wire indication in line with power supply to device & Disconnect the device from the power supply system until failure mode has been determined\\
+Hardware Display System & 4.2.5.0 \par (NFR12) & False indication & Display stuck in "on" or "off" state & - Confusion amongst user \par - Incorrect usage may occur by user & Verification downstream to determine state of device & Wire indication in line with power supply to device & Disconnect the device from the power supply system until failure mode has been determined\\
 \hline
 \end{tabular}
 \end{adjustwidth}
@@ -294,86 +299,87 @@ Hardware Display System & 4.2.5.0 \par (RAR1) & False indication & Display stuck
 \renewcommand{\headrulewidth}{0pt}
 \pagestyle{plain}
 
+
 \section{Functional Architecture}
-As many constraints require feasible prototypes, the requirements are subject to change accordingly. Requirements indicated in bold writing are new additions.
+As many constraints require feasible prototypes, the requirements are subject to change accordingly.
 \subsection{Functional Requirements}
 \subsubsection{Software System Functional Requirements}
 \textbf{SR1.} ML Model must optimize inputs faster than the existing process.\\
 \textbf{SR2.} ML Model must be able to develop "new" simulations based on previous optimal models.\\
-\textbf{SR3.} ML Model must be able to encrypt optimized data before exporting.\\
-\textbf{SR4.} \textbf{The software system must determine and output the optimized and correct solution.}\\
-\textbf{SR5.} \textbf{ML Model must be able to process incoming simulation data from multiple source devices.}\\
-\textbf{SR6.} \textbf{ML Model must be able to interpret data exported directly from Matlab simulations.}\\
+\textbf{SR3.} ML Model must be able to encrypt optimized data before exporting for the purpose of security and privacy.\\
+\textbf{SR4.} The software system must determine and output the optimized and correct solution.\\
+\textbf{SR5.} ML Model must be able to process incoming simulation data from multiple source devices.\\
+\textbf{SR6.} ML Model must be able to interpret data exported directly from Matlab simulations.
+
+\color{black}
 
 \subsubsection{Hardware System Functional Requirements}
-\textbf{HR1.} The system must be able to wirelessly charge device through a reasonable amount of material in between.\\
-\textbf{HR2.} The system must be able to charge a device within a reasonable amount of time.\\
+\textbf{HR1.} The system must be able to simulate a remote charging device by levitating a particle in an air medium within the hardware capsule for at least 5 minutes.\\
+\textbf{HR2.} The system must be able to levitate the particles for simulation purposes within 15 seconds.\\
 
 \subsection{Non-functional Requirements}
 \subsubsection{Look and Feel Requirements}
+\textbf{NFR1.} The hardware system will be packaged neatly such that all wiring is hidden and not exposed to the users.\\
+\textbf{NFR2.} The software system will be produced with front end design colors such that strains to the eye are minimized.
 \subsubsection{Appearance Requirements}
-\textbf{APR1.} The system will consist of a simple user interface.
+\textbf{NFR3.} The system will consist of a simple user interface by minimizing unnecessary and complex functionalities.
+
 \subsubsection{Access Requirements}
-\textbf{ACR1.} \textbf{Authorized users will have access to the system.}
+\textbf{NFR4.} Authorized users will have access to the system while unauthorized users will not.
 
 \subsubsection{Integrity Requirements}
-\textbf{IR1.} \textbf{The system must be able to store its current state locally in the event of a failure}\\
-\textbf{IR2.} \textbf{The individual components of the physical system must be inspected and tested.}
+\textbf{NFR5.} The system must be able to store its current state locally in the event of a failure.\\
+\textbf{NFR6.} The individual components of the physical system must be inspected and tested.
 
 \subsubsection{Style Requirements}
 N/A
 \subsubsection{Usability and Humanity Requirements}
+N/A
 \subsubsection{Ease of use Requirements}
-\textbf{EUR1.} The system shall be easy to use.\\
-\textbf{EUR2.} The system shall be easy to install.
+\textbf{NFR7.} The system shall be simple to install within 10 steps and within one hour.
 
 \subsubsection{Learning Requirements}
-\textbf{LR1.} The system shall be understandable within an hour of use.
+\textbf{NFR8.} The system shall be understandable within an hour of use.
 
 \subsubsection{Understandability and Politeness Requirements}
 N/A
 
-\subsubsection{Performance Requirements}
 \subsubsection{Speed and Latency Requirements}
-\textbf{SLR1.} The system must compute optimal configuration within 6 hours.
+\textbf{NFR9.} The system must compute optimal configuration within 6 hours.
 
 \subsubsection{Safety Critical Requirements}
-N/A
+\textbf{NFR10.} The hardware system must have a fail safe option such that at the system shuts off at the event of failure to reduce potential harm.
 
 \subsubsection{Precision of Accuracy Requirements}
-\textbf{PAR1.} The system must have a relative accuracy of 5\% compared to current Matlab simulation.
+\textbf{NFR11.} The system must have a relative accuracy of 5\% compared to current Matlab simulation.
 
 \subsubsection{Reliability and Availability Requirements}
-\textbf{RAR1.} The system must be available at all times.\\
+\textbf{NFR12.} The system must be available at all times.\\
 
 \subsubsection{Robustness of Fault Tolerance Requirements}
-\textbf{RFTR1.} The system must be able to discard any corrupted data without adding it to the database.\\
+\textbf{NFR13.} The system must be able to discard any corrupted data without adding it to the database.\\
 
 \subsubsection{Capacity Requirements}
 N/A
-
-\subsubsection{Operational and Environmental Requirements}
 \subsubsection{Physical Environment}
-\textbf{PER1.} The hardware system must be able to withstand harsh weather.
+\textbf{NFR14.} The hardware system must be able to withstand an input of an upper limit of 15 volts\\
 
 \subsubsection{Release Requirements}
 N/A
-
-\subsubsection{Maintainability and Support Requirements}
 \subsubsection{Maintenance Requirements}
 N/A
 
 \subsubsection{Adaptability Requirements}
-\textbf{ADAR1.} The system must be functional on all operating systems.
+\textbf{NFR15.} The system must be functional on Windows and macOS.
 
 \subsubsection{Security Requirements}
-\textbf{SECR1.} The system must protect client data.
+NFR17 - Client data must be protected.
 
 \subsubsection{Access Requirements}
 N/A
 
 \subsubsection{Privacy Requirements}
-\textbf{PRV1.} The system must encrypt all exported data.
+\textbf{NFR16.} The system must encrypt all exported data.
 
 
 \subsubsection{Legal Requirements}
