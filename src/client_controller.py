@@ -6,38 +6,41 @@ import time
 #import server
 ##main script
 
+"""
+Author: Mustafa Choueib
+Last Revision Date: March 23rd, 2023.
+Purpose: The purpose of this script is to allow users to set an initial input configuration that is passed to the Server socket.
+"""
 
+
+
+#Ensures client can be initialized before proceeding
 client.client_init()
 if not(client.authSucess):
     quit()
 
-def user_input():
+def User_Input():
     inputSizeGood = False
     outputSizeGood = False
-
     while True:
         ##add input validation - need a lot here its a user so
-        temp_List = []
+        tempList = []
         for numIn in range(4): 
-        #for numIn in range(int(server.inputSize)): 
-            #val = input("Input your desired data for the optimization problem: ")
             temp = False
+            #Ensures the input is a float value
             while not(temp):
                 val = input(f"Input parameter {numIn+1} for the optimization problem:")
-                #Allow decimal values
                 if(val.isnumeric()):
-                    temp_List.append(float(val))
+                    tempList.append(float(val))
                     temp = True
                 else:
                     print("Input must be numeric 0-9")
             
-        q.add(temp_List)
+        q.add(tempList)
         time.sleep(15)
 
-
-user_input()
-#thread_user = threading.Thread(target=user_input)
-#thread_user.start()
+thread_user = threading.Thread(target=User_Input)
+thread_user.start()
 
 
 
