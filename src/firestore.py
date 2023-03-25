@@ -6,7 +6,7 @@ import json
 
 # Use a service account.
 #DO NOT SHARE THE API KEY
-cred = credentials.Certificate('capstone-45462-firebase-adminsdk-zzso5-df5915dc4b.json')
+cred = credentials.Certificate('src\capstone-fc81e-firebase-adminsdk-ja8xd-369691754f.json')
 
 app = firebase_admin.initialize_app(cred)
 
@@ -67,15 +67,15 @@ def batched_read():
         if ('Input' in current_doc.keys()): 
             #THIS MAY REQUIRE FLOAT CASTING EACH VALUE
             temp_key = current_doc['ID']
-            temp_input = [(current_doc['Input'])]
-            temp_output = [(current_doc['Output'])]
+            temp_input.append(current_doc['Input'])
+            temp_output.append(current_doc['Output'])
 
-            input_array[temp_key] = temp_input
-            output_array[temp_key] = temp_output
+            # input_array[temp_key] = temp_input
+            # output_array[temp_key] = temp_output
 
-            print(temp_key, input_array, output_array)
+            # print(temp_key, input_array, output_array)
 
-    return input_array, output_array
+    return temp_input, temp_output
 
 
 

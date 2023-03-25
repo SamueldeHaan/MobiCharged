@@ -15,7 +15,7 @@ import concurrency_monitor
 import final_gui
 
 # GLOBAL STATIC VARIABLES----------------------------
-required_performance_streak = 5
+required_performance_streak = 30
 required_streak_to_prune = 5
 ping_frequency_in_seconds = 15
 #----------------------------------------------------
@@ -38,6 +38,7 @@ current_error = None
 #         ui_event.wait()
 #         model = monitor.get_payload()
 
+best_log = []
 
 monitor = concurrency_monitor.ConcurrencyMonitor(None)
 
@@ -130,7 +131,7 @@ def get_best_model_from_valid_models():
 
 def main_loop():
     global valid_models, current_best, data, current_error
-    final_gui.run()
+    # final_gui.compile(monitor)
 
     if valid_models.active_count == 0:
         print("No valid models present!")
@@ -152,7 +153,7 @@ def main_loop():
             current_best = (best_learner_node.data[0], copy.copy(learner))
             current_error = mean(learner.history.val_losses)
             learner.model = None
-            monitor.set_payload(current_best)
+            monitor.set_payload([current_best[0], current_best[1], current_error])
  
     while not(stop_condition()):
         
@@ -171,7 +172,8 @@ def main_loop():
 
         valid_models.active = valid_models.head
         while i <= valid_models.active_count:
-            valid_models.next()
+            if valid_models.active == valid_models.head:
+                valid_models.next()
             current_learner_obj = valid_models.active.data[1]
             current_learner_name = valid_models.active.data[0] ## sync with eric - need to share with frontend
 
@@ -195,15 +197,13 @@ def main_loop():
                 update_learner_entries(current_learner_name, data=[count, current_learner_obj.current_threshold, 0])
                 valid_models.next()
                 save_best_weights()
-                monitor.set_payload(current_best)
+                monitor.set_payload([current_best[0], current_best[1], current_error])
                 i += 1
 
             ##we're doing some unnecessary work here
             elif current_error > performance:
                 if current_learner_name == current_best[0]:
                     current_best[1].model = current_learner_obj.get_model()
-
-
 
                     current_best[1].performance_count += 1
                     update_learner_entries(current_best[0], data=[count, current_learner_obj.current_threshold, current_best[1].performance_count])
@@ -220,7 +220,7 @@ def main_loop():
                 current_error = performance
                 valid_models.next()
                 save_best_weights()
-                monitor.set_payload(current_best)
+                monitor.set_payload([current_best[0], current_best[1], current_error])
                 i += 1
 
             else:
@@ -231,11 +231,12 @@ def main_loop():
                     update_learner_entries(current_best[0], data=[current_best[1].stack_pointer, current_learner_obj.current_threshold, current_best[1].performance_count])
                     if valid_models.active_count == 1: ## if we get worse when we have our last contender, leave
                         current_learner_obj.model = None
+                        best_log.append(current_best[1])
                         return
                     
                 else:
                     current_learner_obj.performance_count += 1
-                    current_best[1].performace_count += 1
+                    current_best[1].performance_count += 1
                     if current_learner_obj.performance_count >= required_streak_to_prune:
                         prune(current_learner_name)
                         valid_models.remove_active()
@@ -245,6 +246,8 @@ def main_loop():
             current_learner_obj.model = None
             current_best[1].update_graphs(count)
             update_best_learner_file()
+            best_log.append(current_best[1])
+            # final_gui.root.update()
 
 def prune(name):
     source_path = os.path.join(local_path, 'valid_models', name + '.py')
