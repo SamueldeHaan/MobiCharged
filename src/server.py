@@ -220,6 +220,9 @@ def DataTransfer():
     for dataT in range(output_q.qSize()):
         #Add confirmation that data was transfered successfully.
         currentVal = output_q.remove()
+        
+        current_count = firestore.check_count()
+        currentVal['ID'] = current_count
         firestore.write_data(currentVal) #FIX OBJECT TYPE
         print("Transfering: " + str(currentVal))
         #file.write(str(currentVal) + "\n")
