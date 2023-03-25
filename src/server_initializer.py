@@ -1,55 +1,62 @@
+import random
+import os
+import paramiko
 
-import firestore 
-def main():
-    current_count = firestore.check_count()
-    print("CURRENT COUNT = ", current_count)
-    inputList = []
-    inputSizeGood = False
-    outputSizeGood = False
+"""
+Author: Mustafa Choueib
+Last Revision Date: March 23rd, 2023.
+Purpose: The purpose of this script is to gather the desired configurations from the GUI,
+         and pass those inputs off to the Server, ML Blackboard and front end script.
+"""
 
-    while not(inputSizeGood):
-        inputSize = input("Please Enter The Number of Unique Elements in the Input: ")
-        if(inputSize.isdecimal()):
-            inputSizeGood = True
-        else:
-            print("Please Enter an Integer Value!")
-    
-    while not(outputSizeGood):
-        outputSize = input("Please Enter The Number of Unique Elements in the Output: ")
-        if(outputSize.isdecimal()):
-            outputSizeGood = True
-        else:
-            print("Please Enter an Integer Value!")
-    
-    for numIn in range(int(inputSize)): 
-        inputRanges = False
-        inputRangeMin = False
-        inputRangeMax = False
-        while not(inputRanges):
-            while not(inputRangeMin):    
-                rangeMin = input(f"Please Enter the Minimum Value in the Range (input #{numIn + 1}): ")
-                if(rangeMin.isdecimal()):
-                    inputRangeMin = True
-                else:
-                    print("Please Enter an Integer or Float Value")
-            while not(inputRangeMax):
-                rangeMax = input(f"Please Enter the Maximum Value in the Range (input #{numIn + 1}): ")
-                if(rangeMax.isdecimal()):
-                    tempList = [rangeMin, rangeMax]
-                    inputList.append(tempList)
-                    inputRangeMax = True
-                else:
-                    print("Please Enter an Integer or Float Value")
-                inputRanges = True
-    
-    #print(inputList)
-    startServer(inputSize, outputSize, inputList)
+def connectToServer():
+    serverIP = "172.105.14.186"
+    serverUsername = "root"
+    serverPassword = "Mobichargedgroup"
+    serverPort = 22
 
-def startServer(inputSize, outputSize, inputList):
+    try:
+        ssh = paramiko.SSHClient()
+        #Load SSH hot keys
+        ssh.load_system_host_keys()
+        #Add SSH host key automatically if needed.
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        #Connect to the server
+        ssh.connect(serverIP, serverPort, serverUsername, serverPassword, look_for_keys=False)
+
+        #Setting the path to the correct directory
+        pathCommand = "cd Mobicharged-Server"
+        stdin, stdout, stderr = ssh.exec_command(pathCommand)
+
+        #Sending the batch file to the remote server
+        sftp = ssh.open_sftp()
+        sftp.put("launch_server.bat", '//root//Mobicharged-Server//launch_server.bat')
+        sftp.close()
+
+        permCommand = "chmod +x launch_server.bat"
+        stdin, stdout, stderr = ssh.exec_command(permCommand)
+        #stdin, stdout, stderr = ssh.exec_command("./launch_server.bat")
+    except Exception as e:
+        return False
+
+def createLaunchBat(inputSize, outputSize, inputList, simFilePath):
+    #Need to indentify the chosen simulation file to the server so it can inform any clients trying to connect.
+    fileName = os.path.basename(simFilePath)
+    #Dynamically creating a bat file consisting of the inputs specified in the GUI
+    launchBat = open('launch_server.bat', 'w+')
+    #launchBat.write("#!/bin/sh\n")
+    launchBat.write('''@echo off
+    python3 -c "from server_initializer import startServer ; startServer({0}, {1}, {2}, '{3}')"
+    pause
+    '''.format(inputSize, outputSize, inputList, fileName))
+    launchBat.close()
+
+    connectToServer()
+
+
+#Initializes the Server Socket with the given configuration
+def startServer(inputSize, outputSize, inputList, simFileName):
     import server
-    server.Server_Configuration(inputSize,outputSize, inputList)
-    
+    server.Server_Configuration(inputSize,outputSize, inputList, simFileName)
 
-
-
-main()

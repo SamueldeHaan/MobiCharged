@@ -1,12 +1,12 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-import os
+
 import json
 
 # Use a service account.
 #DO NOT SHARE THE API KEY
-cred = credentials.Certificate(os.path.join('src', 'capstone-45462-firebase-adminsdk-zzso5-df5915dc4b.json'))
+cred = credentials.Certificate('capstone-45462-firebase-adminsdk-zzso5-df5915dc4b.json')
 
 app = firebase_admin.initialize_app(cred)
 
@@ -32,14 +32,8 @@ statsRef = db.collection(u'MATLAB_Simulations').document(u'count') #initalize si
 def write_data(data):
     #Select the collection 'Models' and add a new document with ID: record['Model']
     #data['Simulation'] parameter MUST BE A STRING IN ORDER TO BE WRITTEN
-    print("1")
-    #.DOCUMENT(THIS MUST BE A STRING)
-    doc_ref = db.collection(u'MATLAB_Simulations').document(str(data['ID'])) #store a new document with the name of model
-    print("2")
+    doc_ref = db.collection(u'MATLAB_Simulations').document(data['ID']) #store a new document with the name of model
     doc_ref.set(data)
-    print("3")
-    #want to label each document w.r.t simulationsCount
-
     batch.update(statsRef, {u'simulationsCount': increment}) #increment the counter of how many simulations have been stored
     batch.commit()
 
@@ -67,9 +61,6 @@ def batched_read():
     output_array = {}
     temp_output = []
 
-    input = []
-    output = []
-
     for doc in docs:
         current_doc = doc.to_dict()
         #print(current_doc['Input'])
@@ -79,44 +70,12 @@ def batched_read():
             temp_input = [(current_doc['Input'])]
             temp_output = [(current_doc['Output'])]
 
-            input.append(temp_input)
-            output.append(temp_output)
+            input_array[temp_key] = temp_input
+            output_array[temp_key] = temp_output
 
-            # input_array[temp_key] = temp_input
-            # output_array[temp_key] = temp_output
+            print(temp_key, input_array, output_array)
 
-            # print(temp_key, input_array, output_array)
-
-    return input, output
-
-def read_from_point(ID,  numberOfReads):
-    #read from firestore MATLAB_simulations collection, starting at startAfterDocument ID
-    #reads numberOfReads number of documents after that
-    #outputs 2 dictionaries: input, output with key as each corresponding simulation ID (count)
-
-    startAfterDocument={
-        u'ID': ID
-    }
-
-    docs = db.collection(u'MATLAB_Simulations').order_by('ID')\
-                        .start_after(startAfterDocument)\
-                        .limit(numberOfReads)\
-                        .stream()
-    #.start_after(startAfterDocument)\
-
-    input_array = {}
-    temp_input = []
-    output_array = {}
-    temp_output = []
-    print(docs)
-    print(type(docs))
-    for doc in docs:
-        print(u'{} => {}'.format(doc.id, doc.to_dict()))
-   
-    
-x = 0
-read_from_point(x,3) # doesn't throw error if we try to read more than exists
-
+    return input_array, output_array
 
 
 
