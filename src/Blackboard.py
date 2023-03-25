@@ -11,6 +11,8 @@ from statistics import mean
 import shutil
 import copy
 import numpy as np
+import threading as th
+import concurrency_monitor
 
 # GLOBAL STATIC VARIABLES----------------------------
 required_performance_streak = 5
@@ -30,6 +32,17 @@ data = None
 #tuple of shape (model name, learner Obj)
 current_best = None
 current_error = None
+
+# def pred_worker(ui_event, monitor):
+#     while True:
+#         ui_event.wait()
+#         model = monitor.get_payload()
+
+
+# monitor = concurrency_monitor.ConcurrencyMonitor(None)
+# learner_event = th.Event()
+# UI_event = th.Event()
+# t = threading.Thread(target=)
 #----------------------------------------------------
 
 def setup(num_in, num_out):
@@ -98,10 +111,21 @@ def save_best_weights():
     current_best[1].get_model().save_weights(save_path)
 
 def is_best_present():
-    return os.path.exists(local_path, 'current_best', 'best_weights.h5')
+    return os.path.exists(os.path.join(local_path, 'current_best', 'best_weights.h5'))
 
 def get_current_best_path():
     return os.path.join(local_path, 'current_best', 'best_weights.h5')
+
+def get_best_model_from_valid_models():
+    name = get_best_model_name()
+    valid_models.active = valid_models.head.next
+    for i in range(0, valid_models.active_count):
+        if valid_models.active.data[0] == name:
+            best = valid_models.active 
+            valid_models.active = valid_models.head.next
+            return best
+        valid_models.next()
+    return None
 
 def main_loop():
     global valid_models, current_best, data, current_error
@@ -110,7 +134,23 @@ def main_loop():
         print("No valid models present!")
         return
     
-    #current_best = ##don't think we need to start by setting this 
+    if is_best_present():
+        best_learner_node = get_best_model_from_valid_models()
+        if best_learner_node:
+            learner = best_learner_node.data[1]
+            learner.setup()
+
+            data = fs.batched_read()
+            trimmed = [data[0][:learner.stack_pointer], data[1][:learner.stack_pointer]]
+            x = np.array(trimmed[0]).astype(np.float32, copy=False)
+            y = np.array(trimmed[1]).astype(np.float32, copy=False)
+
+            learner.run(len(trimmed[0]), x, y)
+            current_best = (best_learner_node.data[0], copy.copy(learner))
+            current_error = mean(learner.history.val_losses)
+            learner.model = None
+            save_best_weights()
+ 
     while not(stop_condition()):
         
         data_entries_required = find_smallest_data_requirement()
@@ -182,8 +222,8 @@ def main_loop():
                 if current_learner_name == current_best[0]:
                     i += 1
                     valid_models.next()
-                    
-                    update_learner_entries(current_best[0], data=[count, current_learner_obj.current_threshold, current_best[1].performance_count])
+                    ##keep stack pointer at the last succesful run on a learner
+                    update_learner_entries(current_best[0], data=[current_best[1].stack_pointer, current_learner_obj.current_threshold, current_best[1].performance_count])
                     if valid_models.active_count == 1: ## if we get worse when we have our last contender, leave
                         current_learner_obj.model = None
                         return
