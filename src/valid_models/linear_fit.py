@@ -1,9 +1,9 @@
-import learner_template
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 import gc
+import learner_template
 
 class LinearFit(learner_template.LearnerTemplate):
 
@@ -35,11 +35,14 @@ class LinearFit(learner_template.LearnerTemplate):
         if not(self.current_threshold):
             self.current_threshold = self.input_size
 
+    def increase_threshold(self):
+        self.current_threshold = min(self.current_threshold + 1, 10000)
+
     ##maybe this can be standardized across instances?
-    def update_graphs(self, history, epoch_num):
-        textstr = 'Training error=%.2f\nValidation error=%.2f\n'%(history.losses[-1], history.val_losses[-1])
-        plt.plot(history.losses)
-        plt.plot(history.val_losses)
+    def update_graphs(self, epoch_num):
+        textstr = 'Training error=%.2f\nValidation error=%.2f\n'%(self.history.losses[-1], self.history.val_losses[-1])
+        plt.plot(self.history.losses)
+        plt.plot(self.history.val_losses)
         plt.title('Model Loss Over ' + str(epoch_num) + ' Epochs With Early Stopping')
         plt.text(0.02, 0.5, textstr, fontsize=14, transform=plt.gcf().transFigure)
         plt.subplots_adjust(left=0.4)

@@ -36,6 +36,10 @@ class LearnerTemplate(ABC):
         pass
 
     @abstractmethod
+    def increase_threshold(self):
+        pass
+
+    @abstractmethod
     def update_graphs(self, history, epoch_num):
         pass
 
@@ -46,6 +50,9 @@ class LearnerTemplate(ABC):
     @abstractmethod
     def predict(self, new_X):
         pass
+
+    # def reset_history(self):
+    #     self.history = self.LossHistory()
 
     class LossHistory(tf.keras.callbacks.Callback):
         def on_train_begin(self, logs={}):
