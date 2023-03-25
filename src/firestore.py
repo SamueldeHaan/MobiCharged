@@ -6,7 +6,7 @@ import json
 
 # Use a service account.
 #DO NOT SHARE THE API KEY
-cred = credentials.Certificate('capstone-45462-firebase-adminsdk-zzso5-df5915dc4b.json')
+cred = credentials.Certificate('capstone-fc81e-firebase-adminsdk-ja8xd-369691754f.json')
 
 app = firebase_admin.initialize_app(cred)
 
@@ -67,21 +67,33 @@ def batched_read():
     output_array = {}
     temp_output = []
 
+    input = []
+    output = []
+
     for doc in docs:
         current_doc = doc.to_dict()
         #print(current_doc['Input'])
         if ('Input' in current_doc.keys()): 
             #THIS MAY REQUIRE FLOAT CASTING EACH VALUE
             temp_key = current_doc['ID']
-            temp_input = [(current_doc['Input'])]
-            temp_output = [(current_doc['Output'])]
+            temp_input = (current_doc['Input'])
+            temp_output = (current_doc['Output'])
+        
+
+
+            input.append(temp_input)
+            output.append(temp_output)
 
             input_array[temp_key] = temp_input
             output_array[temp_key] = temp_output
 
-            print(temp_key, input_array, output_array)
+            # print(temp_key, input_array, output_array)
+    print(input[0])
+    print(output[:5])
+    return [input, output]
 
-    return input_array, output_array
+print("test")
+batched_read()
 
 def read_from_point(ID,  numberOfReads):
     #read from firestore MATLAB_simulations collection, starting at startAfterDocument ID
@@ -102,14 +114,30 @@ def read_from_point(ID,  numberOfReads):
     temp_input = []
     output_array = {}
     temp_output = []
-    print(docs)
-    print(type(docs))
+
+    input = []
+    output = []
+
+    #print(docs)
+    #print(type(docs))
     for doc in docs:
-        print(u'{} => {}'.format(doc.id, doc.to_dict()))
-   
+        #print(u'{} => {}'.format(doc.id, doc.to_dict()))
+        current_doc = doc.to_dict()
+        #print(current_doc['Input'])
+        if ('Input' in current_doc.keys()): 
+            #THIS MAY REQUIRE FLOAT CASTING EACH VALUE
+            temp_key = current_doc['ID']
+            temp_input = (current_doc['Input'])
+            temp_output= (current_doc['Output'])
+
+            input.append(temp_input)
+            output.append(temp_output)
+            #print(temp_key, input_array, output_array)
+    return (input,output)
+
     
-x = 0
-read_from_point(x,3) # doesn't throw error if we try to read more than exists
+#x = 0
+#read_from_point(x,3) # doesn't throw error if we try to read more than exists
 
 
 
@@ -150,3 +178,9 @@ def read_ML_parameters(): ##used to read the ML_parameters from firestore (in ca
         print(u'No such document!')
 
 check_count()
+
+
+# def store_image(image):
+#     count = check_count()
+#     doc_id = 'image{}'.format(count)
+#     data = {'image':img_base64}

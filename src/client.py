@@ -3,30 +3,19 @@ import threading
 import input_queue as q
 import time
 import matlab.engine
-import json
-
-#import firestore
-import pickle
-import uuid 
-import firestore
 
 device_Name = socket.gethostname()
 device_IP = socket.gethostbyname(device_Name)
 authSucess = False
 
 soc = socket.socket()
-server_ADD = "192.168.1.108"
+server_ADD = "192.168.0.27"
 server_PORT = 5001
-
 
 try:
     eng = matlab.engine.start_matlab()
-    #Add check to make sure path works
-    path = eng.genpath('matlab')
-    if path == "":
-        newPath = input("Please Enter the Full Path of the Matlab Simulation File: ")
-        newPath.replace("\\", "\\\\")
-        path = eng.genpath(newPath)
+
+    path = eng.genpath('src')
     eng.addpath(path, nargout=0)
 
 except Exception as e:
@@ -53,45 +42,17 @@ def client_init():
 
 def data_sending():
     while True:
-        #Testing to see if system is idle for 10 minutes, then providing a notice
-        t0 = time.time()
-        while(q.isEmpty()):
-            t1 = time.time()
-            if((t1-t0) >= 600):
-                t0 = time.time()
-                print("\nQueue is currently empty, please provide optimization inputs: ")
-            pass
-        inputParams = q.remove()
+        input = q.remove()
+        if not(input):
+            time.sleep(5) ##this can be avoided with signals in the future
+            print('No inputs to work on!')
+            continue
         
-        #Temporarily set to inputParams[0] as the actual simulation file is not available yet
-        #Setting inputParams[0] is only passing 1 of the input values in the list. 
-        b = list(map(float,inputParams))
-        A= b[0]
-        B= b[1]
-        C= b[2]
-        D= b[3]
-        y = eng.unknown_poly_type(A,B,C,D, nargout=1) #output - hardcoded right now 
+        y = eng.sample_simulation1(int(input), nargout=1) #output - hardcoded right now 
         print('Optimal output:', y)
-        
-        #outputInputPair = str(inputParams) + "/" + str(y)
-
-        UID = uuid.uuid4()
         if y:
-            data = {
-                "UUID" : str(UID), #DOCUMENT WILL ONYL WRITE IF THIS IS A STRING
-                "Input" : inputParams, 
-                "Output" : y,
-            }
-
-            data_string = pickle.dumps(data) #i used pickle to send an array
-            soc.send(data_string)
-            #soc.send(outputInputPair.encode())
-
-        #if q.isEmpty():
-         #   time.sleep(5) ##this can be avoided with signals in the future
-            #print('\nNo inputs to work on!')
-          #  continue
-        inputParams = None
+            soc.send(str(y).encode())
+        input = None
 
     ##need to quit eng upon connection cancellation / program termination
     eng.quit()
@@ -100,7 +61,6 @@ def data_receiving():
     while True:
         data_received = soc.recv(1024).decode()
         if data_received:
-            print("Received New Input: ", data_received)
-            newInputReceived = json.loads(data_received)
-            q.add(newInputReceived)
+            q.add(data_received)
+            print("Received data: ", data_received)
         time.sleep(10)
