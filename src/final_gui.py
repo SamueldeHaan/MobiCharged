@@ -7,6 +7,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+import threading as th
+import concurrency_monitor
+
+monitor = None
 
 class App(tk.Frame):
     def __init__(self, master=None):
@@ -68,15 +72,13 @@ class App(tk.Frame):
 
         #Create a Treeview Widget to display saved inputs and corresponding ML Blackboard output |Input|Model|Prediction|
 
-        self.input_output_tree =  ttk.Treeview(column=("c1", "c2", "c3","c4"), show='headings', height=10)
+        self.input_output_tree =  ttk.Treeview(column=("c1", "c2", "c3"), show='headings', height=5)
         self.input_output_tree.column("# 1", anchor=CENTER)
         self.input_output_tree.heading("# 1", text="INPUT")
         self.input_output_tree.column("# 2", anchor=CENTER)
         self.input_output_tree.heading("# 2", text="MODEL")
         self.input_output_tree.column("# 3", anchor=CENTER)
         self.input_output_tree.heading("# 3", text="OUTPUT")
-        self.input_output_tree.column("# 4", anchor=CENTER)
-        self.input_output_tree.heading("# 4", text="ERROR")
 
         self.input_output_tree.pack()
 
@@ -142,15 +144,44 @@ class App(tk.Frame):
         print("Sending inputs:",inputs)
         #async function
 
+
         return 'Linear',3.02
         #Should return: model type, output
 
-    def display_inputs_outputs_tree(self):
-        ML_Model,ML_Prediction = self.call_tfpredict(self.inputs_list) ##CALL TF.PREDICT HERE
-        #Create a 2x2 Treeview |Best Performing Model|Accuracy| ~= |'CNN'|0.81|
-        
-        self.input_output_tree.insert('', 'end', text=input, values=(self.inputs_list, ML_Model,ML_Prediction))
 
+   #---------------
+    def worker_thread(request, response, monitor, in_event, out_event):
+        # retrieve the shared data object from the queue
+        while True:
+            in_event.wait()
+            in_event.unset()
+            #expecting [val,val,val,val]
+            value = monitor.get_payload()
+            response = (value[0], value[1].predict(request))
+            out_event.set()
+
+    global in_event, out_event, request, response
+    in_event = th.Event()
+    out_event = th.Event()
+    request = None
+    response = None
+    # create worker thread
+    thread = th.Thread(target=worker_thread, args=(request, response, monitor, in_event, out_event))
+    thread.start()
+    #---------------
+
+    def display_inputs_outputs_tree(self):
+        global in_event, out_event, request, response
+        request = self.inputs_list
+
+        in_event.set()
+        out_event.wait()
+        out_event.unset()
+
+        #for i, input in enumerate(self.inputs_list):
+        self.input_output_tree.insert('', 'end', text=input, values=(self.inputs_list, response[0], response[1]))
+
+ 
     def show_input_fields(self, *args):
         # Remove any existing input fields and the save button
         for input_field in self.input_fields:
@@ -170,9 +201,9 @@ class App(tk.Frame):
 
         self.save_button.pack()
 
-
-
-if __name__ == "__main__":
+def run(m):
+    global monitor
+    monitor = m
     root = tk.Tk()
     app = App(master=root)
     app.inputs_list = []

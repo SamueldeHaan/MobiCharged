@@ -11,8 +11,8 @@ from statistics import mean
 import shutil
 import copy
 import numpy as np
-import threading as th
 import concurrency_monitor
+import final_gui
 
 # GLOBAL STATIC VARIABLES----------------------------
 required_performance_streak = 5
@@ -39,7 +39,8 @@ current_error = None
 #         model = monitor.get_payload()
 
 
-# monitor = concurrency_monitor.ConcurrencyMonitor(None)
+monitor = concurrency_monitor.ConcurrencyMonitor(None)
+
 # learner_event = th.Event()
 # UI_event = th.Event()
 # t = threading.Thread(target=)
@@ -61,7 +62,7 @@ def setup(num_in, num_out):
             camel_case_class_name = file_name.title().replace('_', '')
             learner = getattr(lib, camel_case_class_name)
             if issubclass(learner, learner_template.LearnerTemplate):
-                    model_classes.append((file_name, learner))
+                model_classes.append((file_name, learner))
             else:
                 print('The file ' + file_name + '.py is not a valid learner module and will be ignored')
         except Exception as e:
@@ -129,6 +130,7 @@ def get_best_model_from_valid_models():
 
 def main_loop():
     global valid_models, current_best, data, current_error
+    final_gui.run()
 
     if valid_models.active_count == 0:
         print("No valid models present!")
@@ -139,6 +141,7 @@ def main_loop():
         if best_learner_node:
             learner = best_learner_node.data[1]
             learner.setup()
+            learner.model.load_weights(get_current_best_path())
 
             data = fs.batched_read()
             trimmed = [data[0][:learner.stack_pointer], data[1][:learner.stack_pointer]]
@@ -149,7 +152,7 @@ def main_loop():
             current_best = (best_learner_node.data[0], copy.copy(learner))
             current_error = mean(learner.history.val_losses)
             learner.model = None
-            save_best_weights()
+            monitor.set_payload(current_best)
  
     while not(stop_condition()):
         
@@ -192,6 +195,7 @@ def main_loop():
                 update_learner_entries(current_learner_name, data=[count, current_learner_obj.current_threshold, 0])
                 valid_models.next()
                 save_best_weights()
+                monitor.set_payload(current_best)
                 i += 1
 
             ##we're doing some unnecessary work here
@@ -216,6 +220,7 @@ def main_loop():
                 current_error = performance
                 valid_models.next()
                 save_best_weights()
+                monitor.set_payload(current_best)
                 i += 1
 
             else:
