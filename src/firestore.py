@@ -1,12 +1,12 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-
+import os
 import json
 
 # Use a service account.
 #DO NOT SHARE THE API KEY
-cred = credentials.Certificate('capstone-45462-firebase-adminsdk-zzso5-df5915dc4b.json')
+cred = credentials.Certificate(os.path.join('src', 'capstone-45462-firebase-adminsdk-zzso5-df5915dc4b.json'))
 
 app = firebase_admin.initialize_app(cred)
 
@@ -67,6 +67,9 @@ def batched_read():
     output_array = {}
     temp_output = []
 
+    input = []
+    output = []
+
     for doc in docs:
         current_doc = doc.to_dict()
         #print(current_doc['Input'])
@@ -76,12 +79,15 @@ def batched_read():
             temp_input = [(current_doc['Input'])]
             temp_output = [(current_doc['Output'])]
 
-            input_array[temp_key] = temp_input
-            output_array[temp_key] = temp_output
+            input.append(temp_input)
+            output.append(temp_output)
 
-            print(temp_key, input_array, output_array)
+            # input_array[temp_key] = temp_input
+            # output_array[temp_key] = temp_output
 
-    return input_array, output_array
+            # print(temp_key, input_array, output_array)
+
+    return input, output
 
 def read_from_point(ID,  numberOfReads):
     #read from firestore MATLAB_simulations collection, starting at startAfterDocument ID
