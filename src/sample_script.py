@@ -25,4 +25,4 @@ while pred != "Quit":
     
     print(learner_obj.predict(pred_input))
     
-    input = input()
+    pred = input()
