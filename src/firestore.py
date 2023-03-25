@@ -32,8 +32,14 @@ statsRef = db.collection(u'MATLAB_Simulations').document(u'count') #initalize si
 def write_data(data):
     #Select the collection 'Models' and add a new document with ID: record['Model']
     #data['Simulation'] parameter MUST BE A STRING IN ORDER TO BE WRITTEN
-    doc_ref = db.collection(u'MATLAB_Simulations').document(data['ID']) #store a new document with the name of model
+    print("1")
+    #.DOCUMENT(THIS MUST BE A STRING)
+    doc_ref = db.collection(u'MATLAB_Simulations').document(str(data['ID'])) #store a new document with the name of model
+    print("2")
     doc_ref.set(data)
+    print("3")
+    #want to label each document w.r.t simulationsCount
+
     batch.update(statsRef, {u'simulationsCount': increment}) #increment the counter of how many simulations have been stored
     batch.commit()
 
@@ -76,6 +82,35 @@ def batched_read():
             print(temp_key, input_array, output_array)
 
     return input_array, output_array
+
+def read_from_point(ID,  numberOfReads):
+    #read from firestore MATLAB_simulations collection, starting at startAfterDocument ID
+    #reads numberOfReads number of documents after that
+    #outputs 2 dictionaries: input, output with key as each corresponding simulation ID (count)
+
+    startAfterDocument={
+        u'ID': ID
+    }
+
+    docs = db.collection(u'MATLAB_Simulations').order_by('ID')\
+                        .start_after(startAfterDocument)\
+                        .limit(numberOfReads)\
+                        .stream()
+    #.start_after(startAfterDocument)\
+
+    input_array = {}
+    temp_input = []
+    output_array = {}
+    temp_output = []
+    print(docs)
+    print(type(docs))
+    for doc in docs:
+        print(u'{} => {}'.format(doc.id, doc.to_dict()))
+   
+    
+x = 0
+read_from_point(x,3) # doesn't throw error if we try to read more than exists
+
 
 
 
