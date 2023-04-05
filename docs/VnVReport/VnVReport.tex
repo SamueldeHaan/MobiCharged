@@ -39,7 +39,7 @@
 }
     
 
-\date{November 2nd, 2022}
+\date{March 15th, 2023}
 
 
 \maketitle
@@ -66,9 +66,13 @@
     \hline
     All & March 8th, 2023 & Rev 0 & Created first draft of document\\
     \hline
-    Mustafa Choueib & March 9th, 2023 & Rev 1 & Fixed formatting issues, revised tex document, and made grammatical corrections\\
+    Mustafa & March 9th, 2023 & Rev 1 & Fixed formatting issues, revised tex document, and made grammatical corrections\\
     \hline
-    Mustafa Choueib & March 15th, 2023 & Rev 1 & Updated Non-Functional Requirements naming convention (as changed in SRS)\\
+    Mustafa & March 15th, 2023 & Rev 1 & Updated Non-Functional Requirements naming convention (as changed in SRS)\\
+    \hline
+    Nashit & April 03rd, 2023 & Rev 1 & Corrected spelling and grammatical errors along with sentence structure mistakes\\
+    \hline
+    Nashit & April 03rd, 2023 & Rev 1 & Added table 4 reflecting newly created survey along with results\\
     \hline
     \end{tabular}
 \end{table}
@@ -118,28 +122,28 @@ MAX-CHARGE-TIME & The maximum allowed time required to remotely charge a target 
 \end{table}
 
 \section{Objective}
-The objective in this document is to establish a validate \& verify of certain aspects of the system that correlate with the successful completion of satisfying requirements as well as ensuring the system is built as per intentions. The key objective with this document is to build confidence in the outputs produced by the Mobicharged system as well as establish confirmation of ease of navigation for our users when using the system. A selected key objective that should not be ignored is the aim to not only output application variables that will work successfully for the application, but to specifically output the most optimized solution.
+The objective in this document is to validate \& verify certain aspects of the system that correlate with the successful completion of satisfying requirements as well as ensuring the system is built as per intentions. The key objective with this document is to build confidence in the outputs produced by the Mobicharged system as well as establish confirmation of ease regarding navigation for our users when using the system. A selected key objective that should not be ignored is the aim to not only output application variables that will work successfully for the application, but to specifically output the most optimized solution.
 
 \section{Functional Requirements Evaluation}
-To ensure the system satisfies what it was intended to do, it was verified in relation to the SRS document; in particular section 9, \emph{Functional Architecture}. In conjunction, the plan outlined in the V\&V Plan document section 4, \emph{System Test Description}, was used to guide testing. Evaluation of the functional requirements can be found in Section 5. Tests were run to determine successful completion of requirements. 
+To ensure the system satisfies what it is intended to do, verification in relation to the SRS document; in particular section 9, \emph{Functional Architecture}, was conducted. In conjunction, the plan outlined in the V\&V Plan document section 4, \emph{System Test Description}, was used to guide testing. Evaluation of the functional requirements can be found in \hyperlink{Section5Anchor}{Section 7}. Tests were run to determine successful completion of requirements. 
 
 \begin{center}
     \begin{itemize}
         \item \textbf{SR1: ML Model must optimize inputs faster than the existing process}
         \item \textbf{SR2: ML Model must be able to develop "new" simulations based on previous optimal models}
         \item \textbf{SR3: ML Model must be able to encrypt optimized data before exporting}
-        \item \textbf{SR4: The software system must determine and output optimized and correct solution}
+        \item \textbf{SR4: The software system must determine and output the optimized \& correct solutions}
         \item \textbf{SR5: ML Model must be able to process incoming simulation data from multiple source devices}
         \item \textbf{SR6: ML Model must be able to interpret data exported directly from MATLAB simulations}
-        \item \textbf{HR1: The system must be able to use Phased-Wave interference to produce a visual output}
-        \item \textbf{HR2: The system must be able to provide data to an external system}
+        \item \textbf{HR1: The system must be able to simulate a remote charging device by levitating a particle in an air medium within the hardware capsule for at least 5 minutes.}
+        \item \textbf{HR2: The system must be able to levitate the particles for simulation purposes within 15 seconds.}
     \end{itemize}
 \end{center}
 
 \section{Non-Functional Requirements Evaluation}
 In the same vein as the functional requirement evaluation, it was verified in relation to the SRS document; in particular to section 9, \emph{Functional Architecture}. In conjunction, the plan outlined in the V\&V Plan document section 4, \emph{System Test Description}, was used to guide testing.
 \par
-In certain cases where the non-functional requirements pertains to a non-quantifiable attribute, testing was not applicable (i.e, APR1). In these cases, group, supervisor, and peer feedback were taken in a casual constructive form.
+In certain cases where the non-functional requirements pertain to a non-quantifiable attribute, testing was not applicable. In these cases, group, supervisor, and peer feedback were taken in a casual constructive form and/or through the means of a survey.
 
 \begin{center}
     \begin{itemize}
@@ -166,10 +170,12 @@ In certain cases where the non-functional requirements pertains to a non-quantif
 \subsection{Software System}
 The purpose of the software system, MobiCharged, is a machine learning algorithm that will be used by Mobilite-Power, engineering consultant groups, general contractors, and building maintenance teams to optimize the design process required to effectively and efficiently produce the most viable remote charging system. In doing so, this will negate the current process of manually conducting simulations (that requires lengthy computerized numerical calculations), ultimately minimizing cost, manual labour, and the time necessary to produce the required results.
 \par
-This system will provide users with the optimal configuration of a remote charging device based on the desired output, encrypt data protecting users when producing design results, and use data smoothing to ensure the accuracy of the system in a time efficient manner.
+This system will provide users with the optimal configuration of a remote charging device based on the desired output, encrypt data which will be protecting users when producing design results, and use data smoothing to ensure the accuracy of the system in a time efficient manner.
 
 \subsection{Hardware System}
 The purpose of the hardware system is to root our algorithms optimization in the real world environment. The production of a physical model will assist in determination of the absolute boundaries that can be fed into the machine learning algorithm. Variable parameter ranges will be derived from the physical model to determine the magnitude to which the boundaries can be pushed within the simulation. The physical system provides a secondary purpose in the form of data collection and verification. In order to increase the breadth of data that we can feed into the algorithm, we must determine the degree of computational error within the simulation results. A physical model will aid in determining this range and lead to further optimization through the machine learning algorithm.
+
+\hypertarget{Section5Anchor}{}
 
 \section{Test Cases}
 \subsection{Hardware Test Cases}
@@ -180,10 +186,32 @@ The purpose of the hardware system is to root our algorithms optimization in the
  \hline
 \bf Test Number & \bf Description & \bf Requirement Reference & \bf Modules Referenced & \bf Inputs & \bf Expected Outputs & \bf Actual Outputs & \bf Results\\
  \hline
- 1. & Hardware visual effectiveness test & HR1 & HW Power Supply, HW Microcontroller, HW Transducer Circuitry & Styrofoam ball & Levitation of object & Levitation of object & Pass\\
+ 1. & Timed particle levitation test & HR1 & HW Power Supply, HW Microcontroller, HW Transducer Circuitry & Styrofoam ball & Levitation of object for 5 minutes & Levitation of object for 5 minutes & Pass\\
  \hline
- 2. & Hardware visual effectiveness test & HR1 & HW Power Supply, HW Microcontroller, HW Transducer Circuitry & Plastic ball & Levitation of object & No levitation of object  & Fail\\
+ 2. & Time product start-up test. & HR2 & HW Power Supply, HW Microcontroller, HW Transducer Circuitry & Plastic ball & Levitation of object within 15 seconds & Levitation of object did not occur and required human intervention& Fail\\
  \hline
+ 3. & Failure safe system & NFR10 & HW Power Supply, HW Microcontroller, HW Transducer Circuitry, HW Capsule & Power supply overload & System shuts off with no damage & System shuts off with no damage & Pass\\
+ \hline 
+ 4. & Robustness in power & NFR14 & HW Power Supply, HW Microcontroller, HW Transducer Circuitry & Power supply - 15 V & Continuous operation & Continuous operation & Pass\\
+ \hline 
+\end{tabular}
+\end{table}
+
+Along with table 3 above which display hard test cases for the hardware, surveys were conducted for the non-functional requirements that are not quantifiable but rather based on user reviews. Table 4 below illustrates the questions within the surveys and the following averaged results. The survey was conducted by the internal V\&V team stepping in as client users, the supervisor and a select few colleagues who had been familiarized with the project.\\
+
+\newpage
+\begin{table}[H]
+\caption{\bf Hardware Surveyed Tests \& Results}
+\begin{tabular}{ |p{1cm}|p{2.2cm}|p{2.5cm}|p{2.4cm}|p{2cm}|p{2cm}| }
+\hline
+\bf Test Number & \bf Description & \bf Requirement Reference & \bf Question & \bf Output Type & \bf Averaged Result\\
+\hline
+1. & Neatly packaged hardware for safety & NFR1 & How safe does the hardware appear? & Scale of 1-10 & 5\\
+\hline
+2. & Hardware system aesthetic & NFR1 & How aesthetic does the hardware appear? & Scale of 1-10 & 5.4\\
+\hline
+3. & Learning Ability & NFR8 & How easy is it to use the hardware system? & Scale of 1-10 & 7.25\\
+\hline 
 \end{tabular}
 \end{table}
 
@@ -197,7 +225,7 @@ The purpose of the hardware system is to root our algorithms optimization in the
 \hline
  Server-Side Application & The main reason for testing the server-side application is to ensure that the server is launching correctly, allowing/accepting access given the connection is authorized, receiving input/output pairs from the client, communicating and transferring data to the database, generating new random input to send back to the client autonomously, and storing data to a local database that is kept until a data transfer is initiated. Aspects of the application that exhibit the same or similar functionality were grouped and tested. For example, initialization of the server was tested as a group. In addition to this, groups were tested sequentially in the order they would typically execute.\\
 \hline
-Client-Side Application & The main reason for testing the client-side application is to ensure that a client is able to calculate simulation results, connect to the server, and transmit and receive data to and from the server. Thus, the majority of testing is done to ensure correctness and reliability of the client-side application to ensure that it is operating as intended. The way the client-side application was tested is similar to the testing plan of the server-sided application. Different functions within this application were grouped and tested sequentially based on the order they would normally execute. The testing consisted mainly of testing the communication between the client and server, and ensuring the expected data being transferred and received was correct.\\
+Client-Side Application & The main reason for testing the client-side application is to ensure that a client is able to calculate simulation results, connect to the server, and transmit/receive data to and from the server. Thus, the majority of testing is done to ensure correctness and reliability of the client-side application to ensure that it is operating as intended. The way the client-side application was tested is similar to the testing plan of the server-sided application. Different functions within this application were grouped and tested sequentially based on the order they would normally execute. The testing consisted mainly of testing the communication between the client and server, and ensuring the expected data being transferred and received was correct.\\
 \hline
 Server Initializer Application & The main reason for testing the server initializer is to ensure that the server will never start up with broken or incorrect configurations. This application is basically testing input types and ensuring that all the values passed in are parsed correctly and are the expected types.\\
 \hline
@@ -242,7 +270,7 @@ Server Initializer Application & The main reason for testing the server initiali
 \begin{center}
     \begin{table}[H]
         \centering
-        \begin{tabular}{|p{1cm}|p{2.2cm}|p{2.5cm}|p{2.6cm}|p{2.5cm}|p{2.5cm}|p{1.3cm}|}
+        \begin{tabular}{|p{1cm}|p{2.2cm}|p{2.3cm}|p{2.3cm}|p{2.6cm}|p{2.6cm}|p{1.2 cm}|}
         \hline
         \bf Test Number & \bf Description & \bf Requirement Reference & \bf Inputs & \bf Expected Outputs & \bf Actual Outputs & \bf Results \\
         \hline
@@ -603,7 +631,7 @@ During testing, it was discovered that there is a major security flaw within the
 Previously, the Firestore database was configured to allow any user with the API key to read/write to the database. However, this was recognized to be a major security flaw and Firestore Authentication SDK was implemented to fix this. This SDK provides methods to allow users to sign in using email addresses and passwords. This user management is then used to determine which users are granted read/write permissions.
 
 \subsection{Machine Learning Blackboard}
-From the latency issues found in the predictive stream, and the cluttered messaging seen in the terminal, we found that proceeding with the development of a simple front-end system, to improve the user's ability to oversee the process of the learner, would be necessary to achieve a wholly useful project. This requirement was listed in our initial SRS (APR1), but its importance was eclipsed at the time by other services that required development. This could also help in thread management and notify updates to the predictive model, and allow the user to see progress without manually opening the saved graphical models.
+From the latency issues found in the predictive stream, and the cluttered messaging seen in the terminal, we found that proceeding with the development of a simple front-end system, to improve the user's ability to oversee the process of the learner, would be necessary to achieve a wholly useful project. This requirement was listed in our initial SRS, but its importance was eclipsed at the time by other services that required development. This could also help in thread management and notify updates to the predictive model, and allow the user to see progress without manually opening the saved graphical models.
 
 
 
