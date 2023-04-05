@@ -12,20 +12,16 @@ import shutil
 import copy
 import numpy as np
 import concurrency_monitor
-
-
-import queue_module
-
+import final_gui
 
 # GLOBAL STATIC VARIABLES----------------------------
-required_performance_streak = 5
-required_streak_to_prune = 30
+required_performance_streak = 30
+required_streak_to_prune = 5
 ping_frequency_in_seconds = 15
 #----------------------------------------------------
 
 # GLOBAL DYNAMIC VARIABLES---------------------------
-#local_path = os.path.join('src')
-local_path = ''
+local_path = os.path.join('src')
 
 #list of tuples of shape (model name, learner Obj)
 valid_models = None
@@ -57,9 +53,7 @@ def setup(num_in, num_out):
     input_num = num_in
     output_num = num_out
 
-
     target_dir = os.path.join(os.getcwd(), local_path,'valid_models')
-    print(target_dir)
     python_files = [file[:-3] for file in os.listdir(target_dir) if file.endswith('.py')]
 
     for file_name in python_files:
@@ -113,37 +107,10 @@ def is_model_valid_learner(model_name, constructor, stack_pointer, current_thres
     except TypeError:
         print('The model ' + model_name + ' does not comply with the standard machine learner template, and will not be executed.')
         return False, None
-        
-###TESTING OVERWRITING WHEN SAVING MODEL, WE WANT TO SAVE THE BEST MODEL BASED ON MEAN PERFORMANCE
-def save_best_weights(current_error):
+    
+def save_best_weights():
     save_path = get_current_best_path()
-    current_error_path = os.path.join(os.getcwd(),'current_best','current_error.txt')
-
-    #compare the previous current_error's and oly overwrite if it is better
-
-    #current_error.txt doesn't exist, create one and save model
-    if not os.path.exists(current_error_path):
-        ### ERIC: Adding this so we can compare previous and current model's "current_error" to allow overwriting
-        with open('current_best/current_error.txt','w') as f:
-            f.write(str(current_error))
-        current_best[1].get_model().save_weights(save_path, overwrite = True)
-        current_best[1].model.save(os.path.join(os.getcwd(),'current_best','model'), overwrite = True) 
-        print("Saving: No model previously existed")
-    #current_error.txt does exist, compare the previously saved model's current_error and this the current model's current_error
-    #If current model error is less, overwrite the previous, else: do not save
-    else:
-        with open(current_error_path,'r') as f:
-            previous_error = float(f.readlines()[0])
-            print('previous_error=',previous_error)
-            print('current error= ',current_error)
-            if current_error<previous_error:
-                with open(current_error_path,'w') as f:
-                    f.write(str(current_error))
-                current_best[1].get_model().save_weights(save_path, overwrite = True)
-                current_best[1].model.save(os.path.join(os.getcwd(),'current_best','model'), overwrite = True) 
-                print("Saving: Current val losses is less than previous best model")
-            else:
-                print("Not saving: Current val losses is not less than previous best model")
+    current_best[1].get_model().save_weights(save_path)
 
 def is_best_present():
     return os.path.exists(os.path.join(local_path, 'current_best', 'best_weights.h5'))
@@ -154,7 +121,7 @@ def get_current_best_path():
 def get_best_model_from_valid_models():
     name = get_best_model_name()
     valid_models.active = valid_models.head.next
-    for i in range(0, valid_models.active_count):  
+    for i in range(0, valid_models.active_count):
         if valid_models.active.data[0] == name:
             best = valid_models.active 
             valid_models.active = valid_models.head.next
@@ -178,9 +145,6 @@ def main_loop():
             learner.model.load_weights(get_current_best_path())
 
             data = fs.batched_read()
-            #### TESTING
-            #firestore_read_size = len(data) ## this returns 128 fyi
-
             trimmed = [data[0][:learner.stack_pointer], data[1][:learner.stack_pointer]]
             x = np.array(trimmed[0]).astype(np.float32, copy=False)
             y = np.array(trimmed[1]).astype(np.float32, copy=False)
@@ -201,7 +165,6 @@ def main_loop():
 
         i = 1     
         data = fs.batched_read() ## sync with eric for reading from most recent spot - current_model.stack_pointer 
-        firestore_read_size = len(data)
         print('\n Length of data is: ' + str(len(data[0])))
 
         x = np.array(data[0]).astype(np.float32, copy=False)
@@ -213,30 +176,19 @@ def main_loop():
                 valid_models.next()
             current_learner_obj = valid_models.active.data[1]
             current_learner_name = valid_models.active.data[0] ## sync with eric - need to share with frontend
-            print("CURRENT MODEL BEING TRAINED: ", current_learner_name)
+
             if not(current_learner_obj.setup()):
                 print("Tensorflow error encountered. Make sure all dependencies are up to date.")
                 return 
             
             current_learner_obj.run(count, x, y)
-####EAMON: CHECK OUT THIS HISTORY
             performance = mean(current_learner_obj.history.val_losses)
         ## sync with eric - send this mean to him and / or the DB
-
-# #################ERIC ADDED THIS TEST
-#             print("TESTING: PERFORMANCE = ****history of val_losses", performance)
-#             print("TEST1",current_error)
 
         ## update object with new stack_pointer and performance stat (after comparing to current best)
         ## then update json file with these values, including new threshold, and update max weights as necessary
             current_learner_obj.increase_threshold()
             current_learner_obj.stack_pointer = count
-
-
-######## ERIC testing saving overriting abilities
-            #save_best_weights(current_error,current_learner_name)
-            
-
 
             if current_best == None:
                 current_best = (current_learner_name, copy.copy(current_learner_obj))
@@ -244,11 +196,7 @@ def main_loop():
 
                 update_learner_entries(current_learner_name, data=[count, current_learner_obj.current_threshold, 0])
                 valid_models.next()
-                #save_best_weights()
-
-                save_best_weights(current_error)
-
-
+                save_best_weights()
                 monitor.set_payload([current_best[0], current_best[1], current_error])
                 i += 1
 
@@ -271,18 +219,11 @@ def main_loop():
 
                 current_error = performance
                 valid_models.next()
-                ###testing 
-                print("SAVING FROM ELIF")
-                save_best_weights(current_error)
-                #save_best_weights(current_error)
-                #save_best_weights(performance)
+                save_best_weights()
                 monitor.set_payload([current_best[0], current_best[1], current_error])
                 i += 1
 
             else:
-                #### TESTING: ERIC ADDED TO TEST OVERWRITING
-                #save_best_weights(performance)
-
                 if current_learner_name == current_best[0]:
                     i += 1
                     valid_models.next()
@@ -303,12 +244,10 @@ def main_loop():
                     update_learner_entries(current_best[0], data=[current_best[1].stack_pointer, current_best[1].current_threshold, current_best[1].performance_count])
                     
             current_learner_obj.model = None
-    
             current_best[1].update_graphs(count)
             update_best_learner_file()
             best_log.append(current_best[1])
             # final_gui.root.update()
-        
 
 def prune(name):
     source_path = os.path.join(local_path, 'valid_models', name + '.py')
@@ -359,10 +298,8 @@ def get_best_model_name():
 
 def set_best_model_name(name):
     source_path = os.path.join(local_path, 'current_best', 'best.txt')
-    #add model name to queue so we can update the image
     with open(source_path, 'w') as file:
         file.write(name)
-
 
 
 # print(get_best_model_name())
@@ -378,16 +315,5 @@ def set_best_model_name(name):
 
 # prune('linear_fit')
 
-def run():
-    setup(4,1)
-    main_loop()
-### ERIC: Add best performing model name to queue at end of main loop
-    print("MAIN LOOP FINISHED, BEST MODEL NAME ={}".format(str(current_best[0])))
-    print("If no training was performed, please ensure that there is more than 1 model in src/valid_models")
-    queue_module.add_item(str(current_best[0]))
-
-#run()
-#print(firestore_read_size)
-#print(len((fs.batched_read())[0]))
-#print(((fs.batched_read())[0]))
-#print(count)#
+setup(4,1)
+main_loop()

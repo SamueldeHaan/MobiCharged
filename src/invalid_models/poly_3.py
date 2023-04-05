@@ -5,7 +5,7 @@ import os
 import gc
 import learner_template
 
-class LinearFit(learner_template.LearnerTemplate):
+class Poly3(learner_template.LearnerTemplate):
 
     def get_model(self):
         return self.model
@@ -17,7 +17,9 @@ class LinearFit(learner_template.LearnerTemplate):
     def setup(self):
         try: 
             self.model = tf.keras.Sequential()
-            self.model.add(tf.keras.layers.Dense(1, input_shape=(self.input_size,), kernel_regularizer=tf.keras.regularizers.l2(0.01)))
+            self.model.add(tf.keras.layers.Dense(10, input_shape=(self.input_size,), activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
+            self.model.add(tf.keras.layers.Dense(10, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
+            self.model.add(tf.keras.layers.Dense(1, activation='linear', kernel_regularizer=tf.keras.regularizers.l2(0.01)))
 
             #Least squares
             def custom_loss(y_true, y_pred):

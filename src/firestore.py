@@ -6,7 +6,7 @@ import json
 
 # Use a service account.
 #DO NOT SHARE THE API KEY
-cred = credentials.Certificate('src\capstone-fc81e-firebase-adminsdk-ja8xd-369691754f.json')
+cred = credentials.Certificate('capstone-fc81e-firebase-adminsdk-ja8xd-369691754f.json')
 
 app = firebase_admin.initialize_app(cred)
 
@@ -51,6 +51,7 @@ def check_count():
         count = 0 
     return count
 
+
 def batched_read(): 
     #read from firestore MATLAB_simulations collection,
     #outputs 2 dictionaries: input, output with key as each corresponding simulation ID (count)
@@ -77,6 +78,45 @@ def batched_read():
 
     return temp_input, temp_output
 
+def read_from_point(ID,  numberOfReads):
+    #read from firestore MATLAB_simulations collection, starting at startAfterDocument ID
+    #reads numberOfReads number of documents after that
+    #outputs 2 dictionaries: input, output with key as each corresponding simulation ID (count)
+
+    startAfterDocument={
+        u'ID': ID
+    }
+
+    docs = db.collection(u'MATLAB_Simulations').order_by('ID')\
+                        .start_after(startAfterDocument)\
+                        .limit(numberOfReads)\
+                        .stream()
+    #.start_after(startAfterDocument)\
+
+    input_array = {}
+    temp_input = []
+    output_array = {}
+    temp_output = []
+
+    input = []
+    output = []
+
+    #print(docs)
+    #print(type(docs))
+    for doc in docs:
+        #print(u'{} => {}'.format(doc.id, doc.to_dict()))
+        current_doc = doc.to_dict()
+        #print(current_doc['Input'])
+        if ('Input' in current_doc.keys()): 
+            #THIS MAY REQUIRE FLOAT CASTING EACH VALUE
+            temp_key = current_doc['ID']
+            temp_input = (current_doc['Input'])
+            temp_output= (current_doc['Output'])
+
+            input.append(temp_input)
+            output.append(temp_output)
+            #print(temp_key, input_array, output_array)
+    return (input,output)
 
 
 def write_ML_parameters(): ##this will be in ML blackboard
@@ -114,4 +154,4 @@ def read_ML_parameters(): ##used to read the ML_parameters from firestore (in ca
     else:
         print(u'No such document!')
 
-check_count()
+#check_count()
