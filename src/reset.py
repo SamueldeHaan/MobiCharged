@@ -4,7 +4,7 @@ import shutil
 
 
 confirm = str(input("Do you wish to reset the current best model. The discovered weights will be deleted and all models deemed invalid will regain their validity. Input Y to confirm, anything else to return"))
-if confirm == "Y":
+if confirm != "Y":
     pass
 
 else:
