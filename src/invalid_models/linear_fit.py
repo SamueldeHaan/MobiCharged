@@ -1,5 +1,7 @@
 import tensorflow as tf
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 import gc
@@ -51,7 +53,7 @@ class LinearFit(learner_template.LearnerTemplate):
         plt.legend(['Train', 'Validation'], loc='upper right')
         #plt.savefig( os.path.basename(__file__).split('.')[0] + '.png')
         image_name = (os.path.basename(__file__).split('.')[0] + '.png')
-        plt.savefig(os.path.join('matlab_images',image_name),overwrite = True)
+        plt.savefig(os.path.join('src', 'matlab_images',image_name),overwrite = True)
         plt.close()
 
     ##need this to just empty the model and its weights instead and the Losshistory instead
@@ -63,3 +65,13 @@ class LinearFit(learner_template.LearnerTemplate):
         new_X = np.array([new_X])
         predictions = self.model.predict(new_X)
         return predictions
+    
+    
+# x = np.array([[1,2,3,4], [2,3,4,5], [3,4,5,6]]).astype(np.float32, copy=False)
+# y = np.array([[1], [2] , [3]]).astype(np.float32, copy=False)
+# l = LinearFit(0,0,1,2,3)
+# l.setup()
+# l.run(3, x , y)
+# print(l.history)
+# l.reset_history()
+# print(l.history)

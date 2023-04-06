@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import tensorflow as tf
+from constants import local_path
 # import re
 
 class LearnerTemplate(ABC): 
@@ -13,6 +14,7 @@ class LearnerTemplate(ABC):
         self.history = self.LossHistory()
         # self.minimum_data = None
         self.set_minimum_threshold()
+        self.local_path = local_path
 
     @abstractmethod
     def get_model(self):
@@ -51,8 +53,8 @@ class LearnerTemplate(ABC):
     def predict(self, new_X):
         pass
 
-    # def reset_history(self):
-    #     self.history = self.LossHistory()
+    def reset_history(self):
+        self.history = self.LossHistory()
 
     class LossHistory(tf.keras.callbacks.Callback):
         def on_train_begin(self, logs={}):

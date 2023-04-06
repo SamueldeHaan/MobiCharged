@@ -1,5 +1,7 @@
 import tensorflow as tf
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 import gc
@@ -53,7 +55,7 @@ class Poly3(learner_template.LearnerTemplate):
         plt.legend(['Train', 'Validation'], loc='upper right')
         #plt.savefig( os.path.basename(__file__).split('.')[0] + '.png')
         image_name = (os.path.basename(__file__).split('.')[0] + '.png')
-        plt.savefig(os.path.join('matlab_images',image_name),overwrite = True)
+        plt.savefig(os.path.join('src', 'matlab_images',image_name),overwrite = True)
         plt.close()
 
     ##need this to just empty the model and its weights instead and the Losshistory instead

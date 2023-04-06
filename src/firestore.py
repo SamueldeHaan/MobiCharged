@@ -1,12 +1,11 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-
+import os
 import json
 
 # Use a service account.
-#DO NOT SHARE THE API KEY
-cred = credentials.Certificate('capstone-fc81e-firebase-adminsdk-ja8xd-369691754f.json')
+cred = credentials.Certificate(os.path.join('src', 'capstone-fc81e-firebase-adminsdk-ja8xd-369691754f.json'))
 
 app = firebase_admin.initialize_app(cred)
 

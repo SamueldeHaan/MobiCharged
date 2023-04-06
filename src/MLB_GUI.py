@@ -23,7 +23,12 @@ import matlab_calculate
 class MyGUI:
     def __init__(self, master):
         self.master = master
-        self.master.geometry("1000x900")
+        screen_width = self.master.winfo_screenwidth()
+        screen_height = self.master.winfo_screenheight()
+        self.master.geometry(f"{screen_width}x{screen_height}")
+        self.master.resizable(True, True)
+
+        # self.master.geometry("1000x900")
         self.master.title("Input Form")
 
         self.train_count = 0
@@ -41,6 +46,9 @@ class MyGUI:
         self.option_menu = tk.OptionMenu(self.master, self.selected_option, *self.options.keys(), command=self.show_input_fields)
         self.option_menu.pack()
 
+        # Eventually - make two columns for inputs and graph
+        # self.grid_frame = tk.Frame(master)
+        
         # Create the input fields and save button, save_button is .packed() in show_input_fields(); user must select an option first
         self.input_fields = []
         self.save_button = tk.Button(self.master, text="Send to Model", command=self.save_inputs)
@@ -97,9 +105,11 @@ class MyGUI:
 
         #Display image of model training process
         self.image_label = tk.Label(master , text = "Current Best Model:")
+        # placeholder_image = tk.PhotoImage(width=250, height=250)
+        # self.image_label.configure(text = "",image = placeholder_image,compound = "bottom")
+        # self.image_label.image = placeholder_image
         self.image_label.pack()
-
-
+        
         # start a timer to update the image periodically
         self.update_image()
 
@@ -112,11 +122,13 @@ class MyGUI:
             print(model_name)
             if model_name is not None: 
                 #additional bug-prevention = check for type of variable, or if file name belongs to list of possible model types
-                
+                screen_width = self.master.winfo_screenwidth()
+                screen_height = self.master.winfo_screenheight()
+        
                 print("MODEL NAME IS NOT NONE, UPDATE IMAGE:",model_name)
-                filepath = os.path.join(os.getcwd(),'matlab_images',model_name+'.png')
+                filepath = os.path.join(os.getcwd(), 'src','matlab_images',model_name+'.png')
                 new_image = Image.open(filepath) #THIS NEEDS TO BE DYNAMIC
-                resized_image = new_image.resize((250,250))
+                resized_image = new_image.resize((int(screen_width / 5), int(screen_height / 6)))
                 #Open the PIL image as an ImageTk.PhotoImage object to be inserted into Tkinter widget
                 tk_image = ImageTk.PhotoImage(resized_image)
 
@@ -124,7 +136,8 @@ class MyGUI:
                 #note: compound takes second parameter (image) and places it 'bottom' relative to first parameter (text)
                 self.image_label.configure(text = "Current Best Model: {}".format(model_name),image = tk_image,compound = "bottom")
                 self.image_label.image = tk_image
-        except Exception:
+        except Exception as e:
+            # print("Printed Exception" + str(e))
             pass
         self.master.after(1000, self.update_image)
 
@@ -178,6 +191,7 @@ class MyGUI:
         # Append the inputs to the list and clear the input fields
         #self.inputs_list.append(inputs)
         self.inputs_list = (inputs)
+        
         for input_field in self.input_fields:
             input_field[1].delete(0, tk.END)
         #Display inputs, model, and output here

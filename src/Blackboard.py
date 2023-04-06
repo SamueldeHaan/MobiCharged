@@ -19,13 +19,13 @@ import queue_module
 
 # GLOBAL STATIC VARIABLES----------------------------
 required_performance_streak = 5
-required_streak_to_prune = 30
+required_streak_to_prune = 5
 ping_frequency_in_seconds = 15
 #----------------------------------------------------
 
 # GLOBAL DYNAMIC VARIABLES---------------------------
-#local_path = os.path.join('src')
-local_path = ''
+local_path = os.path.join('src')
+# local_path = ''
 
 #list of tuples of shape (model name, learner Obj)
 valid_models = None
@@ -117,14 +117,14 @@ def is_model_valid_learner(model_name, constructor, stack_pointer, current_thres
 ###TESTING OVERWRITING WHEN SAVING MODEL, WE WANT TO SAVE THE BEST MODEL BASED ON MEAN PERFORMANCE
 def save_best_weights(current_error):
     save_path = get_current_best_path()
-    current_error_path = os.path.join(os.getcwd(),'current_best','current_error.txt')
+    current_error_path = os.path.join(local_path,'current_best','current_error.txt')
 
     #compare the previous current_error's and oly overwrite if it is better
 
     #current_error.txt doesn't exist, create one and save model
     if not os.path.exists(current_error_path):
         ### ERIC: Adding this so we can compare previous and current model's "current_error" to allow overwriting
-        with open('current_best/current_error.txt','w') as f:
+        with open(current_error_path,'w') as f:
             f.write(str(current_error))
         current_best[1].get_model().save_weights(save_path, overwrite = True)
         current_best[1].model.save(os.path.join(os.getcwd(),'current_best','model'), overwrite = True) 
@@ -212,6 +212,8 @@ def main_loop():
             if valid_models.active == valid_models.head:
                 valid_models.next()
             current_learner_obj = valid_models.active.data[1]
+            ##RESET HISTORY HERE - define method in learnertemplate ****************************************
+            current_learner_obj.reset_history()
             current_learner_name = valid_models.active.data[0] ## sync with eric - need to share with frontend
             print("CURRENT MODEL BEING TRAINED: ", current_learner_name)
             if not(current_learner_obj.setup()):
@@ -299,6 +301,9 @@ def main_loop():
                     if current_learner_obj.performance_count >= required_streak_to_prune:
                         prune(current_learner_name)
                         valid_models.remove_active()
+                    else:
+                        valid_models.next() ##added - should fix our problem of doing the same one over and over?
+                        
                     update_learner_entries(current_learner_name, data=[count, current_learner_obj.current_threshold, current_learner_obj.performance_count])
                     update_learner_entries(current_best[0], data=[current_best[1].stack_pointer, current_best[1].current_threshold, current_best[1].performance_count])
                     
