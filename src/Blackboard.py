@@ -11,9 +11,6 @@ from statistics import mean
 import shutil
 import copy
 import numpy as np
-import concurrency_monitor
-
-
 import queue_module
 
 
@@ -37,18 +34,8 @@ data = None
 current_best = None
 current_error = None
 
-# def pred_worker(ui_event, monitor):
-#     while True:
-#         ui_event.wait()
-#         model = monitor.get_payload()
-
-best_log = []
-
-monitor = concurrency_monitor.ConcurrencyMonitor(None)
-
-# learner_event = th.Event()
-# UI_event = th.Event()
-# t = threading.Thread(target=)
+# future behaviour
+# best_log = []
 #----------------------------------------------------
 
 def setup(num_in, num_out):
@@ -164,7 +151,6 @@ def get_best_model_from_valid_models():
 
 def main_loop():
     global valid_models, current_best, data, current_error
-    # final_gui.compile(monitor)
 
     if valid_models.active_count == 0:
         print("No valid models present!")
@@ -178,8 +164,6 @@ def main_loop():
             learner.model.load_weights(get_current_best_path())
 
             data = fs.batched_read()
-            #### TESTING
-            #firestore_read_size = len(data) ## this returns 128 fyi
 
             trimmed = [data[0][:learner.stack_pointer], data[1][:learner.stack_pointer]]
             x = np.array(trimmed[0]).astype(np.float32, copy=False)
@@ -189,7 +173,6 @@ def main_loop():
             current_best = (best_learner_node.data[0], copy.copy(learner))
             current_error = mean(learner.history.val_losses)
             learner.model = None
-            monitor.set_payload([current_best[0], current_best[1], current_error])
  
     while not(stop_condition()):
         
@@ -200,7 +183,7 @@ def main_loop():
             count = fs.check_count()
 
         i = 1     
-        data = fs.batched_read() ## sync with eric for reading from most recent spot - current_model.stack_pointer 
+        data = fs.batched_read()
         firestore_read_size = len(data)
         print('\n Length of data is: ' + str(len(data[0])))
 
@@ -212,7 +195,7 @@ def main_loop():
             if valid_models.active == valid_models.head:
                 valid_models.next()
             current_learner_obj = valid_models.active.data[1]
-            ##RESET HISTORY HERE - define method in learnertemplate ****************************************
+            #resetting history for accurate error portrayals for single runs
             current_learner_obj.reset_history()
             current_learner_name = valid_models.active.data[0] ## sync with eric - need to share with frontend
             print("CURRENT MODEL BEING TRAINED: ", current_learner_name)
@@ -221,24 +204,13 @@ def main_loop():
                 return 
             
             current_learner_obj.run(count, x, y)
-####EAMON: CHECK OUT THIS HISTORY
             performance = mean(current_learner_obj.history.val_losses)
-        ## sync with eric - send this mean to him and / or the DB
-
-# #################ERIC ADDED THIS TEST
-#             print("TESTING: PERFORMANCE = ****history of val_losses", performance)
-#             print("TEST1",current_error)
 
         ## update object with new stack_pointer and performance stat (after comparing to current best)
         ## then update json file with these values, including new threshold, and update max weights as necessary
             current_learner_obj.increase_threshold()
             current_learner_obj.stack_pointer = count
-
-
-######## ERIC testing saving overriting abilities
-            #save_best_weights(current_error,current_learner_name)
             
-
 
             if current_best == None:
                 current_best = (current_learner_name, copy.copy(current_learner_obj))
@@ -246,15 +218,10 @@ def main_loop():
 
                 update_learner_entries(current_learner_name, data=[count, current_learner_obj.current_threshold, 0])
                 valid_models.next()
-                #save_best_weights()
 
                 save_best_weights(current_error)
-
-
-                monitor.set_payload([current_best[0], current_best[1], current_error])
                 i += 1
 
-            ##we're doing some unnecessary work here
             elif current_error > performance:
                 if current_learner_name == current_best[0]:
                     current_best[1].model = current_learner_obj.get_model()
@@ -273,18 +240,11 @@ def main_loop():
 
                 current_error = performance
                 valid_models.next()
-                ###testing 
                 print("SAVING FROM ELIF")
                 save_best_weights(current_error)
-                #save_best_weights(current_error)
-                #save_best_weights(performance)
-                monitor.set_payload([current_best[0], current_best[1], current_error])
                 i += 1
 
             else:
-                #### TESTING: ERIC ADDED TO TEST OVERWRITING
-                #save_best_weights(performance)
-
                 if current_learner_name == current_best[0]:
                     i += 1
                     valid_models.next()
@@ -292,7 +252,7 @@ def main_loop():
                     update_learner_entries(current_best[0], data=[current_best[1].stack_pointer, current_learner_obj.current_threshold, current_best[1].performance_count])
                     if valid_models.active_count == 1: ## if we get worse when we have our last contender, leave
                         current_learner_obj.model = None
-                        best_log.append(current_best[1])
+                        # best_log.append(current_best[1])
                         return
                     
                 else:
@@ -302,7 +262,7 @@ def main_loop():
                         prune(current_learner_name)
                         valid_models.remove_active()
                     else:
-                        valid_models.next() ##added - should fix our problem of doing the same one over and over?
+                        valid_models.next()
                         
                     update_learner_entries(current_learner_name, data=[count, current_learner_obj.current_threshold, current_learner_obj.performance_count])
                     update_learner_entries(current_best[0], data=[current_best[1].stack_pointer, current_best[1].current_threshold, current_best[1].performance_count])
@@ -311,8 +271,7 @@ def main_loop():
     
             current_best[1].update_graphs(count)
             update_best_learner_file()
-            best_log.append(current_best[1])
-            # final_gui.root.update()
+            # best_log.append(current_best[1])
         
 
 def prune(name):
@@ -368,21 +327,6 @@ def set_best_model_name(name):
     with open(source_path, 'w') as file:
         file.write(name)
 
-
-
-# print(get_best_model_name())
-# set_best_model_name('teehee')
-# print(get_best_model_name())
-# print(setup(2,3))
-# print(valid_models)
-# print(valid_models.next().data)
-# print("---------------------------")
-# valid_models.print_list()
-# valid_models.active.data[1].setup()
-# print(valid_models.active.data[1].model)
-
-# prune('linear_fit')
-
 def run():
     setup(4,1)
     main_loop()
@@ -390,9 +334,3 @@ def run():
     print("MAIN LOOP FINISHED, BEST MODEL NAME ={}".format(str(current_best[0])))
     print("If no training was performed, please ensure that there is more than 1 model in src/valid_models")
     queue_module.add_item(str(current_best[0]))
-
-#run()
-#print(firestore_read_size)
-#print(len((fs.batched_read())[0]))
-#print(((fs.batched_read())[0]))
-#print(count)#

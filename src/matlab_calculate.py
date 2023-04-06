@@ -9,7 +9,7 @@ def calculate(matlab_sim_filename, GUI_user_inputs):
 
         #matlab files should be stored in src/matlab, add this to the matlab path
         eng = matlab.engine.start_matlab()
-        path = os.path.join(os.getcwd(),'matlab')
+        path = os.path.join(os.getcwd(),'src','matlab')
         eng.addpath(path,nargout=0)
         
         #hard-coded grab user input

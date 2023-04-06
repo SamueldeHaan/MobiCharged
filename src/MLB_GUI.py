@@ -237,14 +237,14 @@ class MyGUI:
 
     def get_model_name(self):
         try:
-            with open(os.path.join(os.getcwd(),'current_best','best.txt'),'r') as f:
+            with open(os.path.join(os.getcwd(), 'src', 'current_best','best.txt'),'r') as f:
                 model_name = str(f.readlines()[0])
                 return model_name
         except:
             return None
     def get_model_current_error(self):
         try:
-            with open(os.path.join(os.getcwd(),'current_best','current_error.txt'),'r') as f:
+            with open(os.path.join(os.getcwd(), 'src', 'current_best','current_error.txt'),'r') as f:
                 current_error = str(f.readlines()[0])
                 return current_error
         except:
