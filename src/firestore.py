@@ -153,4 +153,3 @@ def read_ML_parameters(): ##used to read the ML_parameters from firestore (in ca
     else:
         print(u'No such document!')
 
-#check_count()
