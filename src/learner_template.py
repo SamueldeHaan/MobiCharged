@@ -24,11 +24,6 @@ class LearnerTemplate(ABC):
     def run(self, epochs, input_data, output_data):
         pass
 
-    # don't think we need this -> local copy of table entries will be stored in matrix by Blackboard
-    # @abstractmethod
-    # def make_space(self, input_num):
-    #     pass
-
     @abstractmethod
     def setup(self):
         pass

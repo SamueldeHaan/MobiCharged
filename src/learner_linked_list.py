@@ -50,22 +50,3 @@ class LearnerLinkedList:
         while current is not self.head:
             print(current.data)
             current = current.next
-
-
-# ##test 
-# list = LearnerLinkedList([1,2,3,4,5])
-# list.print_list()
-
-# ##print(list.active_count)
-# print("--------------------------------")
-
-
-# list.next()
-# list.next()
-# list.remove_active()
-# list.print_list()
-
-# print("--------------------------------")
-
-# list.remove_active()
-# list.print_list()
